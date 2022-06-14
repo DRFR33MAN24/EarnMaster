@@ -31,7 +31,7 @@ const BottomTabBar = ({ navigation, state }) => (
 
 const StackNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="WalletScreen" component={WalletScreen} />
+    <Stack.Screen name="Wallet" component={WalletScreen} />
     {/* <Stack.Screen name="Stock" component={StockScreen} /> */}
   </Stack.Navigator>
 );
