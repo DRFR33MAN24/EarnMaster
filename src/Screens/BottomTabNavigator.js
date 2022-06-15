@@ -39,7 +39,11 @@ const walletIcon = props => (
 const HomeScreenTopBar = () => {
   let navigation = useNavigation();
   return (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}>
       <View
         style={{
           paddingHorizontal: 4,
@@ -63,7 +67,6 @@ const HomeScreenTopBar = () => {
           style={{
             flexDirection: 'row',
             justifyContent: 'flex-start',
-            paddingHorizontal: 2,
           }}>
           {/* <Text style={styles.badge}> 2 </Text> */}
 

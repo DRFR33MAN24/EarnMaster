@@ -27,7 +27,7 @@ export const HomeScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1}}>
-        <View
+        <Card
           style={{
             flexDirection: 'column',
             justifyContent: 'center',
@@ -36,10 +36,10 @@ export const HomeScreen = ({navigation}) => {
             marginHorizontal: 5,
             marginVertical: 10,
             borderWidth: 2,
-            borderColor: 'blue',
+
             borderRadius: 20,
           }}>
-          <Text style={{fontSize: 20}}>Lv #1</Text>
+          <Text style={[{fontSize: 20}, styles.textWithShadow]}>Lv #1</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -47,14 +47,19 @@ export const HomeScreen = ({navigation}) => {
               alignItems: 'center',
             }}>
             <View>
-              <Progress.Bar progress={0.3} width={200} height={15} />
+              <Progress.Bar
+                progress={0.3}
+                width={200}
+                height={15}
+                style={styles.progressBarShadow}
+              />
             </View>
             <Image
               source={require('./images/gift.png')}
               style={styles.acheivementImage}
             />
           </View>
-        </View>
+        </Card>
         <View
           style={{
             flexDirection: 'row',
@@ -136,5 +141,21 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     resizeMode: 'stretch',
+  },
+  textWithShadow: {
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+  },
+  progressBarShadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+
+    elevation: 24,
   },
 });
