@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, {useState, useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -12,15 +12,24 @@ import {
   Card,
   Text,
 } from '@ui-kitten/components';
-import { HomeScreen } from './HomeScreen';
-import { WalletScreen } from './WalletScreen';
+import {HomeScreen} from './HomeScreen';
+import {WalletScreen} from './WalletScreen';
 //import { StockScreen } from './StockScreen';
-import { StyleSheet } from 'react-native';
-const { Navigator, Screen } = createBottomTabNavigator();
+import {StyleSheet, View} from 'react-native';
+const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-
-const BottomTabBar = ({ navigation, state }) => (
+const HomeScreenTopBar = props => {
+  return (
+    <View
+      style={{
+        paddingHorizontal: 4,
+      }}>
+      <Button>Bell</Button>
+    </View>
+  );
+};
+const BottomTabBar = ({navigation, state}) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
@@ -39,13 +48,13 @@ const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen
       name="Home"
-      // options={{ headerTitle: props => <LogoTitle {...props} /> }}
+      options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={HomeScreen}
     />
     <Screen
       name="Settings"
       component={StackNavigator}
-      options={{ headerShown: false }}
+      options={{headerShown: false}}
     />
     {/* <Screen name="Settings" component={SettingsScreen} /> */}
   </Navigator>
