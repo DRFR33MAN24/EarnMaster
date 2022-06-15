@@ -6,7 +6,7 @@ import {
   TopNavigation,
   Card,
 } from '@ui-kitten/components';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,16 +16,17 @@ import {
   Image,
 } from 'react-native';
 
-export const HomeScreen = ({navigation}) => {
+
+export const HomeScreen = ({ navigation }) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Divider />
 
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -40,7 +41,7 @@ export const HomeScreen = ({navigation}) => {
               />
 
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -54,7 +55,7 @@ export const HomeScreen = ({navigation}) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -68,7 +69,7 @@ export const HomeScreen = ({navigation}) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -82,7 +83,7 @@ export const HomeScreen = ({navigation}) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>

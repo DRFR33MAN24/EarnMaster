@@ -1093,6 +1093,33 @@
   "resolved" "https://registry.npmjs.org/@eva-design/processor/-/processor-2.1.1.tgz"
   "version" "2.1.1"
 
+"@fortawesome/fontawesome-common-types@6.1.1":
+  "integrity" "sha512-wVn5WJPirFTnzN6tR95abCx+ocH+3IFLXAgyavnf9hUmN0CfWoDjPT/BAWsUVwSlYYVBeCLJxaqi7ZGe4uSjBA=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.1.1.tgz"
+  "version" "6.1.1"
+
+"@fortawesome/fontawesome-svg-core@^6.1.1", "@fortawesome/fontawesome-svg-core@~1 || ~6":
+  "integrity" "sha512-NCg0w2YIp81f4V6cMGD9iomfsIj7GWrqmsa0ZsPh59G7PKiGN1KymZNxmF00ssuAlo/VZmpK6xazsGOwzKYUMg=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.1.1.tgz"
+  "version" "6.1.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.1"
+
+"@fortawesome/free-solid-svg-icons@^6.1.1":
+  "integrity" "sha512-0/5exxavOhI/D4Ovm2r3vxNojGZioPwmFrKg0ZUH69Q68uFhFPs6+dhAToh6VEQBntxPRYPuT5Cg1tpNa9JUPg=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.1.1.tgz"
+  "version" "6.1.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.1"
+
+"@fortawesome/react-native-fontawesome@^0.3.0":
+  "integrity" "sha512-wSfetdK4+b/pvPbM2v+bZ5hfNlwtk9l3QuJo59sbMrxJalfX7BuF2WsSIWMSxfWwSsbOtY4+TUs6uw/rE59NJA=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/react-native-fontawesome/-/react-native-fontawesome-0.3.0.tgz"
+  "version" "0.3.0"
+  dependencies:
+    "humps" "^2.0.1"
+    "prop-types" "^15.7.2"
+
 "@hapi/hoek@^9.0.0":
   "integrity" "sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ=="
   "resolved" "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.3.0.tgz"
@@ -3861,6 +3888,11 @@
   "resolved" "https://registry.npmjs.org/human-signals/-/human-signals-1.1.1.tgz"
   "version" "1.1.1"
 
+"humps@^2.0.1":
+  "integrity" "sha512-E0eIbrFWUhwfXJmsbdjRQFQPrl5pTEoKlz163j1mTqqUnU9PgR4AgB8AIITzuB3vLBdxZXyZ9TDIrwB2OASz4g=="
+  "resolved" "https://registry.npmjs.org/humps/-/humps-2.0.1.tgz"
+  "version" "2.0.1"
+
 "iconv-lite@0.4.24":
   "integrity" "sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA=="
   "resolved" "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz"
@@ -5993,7 +6025,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@*", "prop-types@^15.8.1":
+"prop-types@*", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -6096,7 +6128,7 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
-"react-native-svg@*", "react-native-svg@^12.3.0":
+"react-native-svg@*", "react-native-svg@^12.3.0", "react-native-svg@>= 11.x":
   "integrity" "sha512-ESG1g1j7/WLD7X3XRFTQHVv0r6DpbHNNcdusngAODIxG88wpTWUZkhcM3A2HJTb+BbXTFDamHv7FwtRKWQ/ALg=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.3.0.tgz"
   "version" "12.3.0"
@@ -6104,7 +6136,7 @@
     "css-select" "^4.2.1"
     "css-tree" "^1.0.0-alpha.39"
 
-"react-native@*", "react-native@>=0.50.0", "react-native@0.68.2":
+"react-native@*", "react-native@>= 0.67", "react-native@>=0.50.0", "react-native@0.68.2":
   "integrity" "sha512-qNMz+mdIirCEmlrhapAtAG+SWVx6MAiSfCbFNhfHqiqu1xw1OKXdzIrjaBEPihRC2pcORCoCHduHGQe/Pz9Yuw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.68.2.tgz"
   "version" "0.68.2"
