@@ -43,7 +43,7 @@ const BottomTabBar = ({navigation, state}) => (
 const StackNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Home"
+      name="Dashboard"
       component={HomeScreen}
       options={{
         headerRight: props => <HomeScreenTopBar {...props} />,
@@ -55,7 +55,7 @@ const StackNavigator = () => (
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen
-      name="Home"
+      name="HomeTab"
       component={StackNavigator}
       options={{
         headerShown: false,
