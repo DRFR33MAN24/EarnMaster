@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -16,16 +16,18 @@ import {HomeScreen} from './HomeScreen';
 import {WalletScreen} from './WalletScreen';
 //import { StockScreen } from './StockScreen';
 import {StyleSheet, View} from 'react-native';
+import {NotificationScreen} from './NotificationScreen';
 const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const HomeScreenTopBar = props => {
+const HomeScreenTopBar = () => {
+  let navigation = useNavigation();
   return (
     <View
       style={{
         paddingHorizontal: 4,
       }}>
-      <Button>Bell</Button>
+      <Button onPress={() => navigation.navigate('Notification')}>Bell</Button>
     </View>
   );
 };
@@ -40,21 +42,29 @@ const BottomTabBar = ({navigation, state}) => (
 
 const StackNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Wallet" component={WalletScreen} />
-    {/* <Stack.Screen name="Stock" component={StockScreen} /> */}
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{
+        headerRight: props => <HomeScreenTopBar {...props} />,
+      }}
+    />
+    <Stack.Screen name="Notification" component={NotificationScreen} />
   </Stack.Navigator>
 );
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen
       name="Home"
-      options={{headerRight: props => <HomeScreenTopBar {...props} />}}
-      component={HomeScreen}
+      component={StackNavigator}
+      options={{
+        headerShown: false,
+      }}
     />
     <Screen
-      name="Settings"
-      component={StackNavigator}
-      options={{headerShown: false}}
+      name="Wallet"
+      // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
+      component={WalletScreen}
     />
     {/* <Screen name="Settings" component={SettingsScreen} /> */}
   </Navigator>
