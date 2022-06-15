@@ -6,7 +6,7 @@ import {
   TopNavigation,
   Card,
 } from '@ui-kitten/components';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,18 +15,46 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
+import * as Progress from 'react-native-progress';
 
-
-export const HomeScreen = ({ navigation }) => {
+export const HomeScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <Divider />
 
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{flex: 1}}>
+        <View
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingVertical: 20,
+            marginHorizontal: 5,
+            marginVertical: 10,
+            borderWidth: 2,
+            borderColor: 'blue',
+            borderRadius: 20,
+          }}>
+          <Text style={{fontSize: 20}}>Lv #1</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View>
+              <Progress.Bar progress={0.3} width={200} height={15} />
+            </View>
+            <Image
+              source={require('./images/gift.png')}
+              style={styles.acheivementImage}
+            />
+          </View>
+        </View>
         <View
           style={{
             flexDirection: 'row',
@@ -41,7 +69,7 @@ export const HomeScreen = ({ navigation }) => {
               />
 
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{ flex: 1 }}>
+                <Text numberOfLines={1} style={{flex: 1}}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -55,7 +83,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{ flex: 1 }}>
+                <Text numberOfLines={1} style={{flex: 1}}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -69,7 +97,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{ flex: 1 }}>
+                <Text numberOfLines={1} style={{flex: 1}}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -83,7 +111,7 @@ export const HomeScreen = ({ navigation }) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{ flex: 1 }}>
+                <Text numberOfLines={1} style={{flex: 1}}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -102,6 +130,11 @@ const styles = StyleSheet.create({
   homeScreenButtonImage: {
     width: 96,
     height: 96,
+    resizeMode: 'stretch',
+  },
+  acheivementImage: {
+    width: 64,
+    height: 64,
     resizeMode: 'stretch',
   },
 });
