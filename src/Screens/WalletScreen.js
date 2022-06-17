@@ -1,10 +1,4 @@
-import {
-  Layout,
-  Text,
-  Button,
-  Divider,
-  TopNavigation,
-} from '@ui-kitten/components';
+import {Text, Divider} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
