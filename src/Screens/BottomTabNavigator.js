@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   BottomNavigation,
   BottomNavigationTab,
@@ -12,20 +12,21 @@ import {
   Card,
   Text,
 } from '@ui-kitten/components';
-import {HomeScreen} from './HomeScreen';
-import {WalletScreen} from './WalletScreen';
+import { HomeScreen } from './HomeScreen';
+import { WalletScreen } from './WalletScreen';
 //import { StockScreen } from './StockScreen';
-import {StyleSheet, View} from 'react-native';
-import {NotificationScreen} from './NotificationScreen';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { StyleSheet, View } from 'react-native';
+import { NotificationScreen } from './NotificationScreen';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faBell,
   faHome,
   faWallet,
   faCoins,
 } from '@fortawesome/free-solid-svg-icons';
+import { SurveysScreen } from './SurveysScreen';
 
-const {Navigator, Screen} = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const homeIcon = props => (
@@ -51,11 +52,11 @@ const HomeScreenTopBar = () => {
         <Button
           appearance="ghost"
           onPress={() => navigation.navigate('Notification')}
-          style={{padding: 0}}>
+          style={{ padding: 0 }}>
           <View style={styles.badgeIconView}>
             <Text style={styles.badge}> 2 </Text>
 
-            <FontAwesomeIcon icon={faBell} size={25} style={{color: 'gold'}} />
+            <FontAwesomeIcon icon={faBell} size={25} style={{ color: 'gold' }} />
           </View>
         </Button>
       </View>
@@ -70,7 +71,7 @@ const HomeScreenTopBar = () => {
           }}>
           {/* <Text style={styles.badge}> 2 </Text> */}
 
-          <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+          <FontAwesomeIcon icon={faCoins} size={25} style={{ color: 'gold' }} />
           <Text> 100</Text>
         </View>
       </View>
@@ -92,13 +93,13 @@ const WalletScreenTopBar = () => {
         }}>
         {/* <Text style={styles.badge}> 2 </Text> */}
 
-        <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+        <FontAwesomeIcon icon={faCoins} size={25} style={{ color: 'gold' }} />
         <Text> 100</Text>
       </View>
     </View>
   );
 };
-const BottomTabBar = ({navigation, state}) => (
+const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
@@ -117,6 +118,7 @@ const StackNavigator = () => (
       }}
     />
     <Stack.Screen name="Notification" component={NotificationScreen} />
+    <Stack.Screen name="Surveys" component={SurveysScreen} />
   </Stack.Navigator>
 );
 const TabNavigator = () => (

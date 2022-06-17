@@ -1,0 +1,86 @@
+
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, View, Image, Dimensions } from 'react-native';
+import {
+    Divider,
+    Card,
+    Text,
+} from '@ui-kitten/components';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {
+    faClock,
+    faStar
+} from '@fortawesome/free-solid-svg-icons';
+
+
+const Survey = (props) => {
+    return (
+        <View style={{ flex: 1 }}>
+            <Card style={{ margin: 4 }}>
+                {/* <View style={{ position: 'absolute', backgroundColor: 'pink', width: '150%', height: '150%', zIndex: -200 }}>
+
+                </View> */}
+                <View style={{ position: 'absolute', backgroundColor: 'blue', width: '150%', height: '150%', zIndex: -100, opacity: 0.5 }}>
+                    <Image
+                        source={require('./images/glass.png')}
+                        style={{ resizeMode: 'stretch' }}
+                    />
+                </View>
+                <View style={{ marginTop: 1, marginRight: 2, alignItems: 'flex-end' }}>
+                    <FontAwesomeIcon {...props} icon={faStar} size={25} style={{
+                        color: 'gold',
+
+                        shadowColor: 'gold',
+                        shadowOffset: {
+                            width: 0,
+                            height: 12,
+                        },
+                        shadowOpacity: 0.58,
+                        shadowRadius: 16.0,
+
+                        elevation: 24,
+                    }} />
+                </View>
+                <View style={{ marginVertical: 8, }}>
+                    <Text style={{ flex: 1, flexWrap: 'wrap' }} >
+                        Complete the following survey to get your points
+                    </Text>
+                </View>
+                <View style={{ marginBottom: 1, marginLeft: 2, flexDirection: 'row', }}>
+                    <FontAwesomeIcon {...props} icon={faClock} size={25} />
+                    <Text> 5 min</Text>
+                </View>
+            </Card>
+        </View>
+    )
+}
+
+
+export const SurveysScreen = ({ navigation }) => {
+
+
+    // const navigateDetails = () => {
+    //   navigation.navigate('Details');
+    // };
+
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <Divider />
+
+            <ScrollView style={{ flex: 1 }}>
+                <View style={{ flex: 1, }}>
+
+                    <Survey />
+                </View>
+                <View style={{
+                    flexDirection: 'row', justifyContent: 'space-evenly', alignItems:
+                        'center',
+                    width: Dimensions.get('window').width
+                }}>
+                    <Survey />
+                    <Survey />
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
+};
