@@ -69,18 +69,7 @@ export const HomeScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1}}>
-        <Card
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingVertical: 20,
-            marginHorizontal: 5,
-            marginVertical: 10,
-            borderWidth: 2,
-
-            borderRadius: 20,
-          }}>
+        <Card style={styles.goalsCard}>
           <Text style={[{fontSize: 20}, styles.textWithShadow]}>Lv #1</Text>
           <View
             style={{
@@ -199,5 +188,16 @@ const styles = StyleSheet.create({
     shadowRadius: 16.0,
 
     elevation: 24,
+  },
+  goalsCard: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    borderWidth: 2,
+
+    borderRadius: 20,
   },
 });
