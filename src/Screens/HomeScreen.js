@@ -1,7 +1,7 @@
-import {Text, Button, Divider, Card} from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBell, faCoins, faHome} from '@fortawesome/free-solid-svg-icons';
-import React, {useState} from 'react';
+import { Text, Button, Divider, Card } from '@ui-kitten/components';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faBell, faCoins, faHome } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,11 +11,14 @@ import {
   Image,
 } from 'react-native';
 import * as Progress from 'react-native-progress';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-export const homeIcon = props => (
-  <FontAwesomeIcon {...props} icon={faHome} size={25} />
-);
+export const homeIcon = (props) =>
+
+(
+  <FontAwesomeIcon {...props} icon={faHome} size={25} style={{ color: props.style.tintColor }} />
+)
+
 
 export const HomeScreenTopBar = () => {
   let navigation = useNavigation();
@@ -32,11 +35,11 @@ export const HomeScreenTopBar = () => {
         <Button
           appearance="ghost"
           onPress={() => navigation.navigate('Notification')}
-          style={{padding: 0}}>
+          style={{ padding: 0 }}>
           <View style={styles.badgeIconView}>
             <Text style={styles.badge}> 2 </Text>
 
-            <FontAwesomeIcon icon={faBell} size={25} style={{color: 'gold'}} />
+            <FontAwesomeIcon icon={faBell} size={25} style={{ color: 'gold' }} />
           </View>
         </Button>
       </View>
@@ -51,7 +54,7 @@ export const HomeScreenTopBar = () => {
           }}>
           {/* <Text style={styles.badge}> 2 </Text> */}
 
-          <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+          <FontAwesomeIcon icon={faCoins} size={25} style={{ color: 'gold' }} />
           <Text> 100</Text>
         </View>
       </View>
@@ -59,18 +62,18 @@ export const HomeScreenTopBar = () => {
   );
 };
 
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({ navigation }) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Divider />
 
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         <Card style={styles.goalsCard}>
-          <Text style={[{fontSize: 20}, styles.textWithShadow]}>Lv #1</Text>
+          <Text style={[{ fontSize: 20 }, styles.textWithShadow]}>Lv #1</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -105,8 +108,8 @@ export const HomeScreen = ({navigation}) => {
               />
 
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Watch Ads
+                <Text numberOfLines={1} style={{ flex: 1 }}>
+                  Complete offers
                 </Text>
               </TouchableOpacity>
             </View>
@@ -119,7 +122,7 @@ export const HomeScreen = ({navigation}) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -133,7 +136,7 @@ export const HomeScreen = ({navigation}) => {
                 style={styles.homeScreenButtonImage}
               />
               <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Watch Ads
                 </Text>
               </TouchableOpacity>
@@ -147,7 +150,7 @@ export const HomeScreen = ({navigation}) => {
                   source={require('./images/history.png')}
                   style={styles.homeScreenButtonImage}
                 />
-                <Text numberOfLines={1} style={{flex: 1}}>
+                <Text numberOfLines={1} style={{ flex: 1 }}>
                   Paid Surveys
                 </Text>
               </TouchableOpacity>
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
   },
   textWithShadow: {
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
   progressBarShadow: {
@@ -199,5 +202,20 @@ const styles = StyleSheet.create({
     borderWidth: 2,
 
     borderRadius: 20,
+  },
+  badgeIconView: {
+    position: 'relative',
+    padding: 5,
+  },
+  badge: {
+    color: '#fff',
+    position: 'absolute',
+    zIndex: 10,
+    top: 1,
+    right: 1,
+    padding: 1,
+    backgroundColor: 'red',
+    borderRadius: 5,
+    fontSize: 10,
   },
 });

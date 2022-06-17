@@ -1,19 +1,20 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 //import { StockScreen } from './StockScreen';
-import {StyleSheet} from 'react-native';
-import {NotificationScreen} from './NotificationScreen';
+import { StyleSheet } from 'react-native';
+import { NotificationScreen } from './NotificationScreen';
 
-import {HomeScreen, HomeScreenTopBar, homeIcon} from './HomeScreen';
-import {WalletScreen, walletIcon, WalletScreenTopBar} from './WalletScreen';
-import {SurveysScreen} from './SurveysScreen';
+import { HomeScreen, HomeScreenTopBar, homeIcon } from './HomeScreen';
+import { WalletScreen, walletIcon, WalletScreenTopBar } from './WalletScreen';
+import { SurveysScreen } from './SurveysScreen';
 
-const {Navigator, Screen} = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTabBar = ({navigation, state}) => (
+const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
@@ -76,19 +77,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  badgeIconView: {
-    position: 'relative',
-    padding: 5,
-  },
-  badge: {
-    color: '#fff',
-    position: 'absolute',
-    zIndex: 10,
-    top: 1,
-    right: 1,
-    padding: 1,
-    backgroundColor: 'red',
-    borderRadius: 5,
-    fontSize: 10,
-  },
+
 });
