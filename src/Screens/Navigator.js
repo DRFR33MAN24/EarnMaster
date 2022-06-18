@@ -1,25 +1,28 @@
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 //import { StockScreen } from './StockScreen';
-import { StyleSheet } from 'react-native';
-import { NotificationScreen } from './NotificationScreen';
+import {StyleSheet} from 'react-native';
+import {NotificationScreen} from './NotificationScreen';
 
-import { HomeScreen, HomeScreenTopBar, homeIcon } from './HomeScreen';
-import { WalletScreen, walletIcon, WalletScreenTopBar } from './WalletScreen';
-import { SurveysScreen } from './SurveysScreen';
+import {HomeScreen, HomeScreenTopBar, homeIcon} from './HomeScreen';
+import {WalletScreen, walletIcon, WalletScreenTopBar} from './WalletScreen';
+import {ProfileScreen, profileIcon, ProfileScreenTopBar} from './ProfileScreen';
+import {SurveysScreen} from './SurveysScreen';
+import {WithdrawScreen} from './WithdrawScreen';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTabBar = ({ navigation, state }) => (
+const BottomTabBar = ({navigation, state}) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
     <BottomNavigationTab title="Home" icon={homeIcon} />
     <BottomNavigationTab title="Wallet" icon={walletIcon} />
+    <BottomNavigationTab title="Profile" icon={profileIcon} />
   </BottomNavigation>
 );
 
@@ -34,6 +37,7 @@ const StackNavigator = () => (
     />
     <Stack.Screen name="Notification" component={NotificationScreen} />
     <Stack.Screen name="Surveys" component={SurveysScreen} />
+    <Stack.Screen name="Withdraw" component={WithdrawScreen} />
   </Stack.Navigator>
 );
 const TabNavigator = () => (
@@ -46,11 +50,19 @@ const TabNavigator = () => (
       }}
     />
     <Screen
-      name="WalletTab"
+      name="Wallet"
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={WalletScreen}
       options={{
         headerRight: props => <WalletScreenTopBar {...props} />,
+      }}
+    />
+    <Screen
+      name="Profile"
+      // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
+      component={ProfileScreen}
+      options={{
+        headerRight: props => <ProfileScreenTopBar {...props} />,
       }}
     />
     {/* <Screen name="Settings" component={SettingsScreen} /> */}
@@ -77,5 +89,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
 });

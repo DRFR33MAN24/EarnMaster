@@ -34,6 +34,17 @@ export const WalletScreenTopBar = () => {
     </View>
   );
 };
+const WalletTransaction = () => {
+  return (
+    <Card>
+      <View style={{flexDirection: 'row'}}>
+        <Text style={{color: 'red'}}>-$5.00</Text>
+        <Text> Visa prepaid card.</Text>
+      </View>
+      <Text style={styles.dateText}>12/12/12</Text>
+    </Card>
+  );
+};
 export const WalletScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
@@ -47,23 +58,26 @@ export const WalletScreen = ({navigation}) => {
           <Text>your total earnings:</Text>
           <Text style={styles.bigBoldText}>$71.5</Text>
           <View style={{marginVertical: 8}}>
-            <Button>Withdraw</Button>
+            <Button onPress={() => navigation.navigate('Withdraw')}>
+              Withdraw
+            </Button>
           </View>
         </Card>
       </View>
-      <View style={{margin: 10}}>
+      <View style={{marginHorizontal: 10}}>
         <Card>
           <Text>Transaction history:</Text>
         </Card>
       </View>
-      <ScrollView style={{flex: 1, margin: 10}}>
-        <Card>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{color: 'red'}}>-$5.00</Text>
-            <Text> Visa prepaid card.</Text>
-          </View>
-          <Text style={styles.dateText}>12/12/12</Text>
-        </Card>
+      <ScrollView style={{flex: 1, marginHorizontal: 10}}>
+        <WalletTransaction />
+        <WalletTransaction />
+        <WalletTransaction />
+        <WalletTransaction />
+        <WalletTransaction />
+        <WalletTransaction />
+        <WalletTransaction />
+        <WalletTransaction />
       </ScrollView>
     </SafeAreaView>
   );
