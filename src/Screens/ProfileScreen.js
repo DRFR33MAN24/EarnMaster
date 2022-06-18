@@ -3,12 +3,12 @@ import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faPerson, faCoins} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faCoins} from '@fortawesome/free-solid-svg-icons';
 
 export const profileIcon = props => (
   <FontAwesomeIcon
     {...props}
-    icon={faPerson}
+    icon={faUser}
     size={25}
     style={{color: props.style.tintColor}}
   />
