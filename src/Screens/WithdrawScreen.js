@@ -20,27 +20,33 @@ const RedeemOption = props => {
   return (
     <View style={{flex: 1}}>
       <Card style={{margin: 4}}>
-        <View
+        {/* <View
           style={{
             position: 'absolute',
 
-            width: '100%',
-            height: '100%',
+            width: '150%',
+            height: '150%',
             zIndex: -200,
           }}>
           <Image
             source={require('./images/google.png')}
             style={{resizeMode: 'contain', width: '100%', height: '100%'}}
           />
-        </View>
+        </View> */}
         <View style={styles.glassyBackground}>
           <Image
             source={require('./images/glass.png')}
             style={{resizeMode: 'stretch'}}
           />
         </View>
-        <View style={{flex: 1, marginVertical: 8}}>
-          <Text style={{flex: 1}}>Gift Card to redeem now</Text>
+        <View style={{marginTop: 1, marginRight: 2, alignItems: 'flex-end'}}>
+          <Text>h</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Text>hello</Text>
+        </View>
+        <View style={{marginBottom: 1, marginLeft: 2, flexDirection: 'row'}}>
+          <Text> 5 min</Text>
         </View>
       </Card>
     </View>
@@ -57,22 +63,18 @@ export const WithdrawScreen = ({navigation}) => {
       <View>
         <Text>Choose your withdrawal method:</Text>
       </View>
+      <View style={{flex: 1}}>
+        <RedeemOption />
+      </View>
       <ScrollView style={{flex: 1}}>
         <View
           style={{
-            flex: 1,
-            // flexWrap: 'wrap',
-            // flexDirection: 'row',
+            flexDirection: 'row',
+
             justifyContent: 'space-evenly',
             alignItems: 'center',
             width: Dimensions.get('window').width,
           }}>
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
           <RedeemOption />
           <RedeemOption />
         </View>
