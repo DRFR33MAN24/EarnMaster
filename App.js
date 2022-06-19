@@ -15,10 +15,7 @@ export default () => {
   };
   return (
     <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <ApplicationProvider
-        {...eva}
-        theme={{...eva.light, ...theme}}
-        customMapping={mapping}>
+      <ApplicationProvider {...eva} theme={eva[theme]} customMapping={mapping}>
         <AppNavigator />
       </ApplicationProvider>
     </ThemeContext.Provider>
