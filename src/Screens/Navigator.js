@@ -26,7 +26,7 @@ const BottomTabBar = ({navigation, state}) => (
   </BottomNavigation>
 );
 
-const StackNavigator = () => (
+const StackNavigatorHome = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="Dashboard"
@@ -37,6 +37,12 @@ const StackNavigator = () => (
     />
     <Stack.Screen name="Notification" component={NotificationScreen} />
     <Stack.Screen name="Surveys" component={SurveysScreen} />
+  </Stack.Navigator>
+);
+const StackNavigatorWallet = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Wallet" component={WalletScreen} />
+
     <Stack.Screen name="Withdraw" component={WithdrawScreen} />
   </Stack.Navigator>
 );
@@ -44,16 +50,17 @@ const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen
       name="HomeTab"
-      component={StackNavigator}
+      component={StackNavigatorHome}
       options={{
         headerShown: false,
       }}
     />
     <Screen
-      name="Wallet"
+      name="WalletTab"
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
-      component={WalletScreen}
+      component={StackNavigatorWallet}
       options={{
+        headerShown: false,
         headerRight: props => <WalletScreenTopBar {...props} />,
       }}
     />

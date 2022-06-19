@@ -19,7 +19,7 @@ import {
 const RedeemOption = props => {
   return (
     <View style={{flex: 1}}>
-      <Card>
+      <Card style={{margin: 4}}>
         {/* <View style={{ position: 'absolute', backgroundColor: 'pink', width: '150%', height: '150%', zIndex: -200 }}>
 
                 </View> */}
@@ -28,6 +28,11 @@ const RedeemOption = props => {
             source={require('./images/glass.png')}
             style={{resizeMode: 'stretch'}}
           />
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={{flex: 1, flexWrap: 'wrap'}}>
+            Prepaid Visa gift card when pressing this button
+          </Text>
         </View>
       </Card>
     </View>
@@ -41,7 +46,9 @@ export const WithdrawScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Divider />
-
+      <View>
+        <Text>Choose your withdrawal method:</Text>
+      </View>
       <ScrollView style={{flex: 1}}>
         <View
           style={{
@@ -50,6 +57,13 @@ export const WithdrawScreen = ({navigation}) => {
             alignItems: 'center',
             width: Dimensions.get('window').width,
           }}>
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
           <RedeemOption />
         </View>
       </ScrollView>
