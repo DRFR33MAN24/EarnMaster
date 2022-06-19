@@ -1,21 +1,29 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
-import {default as theme} from './src/theme.json';
+import {default as light} from './src/lightTheme.json';
+import {default as dark} from './src/darkTheme.json';
 import {default as mapping} from './mapping.json';
 import {ThemeContext} from './theme-context';
 import {AppNavigator} from './src/Screens/Navigator';
 
 export default () => {
-  const [theme, setTheme] = React.useState('light');
+  const [currentTheme, setTheme] = React.useState('light');
 
   const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);
   };
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <ApplicationProvider {...eva} theme={eva[theme]} customMapping={mapping}>
+    <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
+      <ApplicationProvider
+        {...eva}
+        theme={
+          currentTheme === 'light'
+            ? {...eva[currentTheme], ...light}
+            : {...eva[currentTheme], ...dark}
+        }
+        customMapping={mapping}>
         <AppNavigator />
       </ApplicationProvider>
     </ThemeContext.Provider>
