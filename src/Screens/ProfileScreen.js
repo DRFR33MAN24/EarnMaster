@@ -4,7 +4,7 @@ import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faUser, faCoins} from '@fortawesome/free-solid-svg-icons';
-
+import {ThemeContext} from '../../theme-context';
 export const profileIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -36,6 +36,8 @@ export const ProfileScreenTopBar = () => {
 };
 
 export const ProfileScreen = ({navigation}) => {
+  const themeContext = React.useContext(ThemeContext);
+
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
@@ -44,7 +46,9 @@ export const ProfileScreen = ({navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       <Divider />
 
-      <ScrollView style={{flex: 1, marginHorizontal: 10}}></ScrollView>
+      <ScrollView style={{flex: 1, marginHorizontal: 10}}>
+        <Button onPress={themeContext.toggleTheme}>Toggle theme</Button>
+      </ScrollView>
     </SafeAreaView>
   );
 };
