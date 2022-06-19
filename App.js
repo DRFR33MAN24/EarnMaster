@@ -1,8 +1,8 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
-import {default as light} from './src/lightTheme.json';
-import {default as dark} from './src/darkTheme.json';
+import {default as light} from './src/light.json';
+import {default as dark} from './src/dark.json';
 import {default as mapping} from './mapping.json';
 import {ThemeContext} from './theme-context';
 import {AppNavigator} from './src/Screens/Navigator';
