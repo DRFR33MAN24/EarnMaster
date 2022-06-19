@@ -18,9 +18,9 @@ import {
 
 const RedeemOption = props => {
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, flexBasis: '50%', maxWidth: '50%'}}>
       <Card style={{margin: 4}}>
-        {/* <View
+        <View
           style={{
             position: 'absolute',
 
@@ -32,7 +32,7 @@ const RedeemOption = props => {
             source={require('./images/google.png')}
             style={{resizeMode: 'contain', width: '100%', height: '100%'}}
           />
-        </View> */}
+        </View>
         <View style={styles.glassyBackground}>
           <Image
             source={require('./images/glass.png')}
@@ -63,18 +63,21 @@ export const WithdrawScreen = ({navigation}) => {
       <View>
         <Text>Choose your withdrawal method:</Text>
       </View>
-      <View style={{flex: 1}}>
-        <RedeemOption />
-      </View>
+
       <ScrollView style={{flex: 1}}>
         <View
           style={{
             flexDirection: 'row',
+            flexWrap: 'wrap',
+            flex: 1,
 
-            justifyContent: 'space-evenly',
+            justifyContent: 'flex-start',
             alignItems: 'center',
-            width: Dimensions.get('window').width,
           }}>
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
+          <RedeemOption />
           <RedeemOption />
           <RedeemOption />
         </View>

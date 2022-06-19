@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,24 +7,24 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native';
-import { Divider, Card, Text } from '@ui-kitten/components';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faClock, faStar } from '@fortawesome/free-solid-svg-icons';
+import {Divider, Card, Text} from '@ui-kitten/components';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faClock, faStar} from '@fortawesome/free-solid-svg-icons';
 
 export const Survey = props => {
   return (
-    <View style={{ flex: 1 }}>
-      <Card style={{ margin: 4 }}>
+    <View style={{flex: 1, flexBasis: '50%', maxWidth: '50%'}}>
+      <Card style={{margin: 4}}>
         {/* <View style={{ position: 'absolute', backgroundColor: 'pink', width: '150%', height: '150%', zIndex: -200 }}>
 
                 </View> */}
         <View style={styles.glassyBackground}>
           <Image
             source={require('../Screens/images/glass.png')}
-            style={{ resizeMode: 'stretch' }}
+            style={{resizeMode: 'stretch'}}
           />
         </View>
-        <View style={{ marginTop: 1, marginRight: 2, alignItems: 'flex-end' }}>
+        <View style={{marginTop: 1, marginRight: 2, alignItems: 'flex-end'}}>
           <FontAwesomeIcon
             {...props}
             icon={faStar}
@@ -32,12 +32,12 @@ export const Survey = props => {
             style={styles.starIcon}
           />
         </View>
-        <View style={{ marginVertical: 8 }}>
-          <Text style={{ flex: 1, flexWrap: 'wrap' }}>
+        <View style={{marginVertical: 8}}>
+          <Text style={{flex: 1, flexWrap: 'wrap'}}>
             Complete the following survey to get your points
           </Text>
         </View>
-        <View style={{ marginBottom: 1, marginLeft: 2, flexDirection: 'row' }}>
+        <View style={{marginBottom: 1, marginLeft: 2, flexDirection: 'row'}}>
           <FontAwesomeIcon {...props} icon={faClock} size={25} />
           <Text> 5 min</Text>
         </View>
