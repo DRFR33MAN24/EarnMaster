@@ -36,13 +36,20 @@ export const homeIcon = props => (
   />
 );
 
-export const NotificationIcon = props => (
+export const CoinsComponent = props => (
   <View
     style={{
-      paddingHorizontal: 4,
       flexDirection: 'row',
-      alignItems: 'center',
+      justifyContent: 'flex-start',
     }}>
+    {/* <Text style={styles.badge}> 2 </Text> */}
+
+    <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} />
+    <Text style={{fontSize: 12}}> 100</Text>
+  </View>
+);
+export const NotificationIcon = props => (
+  <View>
     <Button
       appearance="ghost"
       onPress={() => props.navigation.navigate('Notification')}
@@ -50,19 +57,20 @@ export const NotificationIcon = props => (
       <View style={styles.badgeIconView}>
         <Text style={styles.badge}> 2 </Text>
 
-        <FontAwesomeIcon icon={faBell} size={25} style={{color: 'gold'}} />
+        <FontAwesomeIcon icon={faBell} size={20} style={{color: 'gold'}} />
       </View>
     </Button>
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-      }}>
-      {/* <Text style={styles.badge}> 2 </Text> */}
-
-      <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
-      <Text> 100</Text>
-    </View>
+  </View>
+);
+export const HomeScreenContainer = props => (
+  <View
+    style={{
+      paddingHorizontal: 4,
+      flexDirection: 'row',
+      alignItems: 'center',
+    }}>
+    <NotificationIcon {...props} />
+    <CoinsComponent />
   </View>
 );
 
@@ -117,7 +125,7 @@ export const HomeScreen = ({navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       <TopNavigation
         title="Dashboard"
-        accessoryRight={<NotificationIcon navigation={navigation} />}
+        accessoryRight={<HomeScreenContainer navigation={navigation} />}
       />
       <Divider />
 
@@ -266,6 +274,6 @@ const styles = StyleSheet.create({
     padding: 1,
     backgroundColor: 'red',
     borderRadius: 5,
-    fontSize: 10,
+    fontSize: 8,
   },
 });
