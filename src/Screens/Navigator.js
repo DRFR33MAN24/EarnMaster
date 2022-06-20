@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
@@ -32,18 +32,35 @@ const StackNavigatorHome = () => (
       name="Dashboard"
       component={HomeScreen}
       options={{
-        headerRight: props => <HomeScreenTopBar {...props} />,
+        headerShown: false,
+        // headerRight: props => <HomeScreenTopBar {...props} />,
       }}
     />
-    <Stack.Screen name="Notification" component={NotificationScreen} />
-    <Stack.Screen name="Surveys" component={SurveysScreen} />
+    <Stack.Screen
+      name="Notification"
+      component={NotificationScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Surveys"
+      component={SurveysScreen}
+      options={{headerShown: false}}
+    />
   </Stack.Navigator>
 );
 const StackNavigatorWallet = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Wallet" component={WalletScreen} />
+    <Stack.Screen
+      name="Wallet"
+      component={WalletScreen}
+      options={{headerShown: false}}
+    />
 
-    <Stack.Screen name="Withdraw" component={WithdrawScreen} />
+    <Stack.Screen
+      name="Withdraw"
+      component={WithdrawScreen}
+      options={{headerShown: false}}
+    />
   </Stack.Navigator>
 );
 const TabNavigator = () => (
@@ -69,6 +86,7 @@ const TabNavigator = () => (
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={ProfileScreen}
       options={{
+        headerShown: false,
         headerRight: props => <ProfileScreenTopBar {...props} />,
       }}
     />
