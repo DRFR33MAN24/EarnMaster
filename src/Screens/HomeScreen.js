@@ -26,6 +26,7 @@ import {
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
 import {BackIcon} from '../Components/NavigationComponents';
+
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -33,6 +34,36 @@ export const homeIcon = props => (
     size={25}
     style={{color: props.style.tintColor}}
   />
+);
+
+export const NotificationIcon = props => (
+  <View
+    style={{
+      paddingHorizontal: 4,
+      flexDirection: 'row',
+      alignItems: 'center',
+    }}>
+    <Button
+      appearance="ghost"
+      onPress={() => props.navigation.navigate('Notification')}
+      style={{padding: 0}}>
+      <View style={styles.badgeIconView}>
+        <Text style={styles.badge}> 2 </Text>
+
+        <FontAwesomeIcon icon={faBell} size={25} style={{color: 'gold'}} />
+      </View>
+    </Button>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+      }}>
+      {/* <Text style={styles.badge}> 2 </Text> */}
+
+      <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+      <Text> 100</Text>
+    </View>
+  </View>
 );
 
 export const HomeScreenTopBar = () => {
@@ -84,7 +115,10 @@ export const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title="Dashboard" />
+      <TopNavigation
+        title="Dashboard"
+        accessoryRight={<NotificationIcon navigation={navigation} />}
+      />
       <Divider />
 
       <ScrollView style={{flex: 1}}>

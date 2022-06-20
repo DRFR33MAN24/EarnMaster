@@ -59,7 +59,10 @@ export const WithdrawScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title="Withdraw" accessoryLeft={<BackIcon />} />
+      <TopNavigation
+        title="Withdraw"
+        accessoryLeft={<BackIcon navigation={navigation} />}
+      />
       <Divider />
       <View>
         <Text>Choose your withdrawal method:</Text>

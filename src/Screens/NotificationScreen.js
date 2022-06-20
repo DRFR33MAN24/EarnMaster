@@ -15,7 +15,10 @@ export const NotificationScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title="Notification" accessoryLeft={<BackIcon />} />
+      <TopNavigation
+        title="Notification"
+        accessoryLeft={<BackIcon navigation={navigation} />}
+      />
       <Divider />
 
       <ScrollView style={{flex: 1}}></ScrollView>
