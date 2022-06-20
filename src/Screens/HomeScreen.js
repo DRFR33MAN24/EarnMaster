@@ -8,8 +8,13 @@ import {
   TopNavigation,
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBell, faCoins, faHome} from '@fortawesome/free-solid-svg-icons';
-import React, {useState} from 'react';
+import {
+  faBell,
+  faCoins,
+  faHome,
+  faChevronLeft,
+} from '@fortawesome/free-solid-svg-icons';
+import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -20,22 +25,13 @@ import {
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
-
+import {BackIcon} from '../Components/NavigationComponents';
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
     icon={faHome}
     size={25}
     style={{color: props.style.tintColor}}
-  />
-);
-
-const BackIcon = props => (
-  <FontAwesomeIcon
-    {...props}
-    icon={faHome}
-    size={25}
-    // style={{color: props.style.tintColor}}
   />
 );
 
@@ -88,7 +84,7 @@ export const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title="Eva Application" accessoryLeft={<BackIcon />} />
+      <TopNavigation title="Dashboard" />
       <Divider />
 
       <ScrollView style={{flex: 1}}>

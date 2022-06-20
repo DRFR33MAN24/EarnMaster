@@ -1,4 +1,10 @@
-import {Text, Divider, Card, Button} from '@ui-kitten/components';
+import {
+  Text,
+  Divider,
+  Card,
+  Button,
+  TopNavigation,
+} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -52,6 +58,7 @@ export const WalletScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <TopNavigation title="Wallet" />
       <Divider />
       <View style={{margin: 10}}>
         <Card>

@@ -1,10 +1,17 @@
-import {Text, Divider, Card, Button} from '@ui-kitten/components';
+import {
+  Text,
+  Divider,
+  Card,
+  Button,
+  TopNavigation,
+} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faUser, faCoins} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
+
 export const profileIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -44,6 +51,7 @@ export const ProfileScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <TopNavigation title="Profile" />
       <Divider />
 
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>

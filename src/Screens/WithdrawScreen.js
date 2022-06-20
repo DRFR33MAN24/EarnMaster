@@ -15,7 +15,7 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-
+import {BackIcon} from '../Components/NavigationComponents';
 const RedeemOption = props => {
   return (
     <View style={{flex: 1, flexBasis: '50%', maxWidth: '50%'}}>
@@ -59,6 +59,7 @@ export const WithdrawScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <TopNavigation title="Withdraw" accessoryLeft={<BackIcon />} />
       <Divider />
       <View>
         <Text>Choose your withdrawal method:</Text>
