@@ -24,9 +24,15 @@ const playCard = {
   value: '5$',
 };
 const playstationCard = {
-  backgroundColor: 'black',
+  backgroundColor: 'grey',
   image: require('./images/playstation.png'),
   title: 'Google Play',
+  value: '5$',
+};
+const amazonCard = {
+  backgroundColor: 'orange',
+  image: require('./images/amazon.png'),
+  title: ' Amazon Gift Card',
   value: '5$',
 };
 const RedeemOption = ({style}) => {
@@ -36,7 +42,7 @@ const RedeemOption = ({style}) => {
         width: '50%',
         height: 120,
 
-        backgroundColor: 'pink',
+        // backgroundColor: 'pink',
 
         margin: 0,
         padding: 0,
@@ -46,18 +52,18 @@ const RedeemOption = ({style}) => {
           // backgroundColor: 'yellow',
           justifyContent: 'center',
           alignItems: 'center',
-          margin: 5,
-          padding: 10,
-          borderRadius: 10,
+          margin: 2,
+          padding: 5,
+
           height: 110,
-          width: '95%',
+          width: '99%',
         }}>
         <View
           style={{
             position: 'absolute',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '95%',
+            width: '99%',
             height: 100,
             borderRadius: 15,
             backgroundColor: style.backgroundColor,
@@ -128,8 +134,8 @@ export const WithdrawScreen = ({navigation}) => {
           <RedeemOption style={playCard} />
           <RedeemOption style={playstationCard} />
           <RedeemOption style={playstationCard} />
-          <RedeemOption style={playstationCard} />
-          <RedeemOption style={playstationCard} />
+          <RedeemOption style={amazonCard} />
+          <RedeemOption style={amazonCard} />
           {/* <RedeemOption />
           <RedeemOption /> */}
         </View>
@@ -158,9 +164,9 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     // backgroundColor: '#0E317A',
-    width: '95%',
+    width: '99%',
     height: 100,
     zIndex: -100,
-    opacity: 0.9,
+    opacity: 0.5,
   },
 });
