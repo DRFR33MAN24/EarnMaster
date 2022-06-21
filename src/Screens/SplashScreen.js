@@ -20,6 +20,7 @@ const SplashScreen = props => {
         indeterminate={true}
         width={200}
         height={15}
+        borderWidth={0}
         color={theme['color-primary-default']}
       />
     </View>
