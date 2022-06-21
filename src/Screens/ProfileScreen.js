@@ -8,10 +8,17 @@ import {
   useTheme,
 } from '@ui-kitten/components';
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faUser, faCoins} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faCoins, faSignOut} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
 
 export const profileIcon = props => (
@@ -58,7 +65,45 @@ export const ProfileScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>
-        <Button onPress={themeContext.toggleTheme}>Toggle theme</Button>
+        <Card>
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingVertical: 20,
+            }}>
+            <Image
+              source={require('./images/profile.png')}
+              style={{resizeMode: 'center', width: 64, height: 64}}
+            />
+            <Text>Laura Davis</Text>
+          </View>
+        </Card>
+        <Divider />
+        <Card>
+          <Text>Email:</Text>
+        </Card>
+        <Card>
+          <Text>Membership:</Text>
+        </Card>
+        <Card>
+          <Text>Referral Code:</Text>
+        </Card>
+        <Card>
+          <Text>Total Earnings:</Text>
+        </Card>
+        <Card>
+          <Button onPress={themeContext.toggleTheme}>Toggle theme</Button>
+        </Card>
+        <Card>
+          <TouchableOpacity>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text>Logout</Text>
+              <FontAwesomeIcon icon={faSignOut} size={25} />
+            </View>
+          </TouchableOpacity>
+        </Card>
       </ScrollView>
     </SafeAreaView>
   );
