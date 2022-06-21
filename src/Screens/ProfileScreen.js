@@ -6,6 +6,7 @@ import {
   TopNavigation,
   Layout,
   useTheme,
+  Toggle,
 } from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {
@@ -18,7 +19,12 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faUser, faCoins, faSignOut} from '@fortawesome/free-solid-svg-icons';
+import {
+  faUser,
+  faCoins,
+  faSignOut,
+  faPhone,
+} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
 
 export const profileIcon = props => (
@@ -31,6 +37,7 @@ export const profileIcon = props => (
 );
 export const ProfileScreenTopBar = () => {
   let navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -54,6 +61,12 @@ export const ProfileScreenTopBar = () => {
 export const ProfileScreen = ({navigation}) => {
   const themeContext = React.useContext(ThemeContext);
   const theme = useTheme();
+  const [checked, setChecked] = useState(false);
+
+  const onCheckedChange = isChecked => {
+    setChecked(isChecked);
+    themeContext.toggleTheme();
+  };
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
@@ -92,9 +105,9 @@ export const ProfileScreen = ({navigation}) => {
         <Card>
           <Text>Total Earnings:</Text>
         </Card>
-        <Card>
+        {/* <Card>
           <Button onPress={themeContext.toggleTheme}>Toggle theme</Button>
-        </Card>
+        </Card> */}
         <Card>
           <TouchableOpacity>
             <View
@@ -103,6 +116,21 @@ export const ProfileScreen = ({navigation}) => {
               <FontAwesomeIcon icon={faSignOut} size={25} />
             </View>
           </TouchableOpacity>
+        </Card>
+        <Card>
+          <TouchableOpacity>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text>Contact support</Text>
+              <FontAwesomeIcon icon={faPhone} size={25} />
+            </View>
+          </TouchableOpacity>
+        </Card>
+        <Card>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text>Change Theme</Text>
+            <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
+          </View>
         </Card>
       </ScrollView>
     </SafeAreaView>
