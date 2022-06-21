@@ -16,39 +16,80 @@ import {
   Image,
 } from 'react-native';
 import {BackIcon} from '../Components/NavigationComponents';
-const RedeemOption = props => {
+
+const playCard = {
+  backgroundColor: 'white',
+  image: require('./images/play.png'),
+  title: 'Google Play',
+  value: '5$',
+};
+const playstationCard = {
+  backgroundColor: 'black',
+  image: require('./images/playstation.png'),
+  title: 'Google Play',
+  value: '5$',
+};
+const RedeemOption = ({style}) => {
   return (
-    <View style={{flex: 1, flexBasis: '50%', maxWidth: '50%'}}>
-      <Card style={{margin: 4}}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'row',
+        flexBasis: '50%',
+        maxWidth: '50%',
+        height: 100,
+        padding: 4,
+      }}>
+      <View
+        style={{
+          flex: 1,
+
+          margin: 4,
+
+          // backgroundColor: 'yellow',
+          borderRadius: 2,
+        }}>
         <View
           style={{
-            position: 'absolute',
+            flex: 1,
 
-            width: '150%',
-            height: '150%',
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: 100,
+
+            backgroundColor: style.backgroundColor,
             zIndex: -200,
           }}>
-          <Image
-            source={require('./images/google.png')}
-            style={{resizeMode: 'contain', width: '100%', height: '100%'}}
-          />
+          <View style={{backgroundColor: 'red'}}>
+            <Image
+              source={style.image}
+              style={{resizeMode: 'center', width: 64, height: 64}}
+            />
+          </View>
         </View>
         <View style={styles.glassyBackground}>
           <Image
             source={require('./images/glass.png')}
-            style={{resizeMode: 'stretch'}}
+            style={{resizeMode: 'cover'}}
           />
         </View>
-        <View style={{marginTop: 1, marginRight: 2, alignItems: 'flex-end'}}>
-          <Text>h</Text>
+        <View
+          style={{
+            flex: 1,
+            marginVertical: 2,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text>{style.title}</Text>
+          </View>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text>{style.value}</Text>
+          </View>
         </View>
-        <View style={{flex: 1}}>
-          <Text>hello</Text>
-        </View>
-        <View style={{marginBottom: 1, marginLeft: 2, flexDirection: 'row'}}>
-          <Text> 5 min</Text>
-        </View>
-      </Card>
+      </View>
     </View>
   );
 };
@@ -78,12 +119,14 @@ export const WithdrawScreen = ({navigation}) => {
             justifyContent: 'flex-start',
             alignItems: 'center',
           }}>
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
-          <RedeemOption />
+          <RedeemOption style={playCard} />
+          <RedeemOption style={playCard} />
+          <RedeemOption style={playstationCard} />
+          <RedeemOption style={playstationCard} />
+          <RedeemOption style={playstationCard} />
+          <RedeemOption style={playstationCard} />
+          {/* <RedeemOption />
+          <RedeemOption /> */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -106,9 +149,13 @@ const styles = StyleSheet.create({
   },
   glassyBackground: {
     position: 'absolute',
-    backgroundColor: '#0E317A',
-    width: '150%',
-    height: '150%',
+    margin: 0,
+    padding: 0,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: '#0E317A',
+    width: '100%',
+    height: 100,
     zIndex: -100,
     opacity: 0.3,
   },
