@@ -88,15 +88,30 @@ const RedeemOption = ({style}) => {
         <View
           style={{
             position: 'absolute',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
+            // justifyContent: 'flex-start',
+            // alignItems: 'flex-start',
             width: '95%',
             height: 100,
+            // backgroundColor: 'blue',
           }}>
-          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View
+            style={{
+              // flexDirection: 'row',
+              flex: 1,
+              justifyContent: 'flex-start',
+              // backgroundColor: 'red',
+              padding: 5,
+            }}>
             <Text>{style.title}</Text>
           </View>
-          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View
+            style={{
+              // flexDirection: 'row',
+              flex: 1,
+              justifyContent: 'flex-end',
+              // backgroundColor: 'red',
+              padding: 5,
+            }}>
             <Text>{style.value}</Text>
           </View>
         </View>
@@ -116,9 +131,9 @@ export const WithdrawScreen = ({navigation}) => {
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
-      <View>
+      <Card>
         <Text>Choose your withdrawal method:</Text>
-      </View>
+      </Card>
 
       <ScrollView style={{flex: 1}}>
         <View
