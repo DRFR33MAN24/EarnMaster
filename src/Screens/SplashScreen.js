@@ -2,6 +2,8 @@ import React from 'react';
 
 import {Image, StyleSheet, View} from 'react-native';
 import {Layout, Text, useTheme} from '@ui-kitten/components';
+import * as Progress from 'react-native-progress';
+
 const SplashScreen = props => {
   const splash = './images/logo.png';
   const theme = useTheme();
@@ -14,6 +16,12 @@ const SplashScreen = props => {
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
       <Text style={styles.splashText}>Earn Master v1.0</Text>
+      <Progress.Bar
+        indeterminate={true}
+        width={200}
+        height={15}
+        color={theme['color-primary-default']}
+      />
     </View>
   );
 };

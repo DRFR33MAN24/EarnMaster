@@ -133,7 +133,7 @@ export const HomeScreen = ({navigation}) => {
 
       <ScrollView style={{flex: 1}}>
         <Card style={styles.goalsCard}>
-          <Text style={[{fontSize: 20}, styles.textWithShadow]}>Lv #1</Text>
+          <Text style={[{fontSize: 20}]}>Lv #1</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -145,7 +145,9 @@ export const HomeScreen = ({navigation}) => {
                 progress={0.3}
                 width={200}
                 height={15}
-                style={styles.progressBarShadow}
+                borderWidth={0}
+                color={theme['color-primary-default']}
+                unfilledColor={theme['background-basic-color-4']}
               />
             </View>
             <Image
