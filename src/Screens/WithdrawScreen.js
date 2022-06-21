@@ -33,54 +33,59 @@ const RedeemOption = ({style}) => {
   return (
     <View
       style={{
-        flex: 1,
-        flexDirection: 'row',
-        flexBasis: '50%',
-        maxWidth: '50%',
-        height: 100,
-        padding: 4,
+        width: '50%',
+        height: 120,
+
+        backgroundColor: 'pink',
+
+        margin: 0,
+        padding: 0,
       }}>
       <View
         style={{
-          flex: 1,
-
-          margin: 4,
-
           // backgroundColor: 'yellow',
-          borderRadius: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+          margin: 5,
+          padding: 10,
+          borderRadius: 10,
+          height: 110,
+          width: '95%',
         }}>
         <View
           style={{
-            flex: 1,
-
             position: 'absolute',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
+            width: '95%',
             height: 100,
-
+            borderRadius: 15,
             backgroundColor: style.backgroundColor,
             zIndex: -200,
           }}>
-          <View style={{backgroundColor: 'red'}}>
-            <Image
-              source={style.image}
-              style={{resizeMode: 'center', width: 64, height: 64}}
-            />
-          </View>
+          <Image
+            source={style.image}
+            style={{resizeMode: 'center', width: 64, height: 64}}
+          />
         </View>
         <View style={styles.glassyBackground}>
           <Image
             source={require('./images/glass.png')}
-            style={{resizeMode: 'cover'}}
+            style={{
+              resizeMode: 'cover',
+              height: '100%',
+              width: '100%',
+              borderRadius: 15,
+            }}
           />
         </View>
         <View
           style={{
-            flex: 1,
-            marginVertical: 2,
-            justifyContent: 'center',
+            position: 'absolute',
+            justifyContent: 'flex-start',
             alignItems: 'flex-start',
+            width: '95%',
+            height: 100,
           }}>
           <View style={{flex: 1, flexDirection: 'row'}}>
             <Text>{style.title}</Text>
@@ -114,8 +119,8 @@ export const WithdrawScreen = ({navigation}) => {
           style={{
             flexDirection: 'row',
             flexWrap: 'wrap',
-            flex: 1,
-
+            // flex: 1,
+            padding: 10,
             justifyContent: 'flex-start',
             alignItems: 'center',
           }}>
@@ -149,14 +154,13 @@ const styles = StyleSheet.create({
   },
   glassyBackground: {
     position: 'absolute',
-    margin: 0,
-    padding: 0,
+
     // justifyContent: 'center',
     // alignItems: 'center',
     // backgroundColor: '#0E317A',
-    width: '100%',
+    width: '95%',
     height: 100,
     zIndex: -100,
-    opacity: 0.3,
+    opacity: 0.9,
   },
 });
