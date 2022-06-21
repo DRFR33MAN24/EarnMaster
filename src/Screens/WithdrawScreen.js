@@ -5,6 +5,7 @@ import {
   Divider,
   TopNavigation,
   Card,
+  useTheme,
 } from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {
@@ -15,6 +16,8 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faC, faCoins} from '@fortawesome/free-solid-svg-icons';
 import {BackIcon} from '../Components/NavigationComponents';
 
 const playCard = {
@@ -106,13 +109,38 @@ const RedeemOption = ({style}) => {
           </View>
           <View
             style={{
-              // flexDirection: 'row',
-              flex: 1,
-              justifyContent: 'flex-end',
-              // backgroundColor: 'red',
-              padding: 5,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginBottom: 2,
             }}>
-            <Text>{style.value}</Text>
+            <View
+              style={{
+                // flexDirection: 'row',
+                // flex: 1,
+                // justifyContent: 'flex-end',
+                // backgroundColor: 'red',
+                padding: 5,
+              }}>
+              <Text>{style.value}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                // flex: 1,
+                // justifyContent: 'flex-end',
+                backgroundColor: 'gold',
+                borderRadius: 10,
+                padding: 5,
+              }}>
+              <FontAwesomeIcon
+                icon={faCoins}
+                size={10}
+                // style={{color: props.style.tintColor}}
+              />
+              <Text style={{fontSize: 12}}> 500</Text>
+            </View>
           </View>
         </View>
       </View>
@@ -123,9 +151,10 @@ export const WithdrawScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
-
+  const theme = useTheme();
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView
+      style={{flex: 1, backgroundColor: theme['background-basic-color-1']}}>
       <TopNavigation
         title="Withdraw"
         accessoryLeft={<BackIcon navigation={navigation} />}

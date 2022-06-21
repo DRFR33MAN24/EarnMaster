@@ -4,6 +4,8 @@ import {
   Card,
   Button,
   TopNavigation,
+  Layout,
+  useTheme,
 } from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
@@ -44,13 +46,14 @@ export const ProfileScreenTopBar = () => {
 
 export const ProfileScreen = ({navigation}) => {
   const themeContext = React.useContext(ThemeContext);
-
+  const theme = useTheme();
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView
+      style={{flex: 1, backgroundColor: theme['background-basic-color-1']}}>
       <TopNavigation title="Profile" />
       <Divider />
 
