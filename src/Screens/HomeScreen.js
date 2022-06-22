@@ -47,7 +47,11 @@ export const CoinsComponent = props => (
     }}>
     {/* <Text style={styles.badge}> 2 </Text> */}
 
-    <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} />
+    <Image
+      source={require('./images/dollar.png')}
+      style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
+    />
+    {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
     <Text style={{fontSize: 12}}> 100</Text>
   </View>
 );

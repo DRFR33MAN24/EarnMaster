@@ -87,9 +87,9 @@ export const ProfileScreen = ({navigation}) => {
             }}>
             <Image
               source={require('./images/profile.png')}
-              style={{resizeMode: 'center', width: 64, height: 64}}
+              style={{resizeMode: 'center', width: 96, height: 96}}
             />
-            <Text>Laura Davis</Text>
+            <Text>Martin Mystery</Text>
           </View>
         </Card>
         <Divider />
