@@ -44,6 +44,7 @@ const RedeemOption = ({style}) => {
       style={{
         width: '50%',
         height: 120,
+        maxWidth: 200,
 
         // backgroundColor: 'pink',
 

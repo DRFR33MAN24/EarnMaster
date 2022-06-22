@@ -14,6 +14,7 @@ import {
   faCoins,
   faHome,
   faChevronLeft,
+  faGift,
 } from '@fortawesome/free-solid-svg-icons';
 import React, {useState, useContext} from 'react';
 import {
@@ -26,6 +27,7 @@ import {
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 import {BackIcon} from '../Components/NavigationComponents';
 
 export const homeIcon = props => (
@@ -50,7 +52,7 @@ export const CoinsComponent = props => (
   </View>
 );
 export const NotificationIcon = props => (
-  <View>
+  <Animatable.View animation="swing" easing="ease-out" iterationCount={3}>
     <Button
       appearance="ghost"
       onPress={() => props.navigation.navigate('Notification')}
@@ -61,7 +63,7 @@ export const NotificationIcon = props => (
         <FontAwesomeIcon icon={faBell} size={20} style={{color: 'gold'}} />
       </View>
     </Button>
-  </View>
+  </Animatable.View>
 );
 export const HomeScreenContainer = props => (
   <View
@@ -133,27 +135,38 @@ export const HomeScreen = ({navigation}) => {
 
       <ScrollView style={{flex: 1}}>
         <Card style={styles.goalsCard}>
-          <Text style={[{fontSize: 20}]}>Lv #1</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <Text style={[{fontSize: 20}]}>Lv #1</Text>
+          </View>
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}>
             <View>
-              <Progress.Bar
-                progress={0.3}
-                width={200}
-                height={15}
+              <Progress.Circle
+                progress={0.5}
+                size={60}
+                showsText={true}
+                textStyle={{fontSize: 12, fontFamily: 'Roboto-Bold'}}
+                // width={200}
+                // height={15}
+                thickness={8}
                 borderWidth={0}
                 color={theme['color-primary-default']}
                 unfilledColor={theme['background-basic-color-4']}
               />
             </View>
-            <Image
-              source={require('./images/gift.png')}
-              style={styles.acheivementImage}
-            />
+            <Animatable.View
+              animation="pulse"
+              easing="ease-out"
+              iterationCount="infinite">
+              <Image
+                source={require('./images/giftbox.png')}
+                style={styles.acheivementImage}
+              />
+            </Animatable.View>
           </View>
         </Card>
         <View
@@ -163,60 +176,60 @@ export const HomeScreen = ({navigation}) => {
             justifyContent: 'center',
           }}>
           <Card style={styles.homeScreenButton}>
-            <View>
-              <Image
-                source={require('./images/offer.jpg')}
-                style={styles.homeScreenButtonImage}
-              />
+            <TouchableOpacity>
+              <View>
+                <Image
+                  source={require('./images/ribbon.png')}
+                  style={styles.homeScreenButtonImage}
+                />
 
-              <TouchableOpacity>
                 <Text numberOfLines={1} style={{flex: 1}}>
                   Complete offers
                 </Text>
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableOpacity>
           </Card>
 
           <Card style={styles.homeScreenButton}>
-            <View>
-              <Image
-                source={require('./images/watch.jpg')}
-                style={styles.homeScreenButtonImage}
-              />
-              <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Watch Ads
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </Card>
-
-          <Card style={styles.homeScreenButton}>
-            <View>
-              <Image
-                source={require('./images/gamble.png')}
-                style={styles.homeScreenButtonImage}
-              />
-              <TouchableOpacity>
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Watch Ads
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </Card>
-
-          <Card style={styles.homeScreenButton}>
-            <View>
-              <TouchableOpacity onPress={() => navigation.navigate('Surveys')}>
+            <TouchableOpacity>
+              <View>
                 <Image
-                  source={require('./images/history.png')}
+                  source={require('./images/television.png')}
+                  style={styles.homeScreenButtonImage}
+                />
+                <Text numberOfLines={1} style={{flex: 1}}>
+                  Watch Ads
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </Card>
+
+          <Card style={styles.homeScreenButton}>
+            <TouchableOpacity>
+              <View>
+                <Image
+                  source={require('./images/gambler.png')}
+                  style={styles.homeScreenButtonImage}
+                />
+                <Text numberOfLines={1} style={{flex: 1}}>
+                  Gamble!
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </Card>
+
+          <Card style={styles.homeScreenButton}>
+            <TouchableOpacity onPress={() => navigation.navigate('Surveys')}>
+              <View>
+                <Image
+                  source={require('./images/checklist.png')}
                   style={styles.homeScreenButtonImage}
                 />
                 <Text numberOfLines={1} style={{flex: 1}}>
                   Paid Surveys
                 </Text>
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableOpacity>
           </Card>
         </View>
       </ScrollView>
@@ -237,8 +250,9 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   acheivementImage: {
-    width: 64,
-    height: 64,
+    width: 32,
+    height: 32,
+    opacity: 0.2,
     resizeMode: 'stretch',
   },
   textWithShadow: {
@@ -246,22 +260,22 @@ const styles = StyleSheet.create({
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
   },
-  progressBarShadow: {
-    shadowColor: '#000',
+  giftHalo: {
+    shadowColor: 'gold',
     shadowOffset: {
-      width: 0,
-      height: 12,
+      width: 2,
+      height: 2,
     },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
+    shadowOpacity: 1,
+    shadowRadius: 5.0,
 
-    elevation: 24,
+    elevation: 50,
   },
   goalsCard: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
+    // alignItems: 'center',
+    // paddingVertical: 20,
     marginHorizontal: 18,
     marginVertical: 10,
     borderWidth: 2,
