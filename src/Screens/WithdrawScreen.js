@@ -155,7 +155,7 @@ export const WithdrawScreen = ({navigation}) => {
   const theme = useTheme();
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-1']}}>
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
         title="Withdraw"
         accessoryLeft={<BackIcon navigation={navigation} />}

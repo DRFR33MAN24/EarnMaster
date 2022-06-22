@@ -73,7 +73,7 @@ export const ProfileScreen = ({navigation}) => {
 
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-1']}}>
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation title="Profile" />
       <Divider />
 
@@ -130,6 +130,11 @@ export const ProfileScreen = ({navigation}) => {
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text>Change Theme</Text>
             <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
+          </View>
+        </Card>
+        <Card>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text>About US</Text>
           </View>
         </Card>
       </ScrollView>

@@ -12,7 +12,7 @@ const SplashScreen = props => {
     <View
       style={[
         styles.container,
-        {backgroundColor: theme['background-basic-color-1']},
+        {backgroundColor: theme['background-basic-color-4']},
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
       <Text style={styles.splashText}>Earn Master v1.0</Text>

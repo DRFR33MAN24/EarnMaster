@@ -59,7 +59,7 @@ export const WalletScreen = ({navigation}) => {
   const theme = useTheme();
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-1']}}>
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation title="Wallet" />
       <Divider />
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>

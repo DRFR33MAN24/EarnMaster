@@ -16,7 +16,7 @@ export const NotificationScreen = ({navigation}) => {
   const theme = useTheme();
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-1']}}>
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
         title="Notification"
         accessoryLeft={<BackIcon navigation={navigation} />}
