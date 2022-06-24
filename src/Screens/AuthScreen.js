@@ -17,6 +17,7 @@ import {
   CheckBox,
   Datepicker,
 } from '@ui-kitten/components';
+
 import * as Progress from 'react-native-progress';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
