@@ -7,9 +7,11 @@ import { default as mapping } from './mapping.json';
 import { ThemeContext } from './theme-context';
 import { AppNavigator } from './src/Screens/Navigator';
 import SplashScreen from './src/Screens/SplashScreen';
+
 export default () => {
   const [currentTheme, setTheme] = useState('light');
   const [appReady, setAppReady] = useState(false);
+
 
   useEffect(() => {
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Image, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
-import {Layout, Text, useTheme, Input, Button} from '@ui-kitten/components';
+import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Layout, Text, useTheme, Input, Button, Card } from '@ui-kitten/components';
 import * as Progress from 'react-native-progress';
 
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faEye,
   faEyeDropper,
@@ -13,11 +13,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const AlertIcon = props => (
-  <FontAwesomeIcon
-    icon={faWarning}
-    size={10}
+  <View style={{ paddingHorizontal: 2 }}>
+
+    <FontAwesomeIcon
+      icon={faWarning}
+      size={15}
     // style={{color: props.style.tintColor}}
-  />
+    />
+  </View>
+
 );
 
 const SplashScreen = props => {
@@ -33,28 +37,28 @@ const SplashScreen = props => {
   };
 
   const renderIcon = props => (
-    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
+    <TouchableOpacity onPress={toggleSecureEntry}>
       {/* <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'} /> */}
-      {secureTextEntry === 'eye' ? (
+      {!secureTextEntry ? (
         <FontAwesomeIcon
           icon={faEye}
-          size={10}
-          // style={{color: props.style.tintColor}}
+          size={15}
+        // style={{color: props.style.tintColor}}
         />
       ) : (
         <FontAwesomeIcon
           icon={faEyeDropper}
-          size={10}
-          // style={{color: props.style.tintColor}}
+          size={15}
+        // style={{color: props.style.tintColor}}
         />
       )}
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
   const renderEmailIcon = props => (
     <FontAwesomeIcon
       icon={faMessage}
-      size={10}
-      // style={{color: props.style.tintColor}}
+      size={15}
+    // style={{color: props.style.tintColor}}
     />
   );
 
@@ -72,28 +76,34 @@ const SplashScreen = props => {
     <View
       style={[
         styles.container,
-        {backgroundColor: theme['background-basic-color-4']},
+        { backgroundColor: theme['background-basic-color-4'] },
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
-      <Input
-        value={email}
-        label="Email"
-        placeholder="example@domain.com"
-        // caption={renderCaption}
-        accessoryRight={renderEmailIcon}
-        // secureTextEntry={secureTextEntry}
-        onChangeText={nextValue => setEmail(nextValue)}
-      />
-      <Input
-        value={password}
-        label="Password"
-        placeholder="Enter password"
-        caption={renderCaption}
-        accessoryRight={renderIcon}
-        secureTextEntry={secureTextEntry}
-        onChangeText={nextValue => setPassword(nextValue)}
-      />
-      <Button>Login</Button>
+      <View style={{ width: '95%' }}>
+
+        <Input
+          value={email}
+          label="Email"
+          placeholder="example@domain.com"
+          // caption={renderCaption}
+          accessoryRight={renderEmailIcon}
+          // secureTextEntry={secureTextEntry}
+          onChangeText={nextValue => setEmail(nextValue)}
+        />
+        <Input
+          value={password}
+          label="Password"
+          placeholder="Enter password"
+          caption={renderCaption}
+          accessoryRight={renderIcon}
+          secureTextEntry={secureTextEntry}
+          onChangeText={nextValue => setPassword(nextValue)}
+        />
+        <View style={{ marginVertical: 8 }}>
+
+          <Button>Login</Button>
+        </View>
+      </View>
     </View>
   );
 };
@@ -104,6 +114,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 0,
   },
   splashText: {
     fontSize: 24,
@@ -125,6 +136,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 4
   },
   captionIcon: {
     width: 10,

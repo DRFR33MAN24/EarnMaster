@@ -1,22 +1,22 @@
-import React from 'react';
-import {NavigationContainer, DarkTheme} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
+import React, { useState } from 'react';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 //import { StockScreen } from './StockScreen';
-import {StyleSheet} from 'react-native';
-import {NotificationScreen} from './NotificationScreen';
+import { StyleSheet } from 'react-native';
+import { NotificationScreen } from './NotificationScreen';
 
-import {HomeScreen, HomeScreenTopBar, homeIcon} from './HomeScreen';
-import {WalletScreen, walletIcon, WalletScreenTopBar} from './WalletScreen';
-import {ProfileScreen, profileIcon, ProfileScreenTopBar} from './ProfileScreen';
-import {SurveysScreen} from './SurveysScreen';
-import {WithdrawScreen} from './WithdrawScreen';
-
-const {Navigator, Screen} = createBottomTabNavigator();
+import { HomeScreen, HomeScreenTopBar, homeIcon } from './HomeScreen';
+import { WalletScreen, walletIcon, WalletScreenTopBar } from './WalletScreen';
+import { ProfileScreen, profileIcon, ProfileScreenTopBar } from './ProfileScreen';
+import { SurveysScreen } from './SurveysScreen';
+import { WithdrawScreen } from './WithdrawScreen';
+import AuthScreen from './AuthScreen'
+const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTabBar = ({navigation, state}) => (
+const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
@@ -39,12 +39,12 @@ const StackNavigatorHome = () => (
     <Stack.Screen
       name="Notification"
       component={NotificationScreen}
-      options={{headerShown: false}}
+      options={{ headerShown: false }}
     />
     <Stack.Screen
       name="Surveys"
       component={SurveysScreen}
-      options={{headerShown: false}}
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -53,13 +53,13 @@ const StackNavigatorWallet = () => (
     <Stack.Screen
       name="Wallet"
       component={WalletScreen}
-      options={{headerShown: false}}
+      options={{ headerShown: false }}
     />
 
     <Stack.Screen
       name="Withdraw"
       component={WithdrawScreen}
-      options={{headerShown: false}}
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -94,11 +94,22 @@ const TabNavigator = () => (
   </Navigator>
 );
 
-export const AppNavigator = () => (
-  <NavigationContainer>
-    <TabNavigator />
-  </NavigationContainer>
-);
+export const AppNavigator = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  if (authenticated) {
+
+    return (
+      <NavigationContainer>
+        <TabNavigator />
+      </NavigationContainer>)
+  }
+
+  return (<AuthScreen />)
+
+
+}
+
 
 const styles = StyleSheet.create({
   icon: {
