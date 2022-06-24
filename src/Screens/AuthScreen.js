@@ -1,6 +1,12 @@
 import React from 'react';
 
-import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {
   Layout,
   Text,
@@ -9,6 +15,7 @@ import {
   Button,
   Card,
   CheckBox,
+  Datepicker,
 } from '@ui-kitten/components';
 import * as Progress from 'react-native-progress';
 
@@ -35,9 +42,12 @@ const SplashScreen = props => {
   const theme = useTheme();
 
   const [password, setPassword] = React.useState('');
+  const [repeatPassword, setRepeatPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [name, setName] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const [rememberPassword, setRememberPassword] = React.useState(false);
+  const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
 
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -79,6 +89,109 @@ const SplashScreen = props => {
       </View>
     );
   };
+  const Login = () => {
+    return (
+      <View style={{width: '95%'}}>
+        <ScrollView>
+          <Input
+            value={email}
+            label="Email"
+            placeholder="example@domain.com"
+            // caption={renderCaption}
+            accessoryRight={renderEmailIcon}
+            // secureTextEntry={secureTextEntry}
+            onChangeText={nextValue => setEmail(nextValue)}
+          />
+          <Input
+            value={password}
+            label="Password"
+            placeholder="Enter password"
+            caption={renderCaption}
+            accessoryRight={renderIcon}
+            secureTextEntry={secureTextEntry}
+            onChangeText={nextValue => setPassword(nextValue)}
+          />
+          <View style={{paddingVertical: 8, paddingHorizontal: 4}}>
+            <CheckBox
+              checked={rememberPassword}
+              onChange={nextChecked => setRememberPassword(nextChecked)}>
+              {`Remember me`}
+            </CheckBox>
+          </View>
+          <View style={{marginVertical: 8}}>
+            <Button>Login</Button>
+          </View>
+          <View>
+            <TouchableOpacity>
+              <Text style={{color: 'grey'}}>create new account</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  };
+
+  const Register = () => {
+    return (
+      <View style={{width: '95%'}}>
+        <ScrollView>
+          <Input
+            value={name}
+            label="Name"
+            placeholder="John Doe"
+            // caption={renderCaption}
+            //accessoryRight={renderEmailIcon}
+            // secureTextEntry={secureTextEntry}
+            onChangeText={nextValue => setName(nextValue)}
+          />
+          <Input
+            value={email}
+            label="Email"
+            placeholder="example@domain.com"
+            // caption={renderCaption}
+            accessoryRight={renderEmailIcon}
+            // secureTextEntry={secureTextEntry}
+            onChangeText={nextValue => setEmail(nextValue)}
+          />
+          <View>
+            <Datepicker
+              label="Enter your birth date"
+              date={dateOfBirth}
+              onSelect={nextDate => setDateOfBirth(nextDate)}
+            />
+          </View>
+          <Input
+            value={password}
+            label="Password"
+            placeholder="Enter password"
+            caption={renderCaption}
+            accessoryRight={renderIcon}
+            secureTextEntry={secureTextEntry}
+            onChangeText={nextValue => setPassword(nextValue)}
+          />
+          <Input
+            value={repeatPassword}
+            label="RePassword"
+            placeholder="Enter password"
+            caption={renderCaption}
+            accessoryRight={renderIcon}
+            secureTextEntry={secureTextEntry}
+            onChangeText={nextValue => setRepeatPassword(nextValue)}
+          />
+
+          <View style={{marginVertical: 8}}>
+            <Button>Register</Button>
+          </View>
+          <View>
+            <TouchableOpacity>
+              <Text style={{color: 'grey'}}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  };
+
   return (
     <View
       style={[
@@ -86,36 +199,8 @@ const SplashScreen = props => {
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
-      <View style={{width: '95%'}}>
-        <Input
-          value={email}
-          label="Email"
-          placeholder="example@domain.com"
-          // caption={renderCaption}
-          accessoryRight={renderEmailIcon}
-          // secureTextEntry={secureTextEntry}
-          onChangeText={nextValue => setEmail(nextValue)}
-        />
-        <Input
-          value={password}
-          label="Password"
-          placeholder="Enter password"
-          caption={renderCaption}
-          accessoryRight={renderIcon}
-          secureTextEntry={secureTextEntry}
-          onChangeText={nextValue => setPassword(nextValue)}
-        />
-        <View style={{paddingVertical: 8, paddingHorizontal: 4}}>
-          <CheckBox
-            checked={rememberPassword}
-            onChange={nextChecked => setRememberPassword(nextChecked)}>
-            {`Remember me`}
-          </CheckBox>
-        </View>
-        <View style={{marginVertical: 8}}>
-          <Button>Login</Button>
-        </View>
-      </View>
+      {/* <Login /> */}
+      <Register />
     </View>
   );
 };
