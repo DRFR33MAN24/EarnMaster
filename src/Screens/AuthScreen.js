@@ -1,27 +1,33 @@
 import React from 'react';
 
-import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Layout, Text, useTheme, Input, Button, Card } from '@ui-kitten/components';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {
+  Layout,
+  Text,
+  useTheme,
+  Input,
+  Button,
+  Card,
+  CheckBox,
+} from '@ui-kitten/components';
 import * as Progress from 'react-native-progress';
 
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faEye,
-  faEyeDropper,
-  faMessage,
+  faEyeSlash,
+  faEnvelope,
   faWarning,
 } from '@fortawesome/free-solid-svg-icons';
 
 const AlertIcon = props => (
-  <View style={{ paddingHorizontal: 2 }}>
-
+  <View style={{paddingHorizontal: 2}}>
     <FontAwesomeIcon
       icon={faWarning}
       size={15}
-    // style={{color: props.style.tintColor}}
+      // style={{color: props.style.tintColor}}
     />
   </View>
-
 );
 
 const SplashScreen = props => {
@@ -31,6 +37,7 @@ const SplashScreen = props => {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+  const [rememberPassword, setRememberPassword] = React.useState(false);
 
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -43,22 +50,22 @@ const SplashScreen = props => {
         <FontAwesomeIcon
           icon={faEye}
           size={15}
-        // style={{color: props.style.tintColor}}
+          // style={{color: props.style.tintColor}}
         />
       ) : (
         <FontAwesomeIcon
-          icon={faEyeDropper}
+          icon={faEyeSlash}
           size={15}
-        // style={{color: props.style.tintColor}}
+          // style={{color: props.style.tintColor}}
         />
       )}
     </TouchableOpacity>
   );
   const renderEmailIcon = props => (
     <FontAwesomeIcon
-      icon={faMessage}
+      icon={faEnvelope}
       size={15}
-    // style={{color: props.style.tintColor}}
+      // style={{color: props.style.tintColor}}
     />
   );
 
@@ -76,11 +83,10 @@ const SplashScreen = props => {
     <View
       style={[
         styles.container,
-        { backgroundColor: theme['background-basic-color-4'] },
+        {backgroundColor: theme['background-basic-color-4']},
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
-      <View style={{ width: '95%' }}>
-
+      <View style={{width: '95%'}}>
         <Input
           value={email}
           label="Email"
@@ -99,8 +105,14 @@ const SplashScreen = props => {
           secureTextEntry={secureTextEntry}
           onChangeText={nextValue => setPassword(nextValue)}
         />
-        <View style={{ marginVertical: 8 }}>
-
+        <View style={{paddingVertical: 8, paddingHorizontal: 4}}>
+          <CheckBox
+            checked={rememberPassword}
+            onChange={nextChecked => setRememberPassword(nextChecked)}>
+            {`Remember me`}
+          </CheckBox>
+        </View>
+        <View style={{marginVertical: 8}}>
           <Button>Login</Button>
         </View>
       </View>
@@ -136,7 +148,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 4
+    paddingVertical: 4,
   },
   captionIcon: {
     width: 10,
