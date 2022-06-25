@@ -15,7 +15,7 @@ export default () => {
   const sendTokenToServer = async token => {
     try {
 
-      const response = fetch('192.168.1.18:3000/register', {
+      const response = fetch('http://192.168.1.18:5000/register', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -32,7 +32,6 @@ export default () => {
     }
   }
   useEffect(() => {
-
     setTimeout(() => {
       setAppReady(true);
     }, 2000);
@@ -42,6 +41,7 @@ export default () => {
 
     Notifications.events().registerRemoteNotificationsRegistered((event) => {
       // TODO: Send the token to my server so it could send back push notifications...
+      sendTokenToServer(event.deviceToken);
       console.log("Device Token Received", event.deviceToken);
     });
     Notifications.events().registerRemoteNotificationsRegistrationFailed((event) => {
