@@ -1,36 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-import { default as light } from './src/light.json';
-import { default as dark } from './src/dark.json';
-import { default as mapping } from './mapping.json';
-import { ThemeContext } from './theme-context';
-import { AppNavigator } from './src/Screens/Navigator';
+import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
+import {default as light} from './src/light.json';
+import {default as dark} from './src/dark.json';
+import {default as mapping} from './mapping.json';
+import {ThemeContext} from './theme-context';
+import {AppNavigator} from './src/Screens/Navigator';
 import SplashScreen from './src/Screens/SplashScreen';
-import { Notifications } from 'react-native-notifications';
+import {Notifications} from 'react-native-notifications';
 export default () => {
   const [currentTheme, setTheme] = useState('light');
   const [appReady, setAppReady] = useState(false);
 
   const sendTokenToServer = async token => {
     try {
-
       const response = fetch('http://192.168.1.18:5000/register', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           token: token,
-
-        })
+        }),
       });
       const json = await response.json();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   useEffect(() => {
     setTimeout(() => {
       setAppReady(true);
@@ -39,14 +37,32 @@ export default () => {
     // Request permissions on iOS, refresh token on Android
     Notifications.registerRemoteNotifications();
 
-    Notifications.events().registerRemoteNotificationsRegistered((event) => {
+    Notifications.events().registerRemoteNotificationsRegistered(event => {
       // TODO: Send the token to my server so it could send back push notifications...
       sendTokenToServer(event.deviceToken);
-      console.log("Device Token Received", event.deviceToken);
+      console.log('Device Token Received', event.deviceToken);
     });
-    Notifications.events().registerRemoteNotificationsRegistrationFailed((event) => {
-      console.error(event);
-    });
+    Notifications.events().registerRemoteNotificationsRegistrationFailed(
+      event => {
+        console.error(event);
+      },
+    );
+
+    Notifications.events().registerNotificationReceivedForeground(
+      (notification, completion) => {
+        console.log(
+          `Notification received in foreground: ${notification.title} : ${notification.body}`,
+        );
+        completion({alert: false, sound: false, badge: false});
+      },
+    );
+
+    Notifications.events().registerNotificationOpened(
+      (notification, completion) => {
+        console.log(`Notification opened: ${notification.payload}`);
+        completion();
+      },
+    );
   }, []);
 
   const toggleTheme = () => {
@@ -54,13 +70,13 @@ export default () => {
     setTheme(nextTheme);
   };
   return (
-    <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
       <ApplicationProvider
         {...eva}
         theme={
           currentTheme === 'light'
-            ? { ...eva[currentTheme], ...light }
-            : { ...eva[currentTheme], ...dark }
+            ? {...eva[currentTheme], ...light}
+            : {...eva[currentTheme], ...dark}
         }
         customMapping={mapping}>
         {appReady ? <AppNavigator /> : <SplashScreen />}
