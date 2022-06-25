@@ -49,6 +49,7 @@ const SplashScreen = props => {
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const [rememberPassword, setRememberPassword] = React.useState(false);
   const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
+  const [registered, setRegistered] = React.useState(false);
 
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -90,7 +91,7 @@ const SplashScreen = props => {
       </View>
     );
   };
-  const Login = () => {
+  const Login = (props) => {
     return (
       <View style={{width: '95%'}}>
         <ScrollView>
@@ -123,7 +124,7 @@ const SplashScreen = props => {
             <Button>Login</Button>
           </View>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.setRegistered(false)}>
               <Text style={{color: 'grey'}}>create new account</Text>
             </TouchableOpacity>
           </View>
@@ -132,7 +133,7 @@ const SplashScreen = props => {
     );
   };
 
-  const Register = () => {
+  const Register = (props) => {
     return (
       <View style={{width: '95%'}}>
         <ScrollView>
@@ -184,7 +185,7 @@ const SplashScreen = props => {
             <Button>Register</Button>
           </View>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.setRegistered(true)}>
               <Text style={{color: 'grey'}}>Login</Text>
             </TouchableOpacity>
           </View>
@@ -200,8 +201,7 @@ const SplashScreen = props => {
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
-      {/* <Login /> */}
-      <Register />
+      {registered ? <Login setRegistered={setRegistered} /> : <Register setRegistered={setRegistered}/>}
     </View>
   );
 };
