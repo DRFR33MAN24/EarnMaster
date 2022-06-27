@@ -113,7 +113,14 @@ export const ProfileScreen = ({navigation}) => {
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text>Logout</Text>
-              <FontAwesomeIcon icon={faSignOut} size={25} />
+              <FontAwesomeIcon
+                icon={faSignOut}
+                size={25}
+                style={{
+                  color:
+                    themeContext.currentTheme === 'light' ? 'black' : 'white',
+                }}
+              />
             </View>
           </TouchableOpacity>
         </Card>
@@ -122,7 +129,14 @@ export const ProfileScreen = ({navigation}) => {
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text>Contact support</Text>
-              <FontAwesomeIcon icon={faPhone} size={25} />
+              <FontAwesomeIcon
+                icon={faPhone}
+                size={25}
+                style={{
+                  color:
+                    themeContext.currentTheme === 'light' ? 'black' : 'white',
+                }}
+              />
             </View>
           </TouchableOpacity>
         </Card>

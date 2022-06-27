@@ -3,6 +3,7 @@ import {View, TouchableOpacity} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
+
 export const BackIcon = props => {
   let theme = useContext(ThemeContext).currentTheme;
 

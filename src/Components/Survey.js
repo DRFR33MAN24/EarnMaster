@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,8 +10,10 @@ import {
 import {Divider, Card, Text} from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faClock, faStar} from '@fortawesome/free-solid-svg-icons';
+import {ThemeContext} from '../../theme-context';
 
 export const Survey = props => {
+  let theme = useContext(ThemeContext).currentTheme;
   return (
     <View style={{flex: 1, flexBasis: '50%', maxWidth: '50%'}}>
       <Card style={{margin: 4}}>
@@ -38,7 +40,12 @@ export const Survey = props => {
           </Text>
         </View>
         <View style={{marginBottom: 1, marginLeft: 2, flexDirection: 'row'}}>
-          <FontAwesomeIcon {...props} icon={faClock} size={25} />
+          <FontAwesomeIcon
+            {...props}
+            icon={faClock}
+            size={25}
+            style={{color: theme === 'light' ? 'black' : 'white'}}
+          />
           <Text> 5 min</Text>
         </View>
       </Card>

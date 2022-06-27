@@ -29,6 +29,7 @@ import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import {BackIcon} from '../Components/NavigationComponents';
+import {DailyGoals} from '../Components/DailyGoals';
 
 export const homeIcon = props => (
   <FontAwesomeIcon
@@ -138,41 +139,7 @@ export const HomeScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1}}>
-        <Card style={styles.goalsCard}>
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <Text style={[{fontSize: 20}]}>Lv #1</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Progress.Circle
-                progress={0.5}
-                size={60}
-                showsText={true}
-                textStyle={{fontSize: 12, fontFamily: 'Roboto-Bold'}}
-                // width={200}
-                // height={15}
-                thickness={8}
-                borderWidth={0}
-                color={theme['color-primary-default']}
-                unfilledColor={theme['background-basic-color-4']}
-              />
-            </View>
-            <Animatable.View
-              animation="pulse"
-              easing="ease-out"
-              iterationCount="infinite">
-              <Image
-                source={require('./images/giftbox.png')}
-                style={styles.acheivementImage}
-              />
-            </Animatable.View>
-          </View>
-        </Card>
+        <DailyGoals />
         <View
           style={{
             flexDirection: 'row',

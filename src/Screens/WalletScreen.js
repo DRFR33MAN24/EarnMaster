@@ -68,7 +68,9 @@ export const WalletScreen = ({navigation}) => {
             <Text>your total earnings:</Text>
             <Text style={styles.bigBoldText}>$71.5</Text>
             <View style={{marginVertical: 8}}>
-              <Button onPress={() => navigation.navigate('Withdraw')}>
+              <Button
+                onPress={() => navigation.navigate('Withdraw')}
+                style={theme === 'light' ? {} : styles.buttonDarkGlow}>
                 Withdraw
               </Button>
             </View>
@@ -100,5 +102,12 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 10,
     fontFamily: 'normal',
+  },
+  buttonDarkGlow: {
+    shadowColor: '#94CBFF',
+    shadowRadius: 5.0,
+    shadowOpacity: 10,
+
+    elevation: 10,
   },
 });
