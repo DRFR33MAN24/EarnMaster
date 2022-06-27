@@ -9,7 +9,7 @@ import {AppNavigator} from './src/Screens/Navigator';
 import SplashScreen from './src/Screens/SplashScreen';
 import {Notifications} from 'react-native-notifications';
 export default () => {
-  const [currentTheme, setTheme] = useState('light');
+  const [currentTheme, setTheme] = useState('dark');
   const [appReady, setAppReady] = useState(false);
 
   const sendTokenToServer = async token => {

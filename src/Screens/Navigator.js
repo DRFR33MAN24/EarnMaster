@@ -95,7 +95,7 @@ const TabNavigator = () => (
 );
 
 export const AppNavigator = () => {
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
 
   if (authenticated) {
     return (

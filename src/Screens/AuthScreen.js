@@ -42,9 +42,11 @@ const SplashScreen = props => {
   const splash = './images/logo.png';
   const theme = useTheme();
 
-  const [password, setPassword] = React.useState('');
+  const [register_password, setRegisterPassword] = React.useState('');
+  const [login_password, setLoginPassword] = React.useState('');
   const [repeatPassword, setRepeatPassword] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  const [register_email, setRegisterEmail] = React.useState('');
+  const [login_mail, setLoginEmail] = React.useState('');
   const [name, setName] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const [rememberPassword, setRememberPassword] = React.useState(false);
@@ -91,27 +93,27 @@ const SplashScreen = props => {
       </View>
     );
   };
-  const Login = (props) => {
+  const Login = props => {
     return (
       <View style={{width: '95%'}}>
         <ScrollView>
           <Input
-            value={email}
+            value={login_mail}
             label="Email"
             placeholder="example@domain.com"
             // caption={renderCaption}
             accessoryRight={renderEmailIcon}
             // secureTextEntry={secureTextEntry}
-            onChangeText={nextValue => setEmail(nextValue)}
+            onChangeText={nextValue => setLoginEmail(nextValue)}
           />
           <Input
-            value={password}
+            value={login_password}
             label="Password"
             placeholder="Enter password"
             caption={renderCaption}
             accessoryRight={renderIcon}
             secureTextEntry={secureTextEntry}
-            onChangeText={nextValue => setPassword(nextValue)}
+            onChangeText={nextValue => setLoginPassword(nextValue)}
           />
           <View style={{paddingVertical: 8, paddingHorizontal: 4}}>
             <CheckBox
@@ -133,7 +135,7 @@ const SplashScreen = props => {
     );
   };
 
-  const Register = (props) => {
+  const Register = props => {
     return (
       <View style={{width: '95%'}}>
         <ScrollView>
@@ -147,13 +149,13 @@ const SplashScreen = props => {
             onChangeText={nextValue => setName(nextValue)}
           />
           <Input
-            value={email}
+            value={register_email}
             label="Email"
             placeholder="example@domain.com"
             // caption={renderCaption}
             accessoryRight={renderEmailIcon}
             // secureTextEntry={secureTextEntry}
-            onChangeText={nextValue => setEmail(nextValue)}
+            onChangeText={nextValue => setRegisterEmail(nextValue)}
           />
           <View>
             <Datepicker
@@ -163,13 +165,13 @@ const SplashScreen = props => {
             />
           </View>
           <Input
-            value={password}
+            value={register_password}
             label="Password"
             placeholder="Enter password"
             caption={renderCaption}
             accessoryRight={renderIcon}
             secureTextEntry={secureTextEntry}
-            onChangeText={nextValue => setPassword(nextValue)}
+            onChangeText={nextValue => setRegisterPassword(nextValue)}
           />
           <Input
             value={repeatPassword}
@@ -201,7 +203,11 @@ const SplashScreen = props => {
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
       <Image source={require(splash)} style={styles.imageStyle} />
-      {registered ? <Login setRegistered={setRegistered} /> : <Register setRegistered={setRegistered}/>}
+      {registered ? (
+        <Login setRegistered={setRegistered} />
+      ) : (
+        <Register setRegistered={setRegistered} />
+      )}
     </View>
   );
 };
