@@ -11,7 +11,7 @@ import {Divider, Card, Text} from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faClock, faStar} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
-
+import {glass} from '../Constants/images';
 export const Survey = props => {
   let theme = useContext(ThemeContext).currentTheme;
   return (
@@ -21,10 +21,7 @@ export const Survey = props => {
 
                 </View> */}
         <View style={styles.glassyBackground}>
-          <Image
-            source={require('../Screens/images/glass.png')}
-            style={{resizeMode: 'stretch'}}
-          />
+          <Image source={glass} style={{resizeMode: 'stretch'}} />
         </View>
         <View style={{marginTop: 1, marginRight: 2, alignItems: 'flex-end'}}>
           <FontAwesomeIcon
