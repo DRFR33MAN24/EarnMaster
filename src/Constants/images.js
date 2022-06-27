@@ -1,1 +1,14 @@
 export const giftbox = require('../Screens/images/giftbox.png');
+export const amazon = require('../Screens/images/amazon.png');
+export const coins = require('../Screens/images/coins.png');
+export const gambler = require('../Screens/images/gambler.png');
+export const profile = require('../Screens/images/profile.png');
+export const playstation = require('../Screens/images/playstation.png');
+export const television = require('../Screens/images/television.png');
+export const ribbon = require('../Screens/images/ribbon.png');
+export const play = require('../Screens/images/play.png');
+export const logo = require('../Screens/images/logo.png');
+export const checklist = require('../Screens/images/checklist.png');
+export const razer = require('../Screens/images/razer-gold.png');
+export const glass = require('../Screens/images/glass.png');
+export const dollar = require('../Screens/images/dollar.png');

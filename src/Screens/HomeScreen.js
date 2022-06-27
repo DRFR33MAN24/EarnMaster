@@ -30,7 +30,13 @@ import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import {BackIcon} from '../Components/NavigationComponents';
 import {DailyGoals} from '../Components/DailyGoals';
-
+import {
+  gambler,
+  checklist,
+  ribbon,
+  television,
+  dollar,
+} from '../Constants/images';
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -49,7 +55,7 @@ export const CoinsComponent = props => (
     {/* <Text style={styles.badge}> 2 </Text> */}
 
     <Image
-      source={require('./images/dollar.png')}
+      source={dollar}
       style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
     />
     {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
@@ -149,10 +155,7 @@ export const HomeScreen = ({navigation}) => {
           <Card style={styles.homeScreenButton}>
             <TouchableOpacity>
               <View>
-                <Image
-                  source={require('./images/ribbon.png')}
-                  style={styles.homeScreenButtonImage}
-                />
+                <Image source={ribbon} style={styles.homeScreenButtonImage} />
 
                 <Text numberOfLines={1} style={{flex: 1}}>
                   Complete offers
@@ -165,7 +168,7 @@ export const HomeScreen = ({navigation}) => {
             <TouchableOpacity>
               <View>
                 <Image
-                  source={require('./images/television.png')}
+                  source={television}
                   style={styles.homeScreenButtonImage}
                 />
                 <Text numberOfLines={1} style={{flex: 1}}>
@@ -178,10 +181,7 @@ export const HomeScreen = ({navigation}) => {
           <Card style={styles.homeScreenButton}>
             <TouchableOpacity>
               <View>
-                <Image
-                  source={require('./images/gambler.png')}
-                  style={styles.homeScreenButtonImage}
-                />
+                <Image source={gambler} style={styles.homeScreenButtonImage} />
                 <Text numberOfLines={1} style={{flex: 1}}>
                   Gamble!
                 </Text>
@@ -193,7 +193,7 @@ export const HomeScreen = ({navigation}) => {
             <TouchableOpacity onPress={() => navigation.navigate('Surveys')}>
               <View>
                 <Image
-                  source={require('./images/checklist.png')}
+                  source={checklist}
                   style={styles.homeScreenButtonImage}
                 />
                 <Text numberOfLines={1} style={{flex: 1}}>

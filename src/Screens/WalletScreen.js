@@ -11,7 +11,7 @@ import {SafeAreaView, ScrollView, View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCoins, faWallet} from '@fortawesome/free-solid-svg-icons';
-
+import {WalletTransaction} from '../Components/WalletTransaction';
 export const walletIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -41,17 +41,7 @@ export const WalletScreenTopBar = () => {
     </View>
   );
 };
-const WalletTransaction = () => {
-  return (
-    <Card>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={{color: 'red'}}>-$5.00</Text>
-        <Text> Visa prepaid card.</Text>
-      </View>
-      <Text style={styles.dateText}>12/12/12</Text>
-    </Card>
-  );
-};
+
 export const WalletScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
@@ -63,7 +53,7 @@ export const WalletScreen = ({navigation}) => {
       <TopNavigation title="Wallet" />
       <Divider />
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>
-        <View style={{margin: 10}}>
+        <View>
           <Card>
             <Text>your total earnings:</Text>
             <Text style={styles.bigBoldText}>$71.5</Text>
@@ -99,10 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontFamily: 'normal',
   },
-  dateText: {
-    fontSize: 10,
-    fontFamily: 'normal',
-  },
+
   buttonDarkGlow: {
     shadowColor: '#94CBFF',
     shadowRadius: 5.0,
