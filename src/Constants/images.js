@@ -12,3 +12,4 @@ export const checklist = require('../Screens/images/checklist.png');
 export const razer = require('../Screens/images/razer-gold.png');
 export const glass = require('../Screens/images/glass.png');
 export const dollar = require('../Screens/images/dollar.png');
+export const auth = require('../Screens/images/auth.png');

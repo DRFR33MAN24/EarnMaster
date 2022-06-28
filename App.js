@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import * as eva from '@eva-design/eva';
-import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
-import {default as light} from './src/light.json';
-import {default as dark} from './src/dark.json';
-import {default as mapping} from './mapping.json';
-import {ThemeContext} from './theme-context';
-import {AppNavigator} from './src/Screens/Navigator';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import { default as light } from './src/light.json';
+import { default as dark } from './src/dark.json';
+import { default as mapping } from './mapping.json';
+import { ThemeContext } from './theme-context';
+import { AppNavigator } from './src/Screens/Navigator';
 import SplashScreen from './src/Screens/SplashScreen';
-import {Notifications} from 'react-native-notifications';
+import { Notifications } from 'react-native-notifications';
 export default () => {
-  const [currentTheme, setTheme] = useState('dark');
+  const [currentTheme, setTheme] = useState('light');
   const [appReady, setAppReady] = useState(false);
 
   const sendTokenToServer = async token => {
@@ -53,7 +53,7 @@ export default () => {
         console.log(
           `Notification received in foreground: ${notification.title} : ${notification.body}`,
         );
-        completion({alert: false, sound: false, badge: false});
+        completion({ alert: false, sound: false, badge: false });
       },
     );
 
@@ -70,13 +70,13 @@ export default () => {
     setTheme(nextTheme);
   };
   return (
-    <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
+    <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
       <ApplicationProvider
         {...eva}
         theme={
           currentTheme === 'light'
-            ? {...eva[currentTheme], ...light}
-            : {...eva[currentTheme], ...dark}
+            ? { ...eva[currentTheme], ...light }
+            : { ...eva[currentTheme], ...dark }
         }
         customMapping={mapping}>
         {appReady ? <AppNavigator /> : <SplashScreen />}

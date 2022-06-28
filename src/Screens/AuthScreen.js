@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  ImageBackground
 } from 'react-native';
 import {
   Layout,
@@ -20,26 +21,26 @@ import {
 
 import * as Progress from 'react-native-progress';
 
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faEye,
   faEyeSlash,
   faEnvelope,
   faWarning,
 } from '@fortawesome/free-solid-svg-icons';
-
+import { auth } from '../Constants/images'
 const AlertIcon = props => (
-  <View style={{paddingHorizontal: 2}}>
+  <View style={{ paddingHorizontal: 2 }}>
     <FontAwesomeIcon
       icon={faWarning}
       size={15}
-      // style={{color: props.style.tintColor}}
+    // style={{color: props.style.tintColor}}
     />
   </View>
 );
 
-const SplashScreen = props => {
-  const splash = './images/logo.png';
+const AuthScreen = props => {
+
   const theme = useTheme();
 
   const [register_password, setRegisterPassword] = React.useState('');
@@ -64,13 +65,13 @@ const SplashScreen = props => {
         <FontAwesomeIcon
           icon={faEye}
           size={15}
-          // style={{color: props.style.tintColor}}
+        // style={{color: props.style.tintColor}}
         />
       ) : (
         <FontAwesomeIcon
           icon={faEyeSlash}
           size={15}
-          // style={{color: props.style.tintColor}}
+        // style={{color: props.style.tintColor}}
         />
       )}
     </TouchableOpacity>
@@ -79,7 +80,7 @@ const SplashScreen = props => {
     <FontAwesomeIcon
       icon={faEnvelope}
       size={15}
-      // style={{color: props.style.tintColor}}
+    // style={{color: props.style.tintColor}}
     />
   );
 
@@ -95,7 +96,7 @@ const SplashScreen = props => {
   };
   const Login = props => {
     return (
-      <View style={{width: '95%'}}>
+      <View style={{ width: '95%' }}>
         <ScrollView>
           <Input
             value={login_mail}
@@ -115,19 +116,19 @@ const SplashScreen = props => {
             secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setLoginPassword(nextValue)}
           />
-          <View style={{paddingVertical: 8, paddingHorizontal: 4}}>
+          <View style={{ paddingVertical: 8, paddingHorizontal: 4 }}>
             <CheckBox
               checked={rememberPassword}
               onChange={nextChecked => setRememberPassword(nextChecked)}>
               {`Remember me`}
             </CheckBox>
           </View>
-          <View style={{marginVertical: 8}}>
+          <View style={{ marginVertical: 8 }}>
             <Button>Login</Button>
           </View>
           <View>
             <TouchableOpacity onPress={() => props.setRegistered(false)}>
-              <Text style={{color: 'grey'}}>create new account</Text>
+              <Text style={{ color: 'grey' }}>create new account</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -137,7 +138,7 @@ const SplashScreen = props => {
 
   const Register = props => {
     return (
-      <View style={{width: '95%'}}>
+      <View style={{ width: '95%' }}>
         <ScrollView>
           <Input
             value={name}
@@ -183,12 +184,12 @@ const SplashScreen = props => {
             onChangeText={nextValue => setRepeatPassword(nextValue)}
           />
 
-          <View style={{marginVertical: 8}}>
+          <View style={{ marginVertical: 8 }}>
             <Button>Register</Button>
           </View>
           <View>
             <TouchableOpacity onPress={() => props.setRegistered(true)}>
-              <Text style={{color: 'grey'}}>Login</Text>
+              <Text style={{ color: 'grey' }}>Login</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -197,18 +198,29 @@ const SplashScreen = props => {
   };
 
   return (
+
+
     <View
       style={[
         styles.container,
-        {backgroundColor: theme['background-basic-color-4']},
+        { backgroundColor: theme['background-basic-color-4'] },
       ]}>
-      <Image source={require(splash)} style={styles.imageStyle} />
-      {registered ? (
-        <Login setRegistered={setRegistered} />
-      ) : (
-        <Register setRegistered={setRegistered} />
-      )}
+      <ScrollView style={{ width: '100%', }}>
+        <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+
+          <View style={{ padding: 40 }} >
+
+            <ImageBackground source={auth} style={styles.imageStyle} resizeMode='contain' />
+          </View>
+          {registered ? (
+            <Login setRegistered={setRegistered} />
+          ) : (
+            <Register setRegistered={setRegistered} />
+          )}
+        </View>
+      </ScrollView>
     </View>
+
   );
 };
 
@@ -216,7 +228,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     padding: 0,
   },
@@ -226,8 +238,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imageStyle: {
-    width: 128,
-    height: 128,
+    width: 300,
+    height: 250,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -255,4 +267,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SplashScreen;
+export default AuthScreen;
