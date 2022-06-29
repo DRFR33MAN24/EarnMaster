@@ -13,3 +13,6 @@ export const razer = require('../Screens/images/razer-gold.png');
 export const glass = require('../Screens/images/glass.png');
 export const dollar = require('../Screens/images/dollar.png');
 export const auth = require('../Screens/images/auth.png');
+export const facebook = require('../Screens/images/facebook.png');
+export const twitter = require('../Screens/images/twitter.png');
+export const instagram = require('../Screens/images/instagram.png');

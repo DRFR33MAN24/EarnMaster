@@ -7,6 +7,7 @@ import {
   TopNavigationAction,
   TopNavigation,
   useTheme,
+  Input,
 } from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -36,6 +37,9 @@ import {
   ribbon,
   television,
   dollar,
+  facebook,
+  twitter,
+  instagram,
 } from '../Constants/images';
 export const homeIcon = props => (
   <FontAwesomeIcon
@@ -135,6 +139,7 @@ export const HomeScreen = ({navigation}) => {
   //   navigation.navigate('Details');
   // };
   const theme = useTheme();
+  const [referral, setReferral] = useState('');
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
@@ -203,6 +208,76 @@ export const HomeScreen = ({navigation}) => {
             </TouchableOpacity>
           </Card>
         </View>
+        <View>
+          <Card style={{marginVertical: 10}}>
+            <Text>Refer friend and earn</Text>
+            <View style={{marginVertical: 2}}>
+              <Input
+                value={referral}
+                label="Friend Email"
+                placeholder="enter email here"
+                // caption={renderCaption}
+                //accessoryRight={renderEmailIcon}
+                // secureTextEntry={secureTextEntry}
+                onChangeText={nextValue => setReferral(nextValue)}
+              />
+            </View>
+            <View>
+              <Button>Send Link</Button>
+            </View>
+            <TouchableOpacity>
+              <View style={{marginVertical: 2, paddingVertical: 10}}>
+                <Text>Active referrals: 15</Text>
+              </View>
+            </TouchableOpacity>
+          </Card>
+        </View>
+        <View>
+          <Card style={{marginVertical: 10}}>
+            <Text>Follow us on social media</Text>
+          </Card>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}>
+            <Card
+              style={[styles.homeScreenButton, {backgroundColor: '#4267B2'}]}>
+              <TouchableOpacity>
+                <View>
+                  <Image source={facebook} style={styles.homeScreenSocial} />
+                  <Text numberOfLines={1} style={{flex: 1}}>
+                    Facebook
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Card>
+
+            <Card
+              style={[styles.homeScreenButton, {backgroundColor: '#1DA1F2'}]}>
+              <TouchableOpacity>
+                <View>
+                  <Image source={twitter} style={styles.homeScreenSocial} />
+                  <Text numberOfLines={1} style={{flex: 1}}>
+                    Twitter
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Card>
+
+            <Card style={styles.homeScreenButton}>
+              <TouchableOpacity>
+                <View>
+                  <Image source={instagram} style={styles.homeScreenSocial} />
+                  <Text numberOfLines={1} style={{flex: 1}}>
+                    Instagram
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Card>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -218,6 +293,11 @@ const styles = StyleSheet.create({
   homeScreenButtonImage: {
     width: 96,
     height: 96,
+    resizeMode: 'stretch',
+  },
+  homeScreenSocial: {
+    width: 64,
+    height: 64,
     resizeMode: 'stretch',
   },
   acheivementImage: {
