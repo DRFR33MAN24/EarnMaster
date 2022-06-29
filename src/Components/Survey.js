@@ -12,11 +12,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faClock, faStar} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
 import {glass} from '../Constants/images';
-export const Survey = props => {
+export const Survey = ({data}) => {
   let theme = useContext(ThemeContext).currentTheme;
   return (
-    <View style={{flex: 1, flexBasis: '50%', maxWidth: '50%'}}>
-      <Card style={{margin: 4}}>
+    <View
+      style={{
+        width: '50%',
+        // minHeight: 200,
+        maxWidth: 200,
+      }}>
+      <Card>
         {/* <View style={{ position: 'absolute', backgroundColor: 'pink', width: '150%', height: '150%', zIndex: -200 }}>
 
                 </View> */}
@@ -24,26 +29,24 @@ export const Survey = props => {
           <Image source={glass} style={{resizeMode: 'stretch'}} />
         </View>
         <View style={{marginTop: 1, marginRight: 2, alignItems: 'flex-end'}}>
-          <FontAwesomeIcon
-            {...props}
-            icon={faStar}
-            size={25}
-            style={styles.starIcon}
-          />
+          <FontAwesomeIcon icon={faStar} size={25} style={styles.starIcon} />
         </View>
         <View style={{marginVertical: 8}}>
-          <Text style={{flex: 1, flexWrap: 'wrap'}}>
-            Complete the following survey to get your points
-          </Text>
+          <Text style={{flex: 1, flexWrap: 'wrap'}}>{data.name}</Text>
         </View>
-        <View style={{marginBottom: 1, marginLeft: 2, flexDirection: 'row'}}>
+        <View
+          style={{
+            marginBottom: 1,
+            marginLeft: 2,
+            flexDirection: 'row',
+            // height: '100%',
+          }}>
           <FontAwesomeIcon
-            {...props}
             icon={faClock}
             size={25}
             style={{color: theme === 'light' ? 'black' : 'white'}}
           />
-          <Text> 5 min</Text>
+          <Text> {data.timeToComplete}</Text>
         </View>
       </Card>
     </View>
