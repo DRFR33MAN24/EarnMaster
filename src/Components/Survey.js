@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   StyleSheet,
+  Animated,
 } from 'react-native';
 import {Divider, Card, Text} from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -13,12 +14,26 @@ import {faClock, faS, faStar} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
 import {glass} from '../Constants/images';
 export const Survey = ({data}) => {
+  const width = new Animated.Value(0);
+
+  const height = new Animated.Value(0);
   let theme = useContext(ThemeContext).currentTheme;
   let rate = Math.round(data.coins / 100);
   if (rate > 5) {
     rate = 5;
   }
-
+  useEffect(() => {
+    Animated.timing(width, {
+      toValue: 100,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(height, {
+      toValue: 100,
+      duration: 10000,
+      useNativeDriver: false,
+    }).start();
+  }, []);
   return (
     <View
       style={{
@@ -53,12 +68,12 @@ export const Survey = ({data}) => {
             backgroundColor: 'grey',
             zIndex: -200,
           }}>
-          <Image
+          <Animated.Image
             source={data.imageUri}
             style={{
               resizeMode: 'stretch',
-              width: '100%',
-              height: 100,
+              width: width,
+              height: height,
               borderRadius: 10,
             }}
           />
