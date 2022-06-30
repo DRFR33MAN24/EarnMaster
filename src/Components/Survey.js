@@ -14,7 +14,11 @@ import {ThemeContext} from '../../theme-context';
 import {glass} from '../Constants/images';
 export const Survey = ({data}) => {
   let theme = useContext(ThemeContext).currentTheme;
-  const rate = Math.round(data.coins % 100);
+  let rate = Math.round(data.coins / 100);
+  if (rate > 5) {
+    rate = 5;
+  }
+
   return (
     <View
       style={{
