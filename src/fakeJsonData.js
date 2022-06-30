@@ -1,3 +1,5 @@
+const beer = require('./Screens/images/beer.jpg');
+const dating = require('./Screens/images/dating.jpg');
 export const surveysData = [
   {
     id: 1,
@@ -5,7 +7,7 @@ export const surveysData = [
     coins: 100,
     details:
       'Help a famous beer company choose the right beverage to customers',
-    imageUri: 'http://localhost:5000/survey/1',
+    imageUri: beer,
     timeToComplete: '5 min',
   },
   {
@@ -13,31 +15,41 @@ export const surveysData = [
     name: 'Pick your best partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
-    imageUri: 'http://localhost:5000/survey/2',
+    imageUri: dating,
     timeToComplete: '15 min',
+  },
+  {
+    id: 1,
+    name: 'Beat Beer ',
+    coins: 100,
+    details:
+      'Help a famous beer company choose the right beverage to customers',
+    imageUri: beer,
+    timeToComplete: '5 min',
   },
   {
     id: 2,
     name: 'Pick your best partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
-    imageUri: 'http://localhost:5000/survey/2',
+    imageUri: dating,
     timeToComplete: '15 min',
+  },
+  {
+    id: 1,
+    name: 'Beat Beer ',
+    coins: 100,
+    details:
+      'Help a famous beer company choose the right beverage to customers',
+    imageUri: beer,
+    timeToComplete: '5 min',
   },
   {
     id: 2,
     name: 'Pick your best partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
-    imageUri: 'http://localhost:5000/survey/2',
-    timeToComplete: '15 min',
-  },
-  {
-    id: 2,
-    name: 'Pick your best partner',
-    coins: 550,
-    details: 'Help a famous dating company choose the right soulmate for you',
-    imageUri: 'http://localhost:5000/survey/2',
+    imageUri: dating,
     timeToComplete: '15 min',
   },
 ];

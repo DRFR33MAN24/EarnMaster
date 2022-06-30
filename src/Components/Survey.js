@@ -14,11 +14,12 @@ import {ThemeContext} from '../../theme-context';
 import {glass} from '../Constants/images';
 export const Survey = ({data}) => {
   let theme = useContext(ThemeContext).currentTheme;
+  const rate = Math.round(data.coins % 100);
   return (
     <View
       style={{
         width: '50%',
-        height: 120,
+        // height: 120,
         maxWidth: 200,
 
         // backgroundColor: 'pink',
@@ -49,7 +50,7 @@ export const Survey = ({data}) => {
             zIndex: -200,
           }}>
           <Image
-            source={require('../Screens/images/beer.jpg')}
+            source={data.imageUri}
             style={{
               resizeMode: 'stretch',
               width: '100%',
@@ -77,7 +78,17 @@ export const Survey = ({data}) => {
             right: 10,
             zIndex: 300,
           }}>
-          <FontAwesomeIcon icon={faStar} size={20} style={styles.starIcon} />
+          <View style={{flexDirection: 'row'}}>
+            {
+            [...Array(rate)].map((e, i) => (
+a             <FontAwesomeIcon
+                icon={faStar}
+                size={20}
+                style={styles.starIcon}
+              />
+            ))
+            }
+          </View>
         </View>
         <View
           style={{
@@ -87,8 +98,14 @@ export const Survey = ({data}) => {
             zIndex: 300,
             flexDirection: 'row',
           }}>
-          <FontAwesomeIcon icon={faClock} size={20} />
-          <Text>{data.timeToComplete}</Text>
+          <FontAwesomeIcon
+            icon={faClock}
+            size={20}
+            style={{color: theme === 'light' ? 'white' : 'black'}}
+          />
+          <Text style={{color: theme === 'light' ? 'white' : 'black'}}>
+            {data.timeToComplete}
+          </Text>
         </View>
         <View
           style={{
@@ -107,10 +124,12 @@ export const Survey = ({data}) => {
               // backgroundColor: 'red',
               padding: 5,
             }}>
-            <Text>{data.name}</Text>
-            <Text>{data.details}</Text>
+            {/* <Text>{data.details}</Text> */}
           </View>
         </View>
+      </View>
+      <View style={{paddingHorizontal: 10}}>
+        <Text>{data.name}</Text>
       </View>
     </View>
   );
