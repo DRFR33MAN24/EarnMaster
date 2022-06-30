@@ -44,8 +44,8 @@ export const Survey = ({data}) => {
             alignItems: 'center',
             width: '99%',
             height: 100,
-            borderRadius: 15,
-            // backgroundColor: 'red',
+            borderRadius: 10,
+            backgroundColor: 'grey',
             zIndex: -200,
           }}>
           <Image
@@ -60,15 +60,15 @@ export const Survey = ({data}) => {
               resizeMode: 'cover',
               height: '100%',
               width: '100%',
-              borderRadius: 15,
+              borderRadius: 10,
             }}
           />
         </View>
         <View
           style={{
             position: 'absolute',
-            top: 4,
-            right: 4,
+            top: 10,
+            right: 10,
             zIndex: 300,
           }}>
           <FontAwesomeIcon icon={faStar} size={20} style={styles.starIcon} />
@@ -76,8 +76,8 @@ export const Survey = ({data}) => {
         <View
           style={{
             position: 'absolute',
-            bottom: 4,
-            left: 4,
+            bottom: 10,
+            left: 10,
             zIndex: 300,
             flexDirection: 'row',
           }}>
@@ -102,41 +102,7 @@ export const Survey = ({data}) => {
               padding: 5,
             }}>
             <Text>{data.name}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginBottom: 2,
-            }}>
-            {/* <View
-              style={{
-                // flexDirection: 'row',
-                // flex: 1,
-                // justifyContent: 'flex-end',
-                // backgroundColor: 'red',
-                padding: 5,
-              }}>
-              <Text>{data.details}</Text>
-            </View> */}
-            {/* <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                // flex: 1,
-                // justifyContent: 'flex-end',
-                backgroundColor: 'gold',
-                borderRadius: 10,
-                padding: 5,
-              }}>
-              <FontAwesomeIcon
-                icon={faClock}
-                size={10}
-                // style={{color: props.style.tintColor}}
-              />
-              <Text style={{fontSize: 12}}> 500</Text>
-            </View> */}
+            <Text>{data.details}</Text>
           </View>
         </View>
       </View>
