@@ -79,15 +79,13 @@ export const Survey = ({data}) => {
             zIndex: 300,
           }}>
           <View style={{flexDirection: 'row'}}>
-            {
-            [...Array(rate)].map((e, i) => (
-a             <FontAwesomeIcon
+            {[...Array(rate)].map((e, i) => (
+              <FontAwesomeIcon
                 icon={faStar}
                 size={20}
                 style={styles.starIcon}
               />
-            ))
-            }
+            ))}
           </View>
         </View>
         <View
