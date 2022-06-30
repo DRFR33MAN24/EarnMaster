@@ -49,18 +49,24 @@ export const Survey = ({data}) => {
             zIndex: -200,
           }}>
           <Image
-            source={data.imageUri}
-            style={{resizeMode: 'center', width: 64, height: 64}}
+            source={require('../Screens/images/beer.jpg')}
+            style={{
+              resizeMode: 'stretch',
+              width: '100%',
+              height: 100,
+              borderRadius: 10,
+            }}
           />
         </View>
         <View style={styles.glassyBackground}>
           <Image
             source={glass}
             style={{
-              resizeMode: 'cover',
+              resizeMode: 'stretch',
               height: '100%',
               width: '100%',
               borderRadius: 10,
+              zIndex: -100,
             }}
           />
         </View>
