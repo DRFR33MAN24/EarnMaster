@@ -222,7 +222,7 @@ export const HomeScreen = ({navigation}) => {
                 onChangeText={nextValue => setReferral(nextValue)}
               />
             </View>
-            <View>
+            <View style={{marginVertical: 2, paddingVertical: 10}}>
               <Button>Send Link</Button>
             </View>
             <TouchableOpacity>
