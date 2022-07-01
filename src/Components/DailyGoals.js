@@ -31,9 +31,8 @@ export const DailyGoals = props => {
           />
         </View>
         <View>
-          <Text numberOfLines={3} style={[{fontSize: 14}]}>
-            {`Complete 3 offers to reach 
-            your first gift card`}
+          <Text numberOfLines={3} style={[{fontSize: 14, textAlign: 'left'}]}>
+            Complete 3 offers to reach your first gift card
           </Text>
         </View>
 
