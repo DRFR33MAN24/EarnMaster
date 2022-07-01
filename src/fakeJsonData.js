@@ -47,7 +47,7 @@ export const surveysData = [
       'Help a famous beer company choose the right beverage to customers',
     imageUri: beer,
     timeToComplete: '5 min',
-    animated: true,
+    animated: false,
   },
   {
     id: 2,
@@ -56,7 +56,45 @@ export const surveysData = [
     details: 'Help a famous dating company choose the right soulmate for you',
     imageUri: dating,
     timeToComplete: '15 min',
-    animated: true,
+    animated: false,
+  },
+  {
+    id: 1,
+    name: 'Beat Beer ',
+    coins: 100,
+    details:
+      'Help a famous beer company choose the right beverage to customers',
+    imageUri: beer,
+    timeToComplete: '5 min',
+    animated: false,
+  },
+  {
+    id: 2,
+    name: 'Pick your best partner',
+    coins: 550,
+    details: 'Help a famous dating company choose the right soulmate for you',
+    imageUri: dating,
+    timeToComplete: '15 min',
+    animated: false,
+  },
+  {
+    id: 1,
+    name: 'Beat Beer ',
+    coins: 100,
+    details:
+      'Help a famous beer company choose the right beverage to customers',
+    imageUri: beer,
+    timeToComplete: '5 min',
+    animated: false,
+  },
+  {
+    id: 2,
+    name: 'Pick your best partner',
+    coins: 550,
+    details: 'Help a famous dating company choose the right soulmate for you',
+    imageUri: dating,
+    timeToComplete: '15 min',
+    animated: false,
   },
 ];
 
