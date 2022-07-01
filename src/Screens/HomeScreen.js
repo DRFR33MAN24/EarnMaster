@@ -266,10 +266,10 @@ export const HomeScreen = ({navigation}) => {
               </TouchableOpacity>
             </Card>
 
-            <Card style={styles.homeScreenButton}>
+            <Card style={[styles.homeScreenButton, {backgroundColor: 'white'}]}>
               <TouchableOpacity>
                 <View>
-                  <Image source={instagram} style={styles.homeScreenSocial} />
+                  <Image source={instagram} style={[styles.homeScreenSocial]} />
                   <Text numberOfLines={1} style={{flex: 1}}>
                     Instagram
                   </Text>
