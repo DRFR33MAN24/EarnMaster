@@ -30,7 +30,12 @@ export const DailyGoals = props => {
             unfilledColor={theme['background-basic-color-4']}
           />
         </View>
-        <Text style={[{fontSize: 20}]}>Lv #1</Text>
+        <View>
+          <Text numberOfLines={3} style={[{fontSize: 14}]}>
+            {`Complete 3 offers to reach 
+            your first gift card`}
+          </Text>
+        </View>
 
         <Animatable.View
           animation="pulse"
