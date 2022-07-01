@@ -7,7 +7,7 @@ import {
   TopNavigation,
   useTheme,
 } from '@ui-kitten/components';
-import {Survey} from '../Components/Survey';
+import {Survey, WideSurvey} from '../Components/Survey';
 import {BackIcon} from '../Components/NavigationComponents';
 
 import {surveysData} from '../fakeJsonData';
@@ -32,6 +32,7 @@ export const SurveysScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1}}>
+        {surveys != null && surveys.map(survey => <WideSurvey data={survey} />)}
         <View
           style={{
             flexDirection: 'row',

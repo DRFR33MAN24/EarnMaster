@@ -1,38 +1,44 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { View, Image, Dimensions } from 'react-native';
-import {
-    Text,
-    Button,
-    Modal,
-    Card,
+import React, {useContext, useState, useEffect} from 'react';
+import {View, Image, Dimensions, ScrollView} from 'react-native';
+import {Text, Button, Modal, Card} from '@ui-kitten/components';
 
-} from '@ui-kitten/components';
+export const GoToSurveyModal = ({data, closeModal}) => {
+  return (
+    <Modal
+      visible={true}
+      style={{
+        height: '95%',
+        width: '95%',
+        borderRadius: 10,
+        backgroundColor: 'white',
+        padding: 10,
+      }}>
+      <ScrollView>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
+            source={data.imageUri}
+            style={{
+              resizeMode: 'stretch',
 
-export const GoToSurveyModal = ({ data, closeModal }) => {
+              borderTopRightRadius: 10,
+              borderTopLeftRadius: 10,
 
-
-    return (
-        <View >
-            <Modal visible={true} style={{ height: '95%', width: '95%' }}>
-                <Card disabled={true} style={{ borderRadius: 10 }} >
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Image
-                            source={data.imageUri}
-                            style={{
-                                resizeMode: 'stretch',
-
-                                width: '100%',
-                                height: 300,
-
-                            }}
-                        />
-
-                        <Button onPress={() => closeModal(false)}>
-                            DISMISS
-                        </Button>
-                    </View>
-                </Card>
-            </Modal>
+              width: '100%',
+              height: 300,
+            }}
+          />
+          <View style={{paddingHorizontal: 10, marginVertical: 10}}>
+            <Text>{data.details}</Text>
+          </View>
         </View>
-    )
-}
+      </ScrollView>
+      <View style={{marginVertical: 10}}>
+        <Button onPress={() => closeModal(false)}>DISMISS</Button>
+      </View>
+    </Modal>
+  );
+};
