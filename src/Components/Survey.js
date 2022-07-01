@@ -14,25 +14,26 @@ import {faClock, faS, faStar} from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
 import {glass} from '../Constants/images';
 export const Survey = ({data}) => {
-  const width = new Animated.Value(0);
+  const width = new Animated.Value(1);
 
-  const height = new Animated.Value(0);
+  const height = new Animated.Value(1);
   let theme = useContext(ThemeContext).currentTheme;
   let rate = Math.round(data.coins / 100);
   if (rate > 5) {
     rate = 5;
   }
   useEffect(() => {
-    Animated.timing(width, {
-      toValue: 100,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(height, {
-      toValue: 100,
-      duration: 10000,
-      useNativeDriver: false,
-    }).start();
+    if (data.animated) {
+      Animated.loop(
+        Animated.spring(width, {
+          toValue: 1.2,
+          duration: 10000,
+
+          friction: 0.5,
+          useNativeDriver: false,
+        }),
+      ).start();
+    }
   }, []);
   return (
     <View
@@ -67,18 +68,22 @@ export const Survey = ({data}) => {
             borderRadius: 10,
             backgroundColor: 'grey',
             zIndex: -200,
+            overflow: 'hidden',
           }}>
           <Animated.Image
             source={data.imageUri}
             style={{
-              resizeMode: 'stretch',
-              width: width,
-              height: height,
+              resizeMode: 'cover',
+              // width: width,
+              // height: height,
+              width: '100%',
+              height: '100%',
               borderRadius: 10,
+              transform: [{scale: width}],
             }}
           />
         </View>
-        <View style={styles.glassyBackground}>
+        {/* <View style={styles.glassyBackground}>
           <Image
             source={glass}
             style={{
@@ -89,7 +94,7 @@ export const Survey = ({data}) => {
               zIndex: -100,
             }}
           />
-        </View>
+        </View> */}
         <View
           style={{
             position: 'absolute',
@@ -120,7 +125,11 @@ export const Survey = ({data}) => {
             size={20}
             style={{color: theme === 'light' ? 'white' : 'black'}}
           />
-          <Text style={{color: theme === 'light' ? 'white' : 'black'}}>
+          <Text
+            style={{
+              color: theme === 'light' ? 'white' : 'black',
+              paddingHorizontal: 4,
+            }}>
             {data.timeToComplete}
           </Text>
         </View>
@@ -147,6 +156,7 @@ export const Survey = ({data}) => {
       </View>
       <View style={{paddingHorizontal: 10}}>
         <Text>{data.name}</Text>
+        <Text>{data.coins}</Text>
       </View>
     </View>
   );
