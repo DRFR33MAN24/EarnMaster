@@ -30,8 +30,14 @@ export const DailyGoals = props => {
             unfilledColor={theme['background-basic-color-4']}
           />
         </View>
-        <View>
-          <Text numberOfLines={3} style={[{fontSize: 14, textAlign: 'left'}]}>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            flexShrink: 1,
+            paddingHorizontal: 5,
+          }}>
+          <Text style={[{fontSize: 14, textAlign: 'left'}]}>
             Complete 3 offers to reach your first gift card
           </Text>
         </View>
