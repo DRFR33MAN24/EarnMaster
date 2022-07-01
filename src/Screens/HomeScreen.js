@@ -241,6 +241,7 @@ export const HomeScreen = ({navigation}) => {
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'center',
+              marginBottom: 20,
             }}>
             <Card
               style={[styles.homeScreenButton, {backgroundColor: '#4267B2'}]}>
