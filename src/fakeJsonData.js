@@ -13,7 +13,7 @@ export const surveysData = [
   },
   {
     id: 2,
-    name: 'Pick your best partner',
+    name: 'Pick your\nbest partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
     imageUri: dating,
@@ -32,7 +32,7 @@ export const surveysData = [
   },
   {
     id: 2,
-    name: 'Pick your best partner',
+    name: 'Pick your\nbest partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
     imageUri: dating,
@@ -51,7 +51,7 @@ export const surveysData = [
   },
   {
     id: 2,
-    name: 'Pick your best partner',
+    name: 'Pick your\nbest partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
     imageUri: dating,
@@ -70,7 +70,7 @@ export const surveysData = [
   },
   {
     id: 2,
-    name: 'Pick your best partner',
+    name: 'Pick your\nbest partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
     imageUri: dating,
@@ -89,7 +89,7 @@ export const surveysData = [
   },
   {
     id: 2,
-    name: 'Pick your best partner',
+    name: 'Pick your\nbest partner',
     coins: 550,
     details: 'Help a famous dating company choose the right soulmate for you',
     imageUri: dating,

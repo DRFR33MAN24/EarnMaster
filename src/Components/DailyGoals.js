@@ -37,7 +37,7 @@ export const DailyGoals = props => {
             flexShrink: 1,
             paddingHorizontal: 5,
           }}>
-          <Text style={[{fontSize: 14, textAlign: 'left'}]}>
+          <Text category="p1" style={[{textAlign: 'left'}]}>
             Complete 3 offers to reach your first gift card
           </Text>
         </View>
