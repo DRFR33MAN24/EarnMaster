@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,14 +9,14 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
-import {Divider, Card, Text} from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faClock, faS, faStar} from '@fortawesome/free-solid-svg-icons';
-import {ThemeContext} from '../../theme-context';
-import {glass, dollar} from '../Constants/images';
-import {GoToSurveyModal} from './GoToSurveyModal';
+import { Divider, Card, Text, useTheme } from '@ui-kitten/components';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faClock, faS, faStar } from '@fortawesome/free-solid-svg-icons';
+import { ThemeContext } from '../../theme-context';
+import { glass, dollar } from '../Constants/images';
+import { GoToSurveyModal } from './GoToSurveyModal';
 
-export const Survey = ({data}) => {
+export const Survey = ({ data }) => {
   const width = new Animated.Value(1);
   const height = new Animated.Value(1);
 
@@ -102,7 +102,7 @@ export const Survey = ({data}) => {
                 borderTopRightRadius: 10,
                 borderTopLeftRadius: 10,
 
-                transform: [{scale: width}],
+                transform: [{ scale: width }],
               }}
             />
           </View>
@@ -125,7 +125,7 @@ export const Survey = ({data}) => {
               right: 10,
               zIndex: 300,
             }}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               {[...Array(rate)].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
@@ -147,7 +147,7 @@ export const Survey = ({data}) => {
             <FontAwesomeIcon
               icon={faClock}
               size={20}
-              style={{color: theme === 'light' ? 'white' : 'black'}}
+              style={{ color: theme === 'light' ? 'white' : 'black' }}
             />
             <Text
               style={{
@@ -183,7 +183,7 @@ export const Survey = ({data}) => {
             paddingHorizontal: 10,
           }}>
           <Text>{data.name}</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image
               source={dollar}
               style={{
@@ -201,8 +201,8 @@ export const Survey = ({data}) => {
     </View>
   );
 };
-export const WideSurvey = ({data}) => {
-  console.log(data);
+export const WideSurvey = ({ data }) => {
+  const uiTheme = useTheme();
   if (!data) {
     return <View></View>;
   }
@@ -289,7 +289,7 @@ export const WideSurvey = ({data}) => {
                 height: '100%',
                 borderRadius: 10,
 
-                transform: [{scale: width}],
+                transform: [{ scale: width }],
               }}
             />
           </View>
@@ -301,7 +301,7 @@ export const WideSurvey = ({data}) => {
               right: 10,
               zIndex: 300,
             }}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               {[...Array(rate)].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
@@ -323,12 +323,14 @@ export const WideSurvey = ({data}) => {
             <FontAwesomeIcon
               icon={faClock}
               size={20}
-              style={{color: theme === 'light' ? 'white' : 'black'}}
+              style={{ color: theme === 'light' ? 'white' : 'black' }}
             />
             <Text
               style={{
                 color: theme === 'light' ? 'white' : 'black',
                 paddingHorizontal: 4,
+
+
               }}>
               {data.timeToComplete}
             </Text>
@@ -351,7 +353,7 @@ export const WideSurvey = ({data}) => {
                 marginHorizontal: 5,
               }}
             />
-            <Text style={{color: theme === 'light' ? 'white' : 'black'}}>
+            <Text style={{ color: theme === 'light' ? 'white' : 'black' }}>
               {data.coins}
             </Text>
           </View>
@@ -367,7 +369,11 @@ export const WideSurvey = ({data}) => {
               left: 0,
               paddingHorizontal: 10,
             }}>
-            <Text style={{color: theme === 'light' ? 'white' : 'black'}}>
+            <Text style={{
+              color: theme === 'light' ? 'white' : 'black',
+              fontSize: uiTheme['text-heading-1-font-size'],
+              fontWeight: uiTheme["text-heading-1-font-weight"],
+            }}>
               {data.name}
             </Text>
           </View>
