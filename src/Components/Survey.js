@@ -202,6 +202,10 @@ export const Survey = ({data}) => {
   );
 };
 export const WideSurvey = ({data}) => {
+  console.log(data);
+  if (!data) {
+    return <View></View>;
+  }
   const width = new Animated.Value(1);
   const height = new Animated.Value(1);
 
@@ -218,13 +222,13 @@ export const WideSurvey = ({data}) => {
         Animated.spring(width, {
           toValue: 1.2,
           duration: 10000,
-
           friction: 0.5,
           useNativeDriver: false,
         }),
       ).start();
     }
   }, []);
+
   return (
     <View
       style={{
