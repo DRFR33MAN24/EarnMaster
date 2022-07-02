@@ -9,7 +9,7 @@ import {
   useTheme,
   Input,
 } from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faBell,
   faCoins,
@@ -17,7 +17,7 @@ import {
   faChevronLeft,
   faGift,
 } from '@fortawesome/free-solid-svg-icons';
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -27,10 +27,10 @@ import {
   Image,
 } from 'react-native';
 import * as Progress from 'react-native-progress';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import {BackIcon} from '../Components/NavigationComponents';
-import {DailyGoals} from '../Components/DailyGoals';
+import { BackIcon } from '../Components/NavigationComponents';
+import { DailyGoals } from '../Components/DailyGoals';
 import {
   gambler,
   checklist,
@@ -41,15 +41,16 @@ import {
   twitter,
   instagram,
 } from '../Constants/images';
-import {surveysData} from '../fakeJsonData';
-import {Survey, WideSurvey} from '../Components/Survey';
+import { surveysData } from '../fakeJsonData';
+import { Survey, WideSurvey } from '../Components/Survey';
+
 import Carousel from 'react-native-reanimated-carousel';
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
     icon={faHome}
     size={25}
-    style={{color: props.style.tintColor}}
+    style={{ color: props.style.tintColor }}
   />
 );
 
@@ -63,10 +64,10 @@ export const CoinsComponent = props => (
 
     <Image
       source={dollar}
-      style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
+      style={{ width: 16, height: 16, opacity: 1, resizeMode: 'stretch' }}
     />
     {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
-    <Text style={{fontSize: 12}}> 100</Text>
+    <Text style={{ fontSize: 12 }}> 100</Text>
   </View>
 );
 export const NotificationIcon = props => (
@@ -74,11 +75,11 @@ export const NotificationIcon = props => (
     <Button
       appearance="ghost"
       onPress={() => props.navigation.navigate('Notification')}
-      style={{padding: 0}}>
+      style={{ padding: 0 }}>
       <View style={styles.badgeIconView}>
         <Text style={styles.badge}> 2 </Text>
 
-        <FontAwesomeIcon icon={faBell} size={20} style={{color: 'gold'}} />
+        <FontAwesomeIcon icon={faBell} size={20} style={{ color: 'gold' }} />
       </View>
     </Button>
   </Animatable.View>
@@ -110,11 +111,11 @@ export const HomeScreenTopBar = () => {
         <Button
           appearance="ghost"
           onPress={() => navigation.navigate('Notification')}
-          style={{padding: 0}}>
+          style={{ padding: 0 }}>
           <View style={styles.badgeIconView}>
             <Text style={styles.badge}> 2 </Text>
 
-            <FontAwesomeIcon icon={faBell} size={25} style={{color: 'gold'}} />
+            <FontAwesomeIcon icon={faBell} size={25} style={{ color: 'gold' }} />
           </View>
         </Button>
       </View>
@@ -129,7 +130,7 @@ export const HomeScreenTopBar = () => {
           }}>
           {/* <Text style={styles.badge}> 2 </Text> */}
 
-          <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+          <FontAwesomeIcon icon={faCoins} size={25} style={{ color: 'gold' }} />
           <Text> 100</Text>
         </View>
       </View>
@@ -137,7 +138,7 @@ export const HomeScreenTopBar = () => {
   );
 };
 
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({ navigation }) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
@@ -151,7 +152,7 @@ export const HomeScreen = ({navigation}) => {
   }, []);
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
+      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
       <TopNavigation
         title="Dashboard"
         accessoryRight={<HomeScreenContainer navigation={navigation} />}
@@ -162,11 +163,11 @@ export const HomeScreen = ({navigation}) => {
         width={300}
         height={150}
         data={[1, 2, 3]}
-        renderItem={({item}) => <WideSurvey />}
+        renderItem={({ item }) => <Divider key={item} />}
       />
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         <DailyGoals />
-        <View style={{marginHorizontal: 10}}>
+        <View style={{ marginHorizontal: 10 }}>
           {surveys != null &&
             surveys.map(survey => <WideSurvey data={survey} />)}
         </View>
@@ -241,9 +242,9 @@ export const HomeScreen = ({navigation}) => {
           </Card>
         </View> */}
         <View>
-          <Card style={{marginVertical: 10}}>
+          <Card style={{ marginVertical: 10 }}>
             <Text>Refer friend and earn</Text>
-            <View style={{marginVertical: 2}}>
+            <View style={{ marginVertical: 2 }}>
               <Input
                 value={referral}
                 label="Friend Email"
@@ -254,18 +255,18 @@ export const HomeScreen = ({navigation}) => {
                 onChangeText={nextValue => setReferral(nextValue)}
               />
             </View>
-            <View style={{marginVertical: 2, paddingVertical: 10}}>
+            <View style={{ marginVertical: 2, paddingVertical: 10 }}>
               <Button>Send Link</Button>
             </View>
             <TouchableOpacity>
-              <View style={{marginVertical: 2, paddingVertical: 10}}>
+              <View style={{ marginVertical: 2, paddingVertical: 10 }}>
                 <Text>Active referrals: 15</Text>
               </View>
             </TouchableOpacity>
           </Card>
         </View>
         <View>
-          <Card style={{marginVertical: 10}}>
+          <Card style={{ marginVertical: 10 }}>
             <Text>Follow us on social media</Text>
           </Card>
           <View
@@ -276,11 +277,11 @@ export const HomeScreen = ({navigation}) => {
               marginBottom: 20,
             }}>
             <Card
-              style={[styles.homeScreenButton, {backgroundColor: '#4267B2'}]}>
+              style={[styles.homeScreenButton, { backgroundColor: '#4267B2' }]}>
               <TouchableOpacity>
                 <View>
                   <Image source={facebook} style={styles.homeScreenSocial} />
-                  <Text numberOfLines={1} style={{flex: 1}}>
+                  <Text numberOfLines={1} style={{ flex: 1 }}>
                     Facebook
                   </Text>
                 </View>
@@ -288,22 +289,22 @@ export const HomeScreen = ({navigation}) => {
             </Card>
 
             <Card
-              style={[styles.homeScreenButton, {backgroundColor: '#1DA1F2'}]}>
+              style={[styles.homeScreenButton, { backgroundColor: '#1DA1F2' }]}>
               <TouchableOpacity>
                 <View>
                   <Image source={twitter} style={styles.homeScreenSocial} />
-                  <Text numberOfLines={1} style={{flex: 1}}>
+                  <Text numberOfLines={1} style={{ flex: 1 }}>
                     Twitter
                   </Text>
                 </View>
               </TouchableOpacity>
             </Card>
 
-            <Card style={[styles.homeScreenButton, {backgroundColor: 'white'}]}>
+            <Card style={[styles.homeScreenButton, { backgroundColor: 'white' }]}>
               <TouchableOpacity>
                 <View>
                   <Image source={instagram} style={[styles.homeScreenSocial]} />
-                  <Text numberOfLines={1} style={{flex: 1}}>
+                  <Text numberOfLines={1} style={{ flex: 1 }}>
                     Instagram
                   </Text>
                 </View>
@@ -341,7 +342,7 @@ const styles = StyleSheet.create({
   },
   textWithShadow: {
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
   giftHalo: {
