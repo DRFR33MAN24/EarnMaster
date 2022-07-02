@@ -17,7 +17,7 @@ import {
   faChevronLeft,
   faGift,
 } from '@fortawesome/free-solid-svg-icons';
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -41,6 +41,9 @@ import {
   twitter,
   instagram,
 } from '../Constants/images';
+import {surveysData} from '../fakeJsonData';
+import {Survey, WideSurvey} from '../Components/Survey';
+import Carousel from 'react-native-reanimated-carousel';
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -140,6 +143,12 @@ export const HomeScreen = ({navigation}) => {
   // };
   const theme = useTheme();
   const [referral, setReferral] = useState('');
+  const [surveys, setSurveys] = useState([]);
+  useEffect(() => {
+    // api call
+    setSurveys(surveysData);
+    //console.log(surveyData);
+  }, []);
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
@@ -149,9 +158,32 @@ export const HomeScreen = ({navigation}) => {
       />
       <Divider />
 
+      <Carousel
+        width={300}
+        height={150}
+        data={[1, 2, 3]}
+        renderItem={({item}) => <Divider />}
+      />
       <ScrollView style={{flex: 1}}>
         <DailyGoals />
+        <View style={{marginHorizontal: 10}}>
+          {surveys != null &&
+            surveys.map(survey => <WideSurvey data={survey} />)}
+        </View>
         <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            // flex: 1,
+            marginHorizontal: 10,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}>
+          {surveys != null && surveys.map(survey => <Survey data={survey} />)}
+          {/* <Survey />
+          <Survey /> */}
+        </View>
+        {/* <View
           style={{
             flexDirection: 'row',
             flexWrap: 'wrap',
@@ -207,7 +239,7 @@ export const HomeScreen = ({navigation}) => {
               </View>
             </TouchableOpacity>
           </Card>
-        </View>
+        </View> */}
         <View>
           <Card style={{marginVertical: 10}}>
             <Text>Refer friend and earn</Text>
