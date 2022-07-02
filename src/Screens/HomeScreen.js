@@ -169,7 +169,7 @@ export const HomeScreen = ({navigation}) => {
           }}>
           <Carousel
             autoPlay={true}
-            width={Dimensions.get('window').width * 0.95}
+            width={Dimensions.get('screen').width * 0.95}
             autoPlayInterval={3000}
             height={115}
             data={surveysData}
@@ -190,7 +190,7 @@ export const HomeScreen = ({navigation}) => {
             flexWrap: 'wrap',
             // flex: 1,
             marginHorizontal: 10,
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
             alignItems: 'center',
           }}>
           {surveys != null && surveys.map(survey => <Survey data={survey} />)}

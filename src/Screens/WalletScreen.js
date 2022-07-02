@@ -96,31 +96,31 @@ export const WalletScreen = ({navigation}) => {
                 },
               ],
             }}
-            width={Dimensions.get('window').width} // from react-native
+            width={Dimensions.get('screen').width * 0.95} // from react-native
             height={220}
             yAxisLabel="$"
             yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: '#e26a00',
-              backgroundGradientFrom: '#fb8c00',
-              backgroundGradientTo: '#ffa726',
+              backgroundColor: theme['color-control-default'],
+              backgroundGradientFrom: theme['color-control-default'],
+              backgroundGradientTo: theme['color-control-default'],
               decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
               style: {
-                borderRadius: 16,
+                borderRadius: 0,
               },
               propsForDots: {
                 r: '6',
                 strokeWidth: '2',
-                stroke: '#ffa726',
+                stroke: '#000',
               },
             }}
             bezier
             style={{
               marginVertical: 8,
-              borderRadius: 16,
+              borderRadius: 0,
             }}
           />
         </View>
