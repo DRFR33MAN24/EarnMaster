@@ -162,7 +162,7 @@ export const HomeScreen = ({navigation}) => {
         width={300}
         height={150}
         data={[1, 2, 3]}
-        renderItem={({item}) => <Divider />}
+        renderItem={({item}) => <WideSurvey />}
       />
       <ScrollView style={{flex: 1}}>
         <DailyGoals />
