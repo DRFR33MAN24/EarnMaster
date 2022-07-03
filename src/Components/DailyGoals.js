@@ -18,7 +18,8 @@ export const DailyGoals = props => {
         }}>
         <View>
           <Progress.Circle
-            progress={0.5}
+            progress={0.6}
+            animated={false}
             size={60}
             showsText={true}
             textStyle={{fontSize: 12, fontFamily: 'Roboto-Bold'}}
