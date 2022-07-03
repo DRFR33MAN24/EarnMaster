@@ -21,7 +21,7 @@ export const Survey = ({data}) => {
   const height = new Animated.Value(1);
 
   const [surveyDetails, toggleSurveyDetails] = useState(false);
-
+  const uiTheme = useTheme();
   let theme = useContext(ThemeContext).currentTheme;
   let rate = Math.round(data.coins / 100);
   if (rate > 5) {
@@ -60,9 +60,9 @@ export const Survey = ({data}) => {
           styles.cardShadow,
           {
             borderRadius: 10,
-            backgroundColor: 'white',
+            backgroundColor: uiTheme['background-basic-color-1'],
             margin: 4,
-            minHeight: 200,
+            minHeight: 220,
           },
         ]}>
         <View
@@ -147,11 +147,11 @@ export const Survey = ({data}) => {
             <FontAwesomeIcon
               icon={faClock}
               size={20}
-              style={{color: theme === 'light' ? 'white' : 'black'}}
+              style={{color: 'white'}}
             />
             <Text
               style={{
-                color: theme === 'light' ? 'white' : 'black',
+                color: 'white',
                 paddingHorizontal: 4,
               }}>
               {data.timeToComplete}
@@ -190,6 +190,7 @@ export const Survey = ({data}) => {
                 width: 16,
                 height: 16,
                 opacity: 1,
+                marginRight: 5,
                 resizeMode: 'stretch',
                 // marginHorizontal: 5,
               }}
@@ -323,11 +324,11 @@ export const WideSurvey = ({data}) => {
             <FontAwesomeIcon
               icon={faClock}
               size={20}
-              style={{color: theme === 'light' ? 'white' : 'black'}}
+              style={{color: 'white'}}
             />
             <Text
               style={{
-                color: theme === 'light' ? 'white' : 'black',
+                color: 'white',
                 paddingHorizontal: 4,
               }}>
               {data.timeToComplete}
@@ -351,9 +352,7 @@ export const WideSurvey = ({data}) => {
                 marginHorizontal: 5,
               }}
             />
-            <Text style={{color: theme === 'light' ? 'white' : 'black'}}>
-              {data.coins}
-            </Text>
+            <Text style={{color: 'white'}}>{data.coins}</Text>
           </View>
           <View
             style={{
@@ -370,7 +369,7 @@ export const WideSurvey = ({data}) => {
             <Text
               category="h5"
               style={{
-                color: theme === 'light' ? 'white' : 'black',
+                color: 'white',
                 flexWrap: 'wrap',
                 flexShrink: 1,
               }}>

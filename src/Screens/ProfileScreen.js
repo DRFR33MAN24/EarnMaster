@@ -77,7 +77,7 @@ export const ProfileScreen = ({navigation}) => {
       <TopNavigation title="Profile" />
       <Divider />
 
-      <ScrollView style={{flex: 1, marginHorizontal: 10}}>
+      <ScrollView style={{flex: 1, marginHorizontal: 10, marginVertical: 20}}>
         <Card>
           <View
             style={{

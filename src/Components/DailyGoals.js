@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 2,
 
-    borderRadius: 20,
+    borderRadius: 10,
   },
 });

@@ -66,8 +66,8 @@ export const WalletScreen = ({navigation}) => {
     <SafeAreaView
       style={{flex: 1, backgroundColor: uiTheme['background-basic-color-4']}}>
       <TopNavigation title="Wallet" />
-      <Divider />
-      <ScrollView style={{flex: 1, marginHorizontal: 10}}>
+
+      <ScrollView style={{flex: 1, marginHorizontal: 10, marginVertical: 20}}>
         <View>
           <Card>
             <Text category="h6">your total earnings:</Text>
@@ -131,8 +131,8 @@ export const WalletScreen = ({navigation}) => {
             <Text>Transaction history:</Text>
           </Card>
         </View>
-        {transactions.map(transaction => (
-          <WalletTransaction {...transaction} />
+        {transactions.map((transaction, index) => (
+          <WalletTransaction {...transaction} key={index} />
         ))}
       </ScrollView>
     </SafeAreaView>
