@@ -70,8 +70,8 @@ export const WalletScreen = ({navigation}) => {
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>
         <View>
           <Card>
-            <Text>your total earnings:</Text>
-            <Text style={styles.bigBoldText}>$71.5</Text>
+            <Text category="h6">your total earnings:</Text>
+            <Text category="h1">$71.5</Text>
             <View style={{marginVertical: 8}}>
               <Button
                 onPress={() => navigation.navigate('Withdraw')}
