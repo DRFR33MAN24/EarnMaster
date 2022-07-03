@@ -26,7 +26,7 @@ import {
   faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
-
+import {facebook, twitter, instagram} from '../Constants/images';
 export const profileIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -151,9 +151,68 @@ export const ProfileScreen = ({navigation}) => {
             <Text>About US</Text>
           </View>
         </Card>
+        <View>
+          <Card style={{marginVertical: 10}}>
+            <Text>Follow us on social media</Text>
+          </Card>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              marginBottom: 20,
+            }}>
+            <Card
+              style={[styles.homeScreenButton, {backgroundColor: '#4267B2'}]}>
+              <TouchableOpacity>
+                <View>
+                  <Image source={facebook} style={styles.homeScreenSocial} />
+                  <Text numberOfLines={1} style={{flex: 1, color: 'black'}}>
+                    Facebook
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Card>
+
+            <Card
+              style={[styles.homeScreenButton, {backgroundColor: '#1DA1F2'}]}>
+              <TouchableOpacity>
+                <View>
+                  <Image source={twitter} style={styles.homeScreenSocial} />
+                  <Text numberOfLines={1} style={{flex: 1, color: 'black'}}>
+                    Twitter
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Card>
+
+            <Card style={[styles.homeScreenButton, {backgroundColor: 'white'}]}>
+              <TouchableOpacity>
+                <View>
+                  <Image source={instagram} style={[styles.homeScreenSocial]} />
+                  <Text numberOfLines={1} style={{flex: 1, color: 'black'}}>
+                    Instagram
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Card>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-// const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  homeScreenSocial: {
+    width: 64,
+    height: 64,
+    resizeMode: 'stretch',
+  },
+  homeScreenButton: {
+    margin: 5,
+    borderWidth: 2,
+
+    borderRadius: 20,
+  },
+});

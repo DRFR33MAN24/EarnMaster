@@ -172,7 +172,7 @@ export const WithdrawScreen = ({navigation}) => {
             flexWrap: 'wrap',
             // flex: 1,
             padding: 10,
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
             alignItems: 'center',
           }}>
           <RedeemOption style={playCard} />

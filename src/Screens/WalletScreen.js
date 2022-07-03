@@ -127,8 +127,8 @@ export const WalletScreen = ({navigation}) => {
           />
         </View>
         <View>
-          <Card>
-            <Text>Transaction history:</Text>
+          <Card disabled={true}>
+            <Text category="s1">Transaction history:</Text>
           </Card>
         </View>
         {transactions.map((transaction, index) => (
