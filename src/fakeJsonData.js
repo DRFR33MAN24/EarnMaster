@@ -120,3 +120,24 @@ export const offersData = [
     link: 'http://localhost:5000/offer/link/2',
   },
 ];
+
+export const transactions = [
+  {
+    id: 1,
+    type: 'prepaid visa',
+    state: 'pending',
+    amount: -5.0,
+  },
+  {
+    id: 2,
+    type: 'paypal',
+    state: 'rejected',
+    amount: -5.0,
+  },
+  {
+    id: 3,
+    type: 'BTC',
+    state: 'approved',
+    amount: -5.0,
+  },
+];

@@ -26,7 +26,7 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from 'react-native-chart-kit';
-
+import {transactions} from '../fakeJsonData';
 export const walletIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -129,14 +129,9 @@ export const WalletScreen = ({navigation}) => {
             <Text>Transaction history:</Text>
           </Card>
         </View>
-        <WalletTransaction />
-        <WalletTransaction />
-        <WalletTransaction />
-        <WalletTransaction />
-        <WalletTransaction />
-        <WalletTransaction />
-        <WalletTransaction />
-        <WalletTransaction />
+        {transactions.map(transaction => (
+          <WalletTransaction {...transaction} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
