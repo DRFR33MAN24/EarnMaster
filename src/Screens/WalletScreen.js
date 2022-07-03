@@ -102,9 +102,9 @@ export const WalletScreen = ({navigation}) => {
             yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: uiTheme['color-control-default'],
-              backgroundGradientFrom: uiTheme['color-control-default'],
-              backgroundGradientTo: uiTheme['color-control-default'],
+              backgroundColor: uiTheme['background-basic-color-4'],
+              backgroundGradientFrom: uiTheme['background-basic-color-4'],
+              backgroundGradientTo: uiTheme['background-basic-color-4'],
               decimalPlaces: 2, // optional, defaults to 2dp
               // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
               // labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
