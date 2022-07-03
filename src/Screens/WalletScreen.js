@@ -61,10 +61,10 @@ export const WalletScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
-  const theme = useTheme();
+  const uiTheme = useTheme();
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
+      style={{flex: 1, backgroundColor: uiTheme['background-basic-color-4']}}>
       <TopNavigation title="Wallet" />
       <Divider />
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>
@@ -75,14 +75,14 @@ export const WalletScreen = ({navigation}) => {
             <View style={{marginVertical: 8}}>
               <Button
                 onPress={() => navigation.navigate('Withdraw')}
-                style={theme === 'light' ? {} : styles.buttonDarkGlow}>
+                style={uiTheme === 'light' ? {} : styles.buttonDarkGlow}>
                 Withdraw
               </Button>
             </View>
           </Card>
           <LineChart
             data={{
-              labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+              labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
               datasets: [
                 {
                   data: [
@@ -102,19 +102,21 @@ export const WalletScreen = ({navigation}) => {
             yAxisSuffix="k"
             yAxisInterval={1} // optional, defaults to 1
             chartConfig={{
-              backgroundColor: theme['color-control-default'],
-              backgroundGradientFrom: theme['color-control-default'],
-              backgroundGradientTo: theme['color-control-default'],
+              backgroundColor: uiTheme['color-control-default'],
+              backgroundGradientFrom: uiTheme['color-control-default'],
+              backgroundGradientTo: uiTheme['color-control-default'],
               decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              // labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              color: (opacity = 1) => uiTheme['color-primary-300'],
+              labelColor: (opacity = 1) => uiTheme['color-primary-300'],
               style: {
                 borderRadius: 0,
               },
               propsForDots: {
-                r: '6',
-                strokeWidth: '2',
-                stroke: '#000',
+                r: '4',
+                strokeWidth: '1',
+                stroke: uiTheme['color-primary-300'],
               },
             }}
             bezier

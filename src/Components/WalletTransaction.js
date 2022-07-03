@@ -2,7 +2,7 @@ import {Text, Card, Button, useTheme} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 
-export const WalletTransaction = ({id, type, amount, state}) => {
+export const WalletTransaction = ({id, type, amount, state, submitDate}) => {
   const uiTheme = useTheme();
   const RenderState = ({state}) => {
     switch (state) {
@@ -37,7 +37,7 @@ export const WalletTransaction = ({id, type, amount, state}) => {
         </View>
         <RenderState state={state} />
       </View>
-      <Text style={styles.dateText}>12/12/12</Text>
+      <Text style={styles.dateText}>{submitDate}</Text>
     </Card>
   );
 };

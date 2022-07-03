@@ -127,17 +127,20 @@ export const transactions = [
     type: 'prepaid visa',
     state: 'pending',
     amount: -5.0,
+    submitDate: '12/09/2022',
   },
   {
     id: 2,
     type: 'paypal',
     state: 'rejected',
     amount: -5.0,
+    submitDate: '12/09/2022',
   },
   {
     id: 3,
     type: 'BTC',
     state: 'approved',
     amount: -5.0,
+    submitDate: '12/09/2022',
   },
 ];
