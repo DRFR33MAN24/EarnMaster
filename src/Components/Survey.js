@@ -183,20 +183,30 @@ export const Survey = ({data}) => {
             paddingHorizontal: 10,
           }}>
           <Text>{data.name}</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image
-              source={dollar}
-              style={{
-                width: 16,
-                height: 16,
-                opacity: 1,
-                marginRight: 5,
-                resizeMode: 'stretch',
-                // marginHorizontal: 5,
-              }}
-            />
-            <Text>{data.coins}</Text>
-          </View>
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            right: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: 'gold',
+            borderRadius: 10,
+            padding: 5,
+          }}>
+          <Image
+            source={dollar}
+            style={{
+              width: 16,
+              height: 16,
+              opacity: 1,
+              marginRight: 5,
+              resizeMode: 'stretch',
+              // marginHorizontal: 5,
+            }}
+          />
+          <Text>{data.coins}</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -342,6 +352,9 @@ export const WideSurvey = ({data}) => {
               alignItems: 'center',
               bottom: 10,
               right: 10,
+              backgroundColor: 'gold',
+              borderRadius: 10,
+              padding: 5,
             }}>
             <Image
               source={dollar}
@@ -353,7 +366,7 @@ export const WideSurvey = ({data}) => {
                 marginHorizontal: 5,
               }}
             />
-            <Text style={{color: 'white'}}>{data.coins}</Text>
+            <Text>{data.coins}</Text>
           </View>
           <View
             style={{
