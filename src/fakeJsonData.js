@@ -1,5 +1,7 @@
 const beer = require('./Screens/images/beer.jpg');
 const dating = require('./Screens/images/dating.jpg');
+const ikea = require('./Screens/images/dating.jpg');
+const shampoo = require('./Screens/images/dating.jpg');
 export const surveysData = [
   {
     id: 1,
@@ -142,5 +144,22 @@ export const transactions = [
     state: 'approved',
     amount: -5.0,
     submitDate: '12/09/2022',
+  },
+];
+
+export const notifications = [
+  {
+    id: 1,
+    title: 'A new offer is available for you!',
+    message: 'check the new IKEA products available in the nearest store',
+    img: ikea,
+    read: false,
+  },
+  {
+    id: 2,
+    title: 'Shampoo and body lotion ',
+    message: 'get extra credits for submitting you info',
+    img: shampoo,
+    read: true,
   },
 ];

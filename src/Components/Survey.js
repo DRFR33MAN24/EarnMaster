@@ -191,7 +191,7 @@ export const Survey = ({data}) => {
             right: 10,
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: 'gold',
+            backgroundColor: uiTheme['background-basic-color-4'],
             borderRadius: 10,
             padding: 5,
           }}>
@@ -352,7 +352,7 @@ export const WideSurvey = ({data}) => {
               alignItems: 'center',
               bottom: 10,
               right: 10,
-              backgroundColor: 'gold',
+              backgroundColor: uiTheme['background-basic-color-4'],
               borderRadius: 10,
               padding: 5,
             }}>

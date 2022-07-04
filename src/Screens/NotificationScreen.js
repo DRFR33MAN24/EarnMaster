@@ -7,8 +7,11 @@ import {
   useTheme,
 } from '@ui-kitten/components';
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {SafeAreaView, ScrollView, View} from 'react-native';
 import {BackIcon} from '../Components/NavigationComponents';
+import {notifications} from '../fakeJsonData';
+import {Notification} from '../Components/Notification';
+
 export const NotificationScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
@@ -21,7 +24,18 @@ export const NotificationScreen = ({navigation}) => {
         title="Notification"
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
-      <Divider />
+      <View style={{marginHorizontal: 5}}>
+        <Text category="h5">Today</Text>
+      </View>
+      {notifications.map((notification, index) => (
+        <View>
+          <Notification {...notification} key={index} />
+          <Divider />
+        </View>
+      ))}
+      <View style={{marginHorizontal: 5}}>
+        <Text category="h5">Older</Text>
+      </View>
 
       <ScrollView style={{flex: 1}}></ScrollView>
     </SafeAreaView>
