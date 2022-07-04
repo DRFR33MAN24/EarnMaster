@@ -27,7 +27,7 @@ export const WalletTransaction = ({id, type, amount, state, submitDate}) => {
     }
   };
   return (
-    <Card>
+    <Card disabled={true}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
           <Text style={{color: amount > 0 ? 'green' : 'red'}}>

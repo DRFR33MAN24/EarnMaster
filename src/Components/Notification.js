@@ -40,7 +40,12 @@ export const Notification = ({title, message, img, read}) => {
         <View style={{flex: 1}}>
           <Image
             source={img}
-            style={{width: 64, height: 64, resizeMode: 'stretch'}}
+            style={{
+              width: 64,
+              height: 64,
+              resizeMode: 'stretch',
+              borderRadius: 10,
+            }}
           />
         </View>
       </View>

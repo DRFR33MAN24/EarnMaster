@@ -78,7 +78,7 @@ export const ProfileScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1, marginHorizontal: 10, marginVertical: 20}}>
-        <Card>
+        <Card disabled={true}>
           <View
             style={{
               alignItems: 'center',
@@ -92,23 +92,24 @@ export const ProfileScreen = ({navigation}) => {
             <Text>Martin Mystery</Text>
           </View>
         </Card>
-        <Divider />
-        <Card>
+
+        <Card disabled={true}>
           <Text>Email:</Text>
         </Card>
-        <Card>
+
+        <Card disabled={true}>
           <Text>Membership:</Text>
         </Card>
-        <Card>
+        <Card disabled={true}>
           <Text>Referral Code:</Text>
         </Card>
-        <Card>
+        <Card disabled={true}>
           <Text>Total Earnings:</Text>
         </Card>
         {/* <Card>
           <Button onPress={themeContext.toggleTheme}>Toggle theme</Button>
         </Card> */}
-        <Card>
+        <Card disabled={true}>
           <TouchableOpacity>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -124,7 +125,7 @@ export const ProfileScreen = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </Card>
-        <Card>
+        <Card disabled={true}>
           <TouchableOpacity>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -140,19 +141,19 @@ export const ProfileScreen = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </Card>
-        <Card>
+        <Card disabled={true}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text>Change Theme</Text>
             <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
           </View>
         </Card>
-        <Card>
+        <Card disabled={true}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text>About US</Text>
           </View>
         </Card>
         <View>
-          <Card style={{marginVertical: 10}}>
+          <Card disabled={true} style={{marginVertical: 10}}>
             <Text>Follow us on social media</Text>
           </Card>
           <View
