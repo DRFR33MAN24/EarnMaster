@@ -19,7 +19,7 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faC, faCoins} from '@fortawesome/free-solid-svg-icons';
 import {BackIcon} from '../Components/NavigationComponents';
-import {glass} from '../Constants/images';
+import {glass, dollar} from '../Constants/images';
 const playCard = {
   backgroundColor: 'white',
   image: require('./images/play.png'),
@@ -79,7 +79,7 @@ const RedeemOption = ({style}) => {
             style={{resizeMode: 'center', width: 64, height: 64}}
           />
         </View>
-        <View style={styles.glassyBackground}>
+        {/* <View style={styles.glassyBackground}>
           <Image
             source={glass}
             style={{
@@ -89,7 +89,7 @@ const RedeemOption = ({style}) => {
               borderRadius: 10,
             }}
           />
-        </View>
+        </View> */}
         <View
           style={{
             position: 'absolute',
@@ -136,12 +136,22 @@ const RedeemOption = ({style}) => {
                 borderRadius: 10,
                 padding: 5,
               }}>
-              <FontAwesomeIcon
+              <Image
+                source={dollar}
+                style={{
+                  width: 16,
+                  height: 16,
+                  opacity: 1,
+                  resizeMode: 'stretch',
+                  marginHorizontal: 5,
+                }}
+              />
+              {/* <FontAwesomeIcon
                 icon={faCoins}
                 size={10}
-                // style={{color: props.style.tintColor}}
-              />
-              <Text style={{fontSize: 12}}> 500</Text>
+              
+              /> */}
+              <Text style={{fontSize: 12}}>500</Text>
             </View>
           </View>
         </View>
