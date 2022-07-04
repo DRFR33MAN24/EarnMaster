@@ -13,10 +13,16 @@ import {
   View,
   StyleSheet,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faCoins, faWallet} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCoins,
+  faWallet,
+  faCreditCard,
+  faMoneyBillTransfer,
+} from '@fortawesome/free-solid-svg-icons';
 import {WalletTransaction} from '../Components/WalletTransaction';
 import {
   LineChart,
@@ -85,12 +91,39 @@ export const WalletScreen = ({navigation}) => {
                 <Text category="h1">$22.5</Text>
               </View>
             </View>
-            <View style={{marginVertical: 8}}>
-              <Button
+            <View
+              style={{
+                marginVertical: 8,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+              <TouchableOpacity>
+                <View
+                  style={{
+                    padding: 15,
+                    backgroundColor: uiTheme['color-primary-default'],
+                    borderRadius: 15,
+                  }}>
+                  <FontAwesomeIcon icon={faMoneyBillTransfer} size={25} />
+                </View>
+                <Text>Withdraw</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View
+                  style={{
+                    padding: 15,
+                    backgroundColor: uiTheme['color-primary-default'],
+                    borderRadius: 15,
+                  }}>
+                  <FontAwesomeIcon icon={faCreditCard} size={25} />
+                </View>
+                <Text>Deposit</Text>
+              </TouchableOpacity>
+              {/* <Button
                 onPress={() => navigation.navigate('Withdraw')}
                 style={uiTheme === 'light' ? {} : styles.buttonDarkGlow}>
                 Withdraw
-              </Button>
+              </Button> */}
             </View>
           </Card>
 
