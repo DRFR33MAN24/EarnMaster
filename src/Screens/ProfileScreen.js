@@ -27,6 +27,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {ThemeContext} from '../../theme-context';
 import {facebook, twitter, instagram} from '../Constants/images';
+import {profile} from '../fakeJsonData';
 export const profileIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -94,11 +95,11 @@ export const ProfileScreen = ({navigation}) => {
         </Card>
 
         <Card disabled={true}>
-          <Text>Email:</Text>
+          <Text>Email: {profile.email}</Text>
         </Card>
 
         <Card disabled={true}>
-          <Text>Membership:</Text>
+          <Text>Membership: {profile.membership}</Text>
         </Card>
         <Card disabled={true}>
           <Text>Referral Code:</Text>

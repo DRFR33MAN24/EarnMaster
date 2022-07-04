@@ -163,3 +163,11 @@ export const notifications = [
     read: true,
   },
 ];
+
+export const profile = {
+  name: 'Martin Mystery',
+  email: 'martin@gmail.com',
+  membership: 'starter',
+  totalEarnings: 55000,
+  referralCode: 'RTXX44GG',
+};
