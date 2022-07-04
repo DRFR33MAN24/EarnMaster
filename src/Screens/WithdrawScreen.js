@@ -15,6 +15,7 @@ import {
   View,
   Dimensions,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faC, faCoins} from '@fortawesome/free-solid-svg-icons';
@@ -52,34 +53,35 @@ const RedeemOption = ({style}) => {
         margin: 0,
         padding: 0,
       }}>
-      <View
-        style={{
-          // backgroundColor: 'yellow',
-          justifyContent: 'center',
-          alignItems: 'center',
-          margin: 2,
-          padding: 5,
-
-          height: 110,
-          width: '99%',
-        }}>
+      <TouchableOpacity>
         <View
           style={{
-            position: 'absolute',
+            // backgroundColor: 'yellow',
             justifyContent: 'center',
             alignItems: 'center',
+            margin: 2,
+            padding: 5,
+
+            height: 110,
             width: '99%',
-            height: 100,
-            borderRadius: 10,
-            backgroundColor: style.backgroundColor,
-            zIndex: -200,
           }}>
-          <Image
-            source={style.image}
-            style={{resizeMode: 'center', width: 64, height: 64}}
-          />
-        </View>
-        {/* <View style={styles.glassyBackground}>
+          <View
+            style={{
+              position: 'absolute',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '99%',
+              height: 100,
+              borderRadius: 10,
+              backgroundColor: style.backgroundColor,
+              zIndex: -200,
+            }}>
+            <Image
+              source={style.image}
+              style={{resizeMode: 'center', width: 64, height: 64}}
+            />
+          </View>
+          {/* <View style={styles.glassyBackground}>
           <Image
             source={glass}
             style={{
@@ -90,72 +92,73 @@ const RedeemOption = ({style}) => {
             }}
           />
         </View> */}
-        <View
-          style={{
-            position: 'absolute',
-            // justifyContent: 'flex-start',
-            // alignItems: 'flex-start',
-            width: '95%',
-            height: 100,
-            // backgroundColor: 'blue',
-          }}>
           <View
             style={{
-              // flexDirection: 'row',
-              flex: 1,
-              justifyContent: 'flex-start',
-              // backgroundColor: 'red',
-              padding: 5,
-            }}>
-            <Text>{style.title}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginBottom: 2,
+              position: 'absolute',
+              // justifyContent: 'flex-start',
+              // alignItems: 'flex-start',
+              width: '95%',
+              height: 100,
+              // backgroundColor: 'blue',
             }}>
             <View
               style={{
                 // flexDirection: 'row',
-                // flex: 1,
-                // justifyContent: 'flex-end',
+                flex: 1,
+                justifyContent: 'flex-start',
                 // backgroundColor: 'red',
                 padding: 5,
               }}>
-              <Text>{style.value}</Text>
+              <Text>{style.title}</Text>
             </View>
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                // flex: 1,
-                // justifyContent: 'flex-end',
-                backgroundColor: 'gold',
-                borderRadius: 10,
-                padding: 5,
+                justifyContent: 'space-between',
+                marginBottom: 2,
               }}>
-              <Image
-                source={dollar}
+              <View
                 style={{
-                  width: 16,
-                  height: 16,
-                  opacity: 1,
-                  resizeMode: 'stretch',
-                  marginHorizontal: 5,
-                }}
-              />
-              {/* <FontAwesomeIcon
+                  // flexDirection: 'row',
+                  // flex: 1,
+                  // justifyContent: 'flex-end',
+                  // backgroundColor: 'red',
+                  padding: 5,
+                }}>
+                <Text>{style.value}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  // flex: 1,
+                  // justifyContent: 'flex-end',
+                  backgroundColor: 'gold',
+                  borderRadius: 10,
+                  padding: 5,
+                }}>
+                <Image
+                  source={dollar}
+                  style={{
+                    width: 16,
+                    height: 16,
+                    opacity: 1,
+                    resizeMode: 'stretch',
+                    marginHorizontal: 5,
+                  }}
+                />
+                {/* <FontAwesomeIcon
                 icon={faCoins}
                 size={10}
               
               /> */}
-              <Text style={{fontSize: 12}}>500</Text>
+                <Text style={{fontSize: 12}}>500</Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
