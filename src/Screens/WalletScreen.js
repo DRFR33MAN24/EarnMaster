@@ -67,11 +67,24 @@ export const WalletScreen = ({navigation}) => {
       style={{flex: 1, backgroundColor: uiTheme['background-basic-color-4']}}>
       <TopNavigation title="Wallet" />
 
-      <ScrollView style={{flex: 1, marginHorizontal: 10, marginVertical: 20}}>
+      <ScrollView style={{flex: 1, marginHorizontal: 10}}>
         <View>
           <Card>
-            <Text category="h6">your total earnings:</Text>
-            <Text category="h1">$71.5</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+              }}>
+              <View>
+                <Text category="h6">Total</Text>
+                <Text category="h1">$71.5</Text>
+              </View>
+              <View>
+                <Text category="h6">Pending</Text>
+                <Text category="h1">$22.5</Text>
+              </View>
+            </View>
             <View style={{marginVertical: 8}}>
               <Button
                 onPress={() => navigation.navigate('Withdraw')}
@@ -80,51 +93,59 @@ export const WalletScreen = ({navigation}) => {
               </Button>
             </View>
           </Card>
-          <LineChart
-            data={{
-              labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
-              datasets: [
-                {
-                  data: [
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
+
+          <Card>
+            <Text>Performance</Text>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <LineChart
+                data={{
+                  labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
+                  datasets: [
+                    {
+                      data: [
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                      ],
+                    },
                   ],
-                },
-              ],
-            }}
-            width={Dimensions.get('screen').width * 0.95} // from react-native
-            height={220}
-            yAxisLabel="$"
-            yAxisSuffix="k"
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={{
-              backgroundColor: uiTheme['background-basic-color-4'],
-              backgroundGradientFrom: uiTheme['background-basic-color-4'],
-              backgroundGradientTo: uiTheme['background-basic-color-4'],
-              decimalPlaces: 2, // optional, defaults to 2dp
-              // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              // labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              color: (opacity = 1) => uiTheme['color-primary-300'],
-              labelColor: (opacity = 1) => uiTheme['color-primary-300'],
-              style: {
-                borderRadius: 0,
-              },
-              propsForDots: {
-                r: '4',
-                strokeWidth: '1',
-                stroke: uiTheme['color-primary-300'],
-              },
-            }}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 0,
-            }}
-          />
+                }}
+                width={Dimensions.get('window').width} // from react-native
+                height={220}
+                yAxisLabel="$"
+                yAxisSuffix="k"
+                withHorizontalLabels={false}
+                withHorizontalLines={false}
+                yAxisInterval={1} // optional, defaults to 1
+                chartConfig={{
+                  backgroundColor: `rgba(255, 255, 255, 255)`,
+                  backgroundGradientFrom: `rgba(255, 255, 255, 255)`,
+                  backgroundGradientTo: `rgba(255, 255, 255, 255)`,
+                  decimalPlaces: 2, // optional, defaults to 2dp
+                  // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  // labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  color: (opacity = 1) => uiTheme['color-primary-300'],
+                  labelColor: (opacity = 1) => uiTheme['color-primary-300'],
+                  style: {
+                    borderRadius: 0,
+                  },
+                  propsForDots: {
+                    r: '4',
+                    strokeWidth: '1',
+                    stroke: uiTheme['color-primary-300'],
+                  },
+                }}
+                bezier
+                style={{
+                  marginVertical: 8,
+                  borderRadius: 0,
+                }}
+              />
+            </View>
+          </Card>
         </View>
         <View>
           <Card disabled={true}>
