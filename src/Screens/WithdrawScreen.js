@@ -39,6 +39,7 @@ const amazonCard = {
   value: '5$',
 };
 const RedeemOption = ({style}) => {
+  const uiTheme = useTheme();
   return (
     <View
       style={{
@@ -69,7 +70,7 @@ const RedeemOption = ({style}) => {
             alignItems: 'center',
             width: '99%',
             height: 100,
-            borderRadius: 15,
+            borderRadius: 10,
             backgroundColor: style.backgroundColor,
             zIndex: -200,
           }}>
@@ -85,7 +86,7 @@ const RedeemOption = ({style}) => {
               resizeMode: 'cover',
               height: '100%',
               width: '100%',
-              borderRadius: 15,
+              borderRadius: 10,
             }}
           />
         </View>
