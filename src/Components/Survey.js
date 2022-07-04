@@ -236,8 +236,9 @@ export const WideSurvey = ({data}) => {
         width: '100%',
         // height: 120,
         // maxWidth: 200,
-
+        // width: 300,
         // backgroundColor: 'pink',
+        paddingHorizontal: 10,
         margin: 0,
         padding: 0,
       }}>
@@ -252,7 +253,7 @@ export const WideSurvey = ({data}) => {
           {
             borderRadius: 10,
             backgroundColor: 'white',
-            margin: 4,
+            // margin: 4,
           },
         ]}>
         <View

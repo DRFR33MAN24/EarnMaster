@@ -161,23 +161,37 @@ export const HomeScreen = ({navigation}) => {
       <Divider />
 
       <ScrollView style={{flex: 1}}>
-        <View
+        <Carousel
+          // mode="horizontal-stack"
+          // modeConfig={{
+          //   snapDirection: 'left',
+          //   stackInterval: 18,
+          // }}
+          autoPlay={true}
+          width={Dimensions.get('screen').width}
+          autoPlayInterval={3000}
+          height={115}
+          data={surveysData}
           style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
             width: '100%',
-          }}>
-          <Carousel
-            autoPlay={true}
-            width={Dimensions.get('screen').width * 0.95}
-            autoPlayInterval={3000}
-            height={115}
-            data={surveysData}
-            renderItem={({item, index}) => (
+            marginVertical: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          renderItem={({item, index}) => (
+            <View
+              style={{
+                padding: 0,
+                margin: 0,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+              }}>
               <WideSurvey key={index} data={item} />
-            )}
-          />
-        </View>
+            </View>
+          )}
+        />
         <DailyGoals />
 
         {/* <View style={{marginHorizontal: 10}}>
