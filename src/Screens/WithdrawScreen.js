@@ -16,6 +16,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faC, faCoins} from '@fortawesome/free-solid-svg-icons';
@@ -27,15 +28,22 @@ const playCard = {
   title: 'Google Play',
   value: '5$',
 };
-const playstationCard = {
-  backgroundColor: 'grey',
-  image: require('./images/playstation.png'),
-  title: 'Google Play',
-  value: '5$',
-};
+
 const amazonCard = {
   backgroundColor: 'orange',
   image: require('./images/amazon.png'),
+  title: ' Amazon Gift Card',
+  value: '5$',
+};
+const appleCard = {
+  backgroundColor: 'orange',
+  image: require('./images/apple.png'),
+  title: ' Amazon Gift Card',
+  value: '5$',
+};
+const razerCard = {
+  backgroundColor: 'orange',
+  image: require('./images/razer.png'),
   title: ' Amazon Gift Card',
   value: '5$',
 };
@@ -45,7 +53,7 @@ const RedeemOption = ({style}) => {
     <View
       style={{
         width: '50%',
-        height: 120,
+        height: 160,
         maxWidth: 200,
 
         // backgroundColor: 'pink',
@@ -65,7 +73,11 @@ const RedeemOption = ({style}) => {
             height: 110,
             width: '99%',
           }}>
-          <View
+          <Image
+            source={style.image}
+            style={{resizeMode: 'stretch', width: '100%', height: '100%'}}
+          />
+          {/* <View
             style={{
               position: 'absolute',
               justifyContent: 'center',
@@ -76,11 +88,8 @@ const RedeemOption = ({style}) => {
               backgroundColor: style.backgroundColor,
               zIndex: -200,
             }}>
-            <Image
-              source={style.image}
-              style={{resizeMode: 'center', width: 64, height: 64}}
-            />
-          </View>
+            <Image source={style.image} style={{resizeMode: 'cover'}} />
+          </View> */}
           {/* <View style={styles.glassyBackground}>
           <Image
             source={glass}
@@ -109,7 +118,7 @@ const RedeemOption = ({style}) => {
                 // backgroundColor: 'red',
                 padding: 5,
               }}>
-              <Text>{style.title}</Text>
+              {/* <Text>{style.title}</Text> */}
             </View>
             <View
               style={{
@@ -125,10 +134,13 @@ const RedeemOption = ({style}) => {
                   // backgroundColor: 'red',
                   padding: 5,
                 }}>
-                <Text>{style.value}</Text>
+                {/* <Text>{style.value}</Text> */}
               </View>
               <View
                 style={{
+                  position: 'absolute',
+                  bottom: 5,
+                  right: 5,
                   flexDirection: 'row',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -145,7 +157,7 @@ const RedeemOption = ({style}) => {
                     height: 16,
                     opacity: 1,
                     resizeMode: 'stretch',
-                    marginHorizontal: 5,
+                    marginRight: 5,
                   }}
                 />
                 {/* <FontAwesomeIcon
@@ -159,6 +171,10 @@ const RedeemOption = ({style}) => {
           </View>
         </View>
       </TouchableOpacity>
+      <View style={{paddingHorizontal: 10}}>
+        <Text>{style.title}</Text>
+        <Text>{style.value}</Text>
+      </View>
     </View>
   );
 };
@@ -190,11 +206,10 @@ export const WithdrawScreen = ({navigation}) => {
             alignItems: 'center',
           }}>
           <RedeemOption style={playCard} />
-          <RedeemOption style={playCard} />
-          <RedeemOption style={playstationCard} />
-          <RedeemOption style={playstationCard} />
+          <RedeemOption style={appleCard} />
           <RedeemOption style={amazonCard} />
-          <RedeemOption style={amazonCard} />
+          <RedeemOption style={razerCard} />
+
           {/* <RedeemOption />
           <RedeemOption /> */}
         </View>

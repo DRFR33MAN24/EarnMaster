@@ -5,6 +5,7 @@ import {
   Button,
   TopNavigation,
   useTheme,
+  ButtonGroup,
 } from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {
@@ -82,42 +83,61 @@ export const WalletScreen = ({navigation}) => {
                 justifyContent: 'space-around',
                 alignItems: 'center',
               }}>
-              <View>
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text category="h6">Total</Text>
                 <Text category="h1">$71.5</Text>
               </View>
-              <View>
+              <View style={{borderWidth: 1, height: '100%'}}></View>
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text category="h6">Pending</Text>
                 <Text category="h1">$22.5</Text>
               </View>
             </View>
             <View
               style={{
-                marginVertical: 8,
+                marginVertical: 20,
                 flexDirection: 'row',
                 justifyContent: 'space-around',
               }}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('Withdraw')}>
                 <View
                   style={{
-                    padding: 15,
-                    backgroundColor: uiTheme['color-primary-default'],
-                    borderRadius: 15,
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                  <FontAwesomeIcon icon={faMoneyBillTransfer} size={25} />
+                  <View
+                    style={{
+                      width: 50,
+                      height: 50,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: uiTheme['color-primary-default'],
+                      borderRadius: 25,
+                    }}>
+                    <FontAwesomeIcon icon={faMoneyBillTransfer} size={25} />
+                  </View>
+                  <Text>Withdraw</Text>
                 </View>
-                <Text>Withdraw</Text>
               </TouchableOpacity>
               <TouchableOpacity>
                 <View
                   style={{
-                    padding: 15,
-                    backgroundColor: uiTheme['color-primary-default'],
-                    borderRadius: 15,
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                  <FontAwesomeIcon icon={faCreditCard} size={25} />
+                  <View
+                    style={{
+                      width: 50,
+                      height: 50,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: uiTheme['color-primary-default'],
+                      borderRadius: 25,
+                    }}>
+                    <FontAwesomeIcon icon={faCreditCard} size={25} />
+                  </View>
+                  <Text>Deposit</Text>
                 </View>
-                <Text>Deposit</Text>
               </TouchableOpacity>
               {/* <Button
                 onPress={() => navigation.navigate('Withdraw')}
@@ -129,6 +149,18 @@ export const WalletScreen = ({navigation}) => {
 
           <Card>
             <Text>Performance</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                marginVertical: 8,
+              }}>
+              <ButtonGroup size="small" style={{borderRadius: 10}}>
+                <Button style={styles.buttonGroup}>Hour</Button>
+                <Button style={styles.buttonGroup}>Day</Button>
+                <Button style={styles.buttonGroup}>Week</Button>
+              </ButtonGroup>
+            </View>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <LineChart
                 data={{
@@ -205,5 +237,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 10,
 
     elevation: 10,
+  },
+  buttonGroup: {
+    paddingHorizontal: 30,
   },
 });
