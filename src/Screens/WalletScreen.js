@@ -216,6 +216,8 @@ export const WalletScreen = ({navigation}) => {
                 height={220}
                 yAxisLabel="$"
                 yAxisSuffix="k"
+                withInnerLines={false}
+                withOuterLines={false}
                 withHorizontalLabels={false}
                 withHorizontalLines={false}
                 withVerticalLines={false}
@@ -240,6 +242,7 @@ export const WalletScreen = ({navigation}) => {
                 bezier
                 style={{
                   marginVertical: 8,
+                  paddingTop: 20,
                   borderRadius: 0,
                   paddingRight: 0,
                 }}
