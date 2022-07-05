@@ -71,6 +71,8 @@ export const WalletScreen = ({navigation}) => {
   // };
   const uiTheme = useTheme();
   const theme = useContext(ThemeContext);
+  const [chartParentWidth, setChartParentWidth] = useState(0);
+
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: uiTheme['background-basic-color-4']}}>
@@ -78,7 +80,7 @@ export const WalletScreen = ({navigation}) => {
 
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>
         <View>
-          <View style={{marginVertical: 20, backgroundColor: 'red'}}>
+          <View style={{marginVertical: 20}}>
             <Card>
               <View
                 style={{
@@ -91,7 +93,12 @@ export const WalletScreen = ({navigation}) => {
                   <Text category="h6">Balance</Text>
                   <Text category="h1">$71.5</Text>
                 </View>
-                <View style={{borderWidth: 1, height: '100%'}}></View>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    height: '100%',
+                    borderColor: uiTheme['text-basic-color'],
+                  }}></View>
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text category="h6">Pending</Text>
                   <Text category="h1">$22.5</Text>
@@ -167,7 +174,10 @@ export const WalletScreen = ({navigation}) => {
             </Card>
           </View>
 
-          <Card>
+          <Card
+            onLayout={({nativeEvent}) => {
+              setChartParentWidth(nativeEvent.layout.width);
+            }}>
             <Text>Performance</Text>
             <View
               style={{
@@ -202,25 +212,25 @@ export const WalletScreen = ({navigation}) => {
                     },
                   ],
                 }}
-                width={Dimensions.get('window').width} // from react-native
+                width={chartParentWidth} // from react-native
                 height={220}
                 yAxisLabel="$"
                 yAxisSuffix="k"
                 withHorizontalLabels={false}
                 withHorizontalLines={false}
+                withVerticalLines={false}
+                withVerticalLabels={false}
                 yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
-                  backgroundColor: `rgba(255, 255, 255, 10)`,
-                  backgroundGradientFrom: `rgba(255, 255, 255, 10)`,
-                  backgroundGradientTo: `rgba(255, 255, 255, 10)`,
+                  backgroundColor: uiTheme['background-basic-color-1'],
+                  backgroundGradientFrom: uiTheme['background-basic-color-1'],
+                  backgroundGradientTo: uiTheme['background-basic-color-1'],
                   decimalPlaces: 2, // optional, defaults to 2dp
                   // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                   // labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                   color: (opacity = 1) => uiTheme['color-primary-300'],
                   labelColor: (opacity = 1) => uiTheme['color-primary-300'],
-                  style: {
-                    borderRadius: 0,
-                  },
+
                   propsForDots: {
                     r: '4',
                     strokeWidth: '1',
@@ -231,6 +241,7 @@ export const WalletScreen = ({navigation}) => {
                 style={{
                   marginVertical: 8,
                   borderRadius: 0,
+                  paddingRight: 0,
                 }}
               />
             </View>
