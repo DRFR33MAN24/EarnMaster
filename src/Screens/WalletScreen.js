@@ -7,7 +7,7 @@ import {
   useTheme,
   ButtonGroup,
 } from '@ui-kitten/components';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -33,6 +33,7 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from 'react-native-chart-kit';
+import {ThemeContext} from '../../theme-context';
 import {transactions} from '../fakeJsonData';
 export const walletIcon = props => (
   <FontAwesomeIcon
@@ -69,6 +70,7 @@ export const WalletScreen = ({navigation}) => {
   //   navigation.navigate('Details');
   // };
   const uiTheme = useTheme();
+  const theme = useContext(ThemeContext);
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: uiTheme['background-basic-color-4']}}>
@@ -76,76 +78,94 @@ export const WalletScreen = ({navigation}) => {
 
       <ScrollView style={{flex: 1, marginHorizontal: 10}}>
         <View>
-          <Card>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-              }}>
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text category="h6">Total</Text>
-                <Text category="h1">$71.5</Text>
+          <View style={{marginVertical: 20, backgroundColor: 'red'}}>
+            <Card>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  alignItems: 'center',
+                  marginTop: 20,
+                }}>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text category="h6">Balance</Text>
+                  <Text category="h1">$71.5</Text>
+                </View>
+                <View style={{borderWidth: 1, height: '100%'}}></View>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text category="h6">Pending</Text>
+                  <Text category="h1">$22.5</Text>
+                </View>
               </View>
-              <View style={{borderWidth: 1, height: '100%'}}></View>
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text category="h6">Pending</Text>
-                <Text category="h1">$22.5</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                marginVertical: 20,
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}>
-              <TouchableOpacity onPress={() => navigation.navigate('Withdraw')}>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+              <View
+                style={{
+                  marginVertical: 20,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                }}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Withdraw')}>
                   <View
                     style={{
-                      width: 50,
-                      height: 50,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: uiTheme['color-primary-default'],
-                      borderRadius: 25,
                     }}>
-                    <FontAwesomeIcon icon={faMoneyBillTransfer} size={25} />
+                    <View
+                      style={{
+                        width: 50,
+                        height: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: uiTheme['color-primary-default'],
+                        borderRadius: 25,
+                      }}>
+                      <FontAwesomeIcon
+                        icon={faMoneyBillTransfer}
+                        size={25}
+                        style={{
+                          color:
+                            theme.currentTheme === 'light' ? 'black' : 'white',
+                        }}
+                      />
+                    </View>
+                    <Text>Withdraw</Text>
                   </View>
-                  <Text>Withdraw</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+                </TouchableOpacity>
+                <TouchableOpacity>
                   <View
                     style={{
-                      width: 50,
-                      height: 50,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: uiTheme['color-primary-default'],
-                      borderRadius: 25,
                     }}>
-                    <FontAwesomeIcon icon={faCreditCard} size={25} />
+                    <View
+                      style={{
+                        width: 50,
+                        height: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: uiTheme['color-primary-default'],
+                        borderRadius: 25,
+                      }}>
+                      <FontAwesomeIcon
+                        icon={faCreditCard}
+                        size={25}
+                        style={{
+                          color:
+                            theme.currentTheme === 'light' ? 'black' : 'white',
+                        }}
+                      />
+                    </View>
+                    <Text>Deposit</Text>
                   </View>
-                  <Text>Deposit</Text>
-                </View>
-              </TouchableOpacity>
-              {/* <Button
+                </TouchableOpacity>
+                {/* <Button
                 onPress={() => navigation.navigate('Withdraw')}
                 style={uiTheme === 'light' ? {} : styles.buttonDarkGlow}>
                 Withdraw
               </Button> */}
-            </View>
-          </Card>
+              </View>
+            </Card>
+          </View>
 
           <Card>
             <Text>Performance</Text>
@@ -161,7 +181,11 @@ export const WalletScreen = ({navigation}) => {
                 <Button style={styles.buttonGroup}>Week</Button>
               </ButtonGroup>
             </View>
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
               <LineChart
                 data={{
                   labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -186,9 +210,9 @@ export const WalletScreen = ({navigation}) => {
                 withHorizontalLines={false}
                 yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
-                  backgroundColor: `rgba(255, 255, 255, 255)`,
-                  backgroundGradientFrom: `rgba(255, 255, 255, 255)`,
-                  backgroundGradientTo: `rgba(255, 255, 255, 255)`,
+                  backgroundColor: `rgba(255, 255, 255, 10)`,
+                  backgroundGradientFrom: `rgba(255, 255, 255, 10)`,
+                  backgroundGradientTo: `rgba(255, 255, 255, 10)`,
                   decimalPlaces: 2, // optional, defaults to 2dp
                   // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                   // labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,

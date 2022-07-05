@@ -44,7 +44,7 @@ import {
 } from '../Constants/images';
 import {surveysData} from '../fakeJsonData';
 import {Survey, WideSurvey} from '../Components/Survey';
-
+import {Congratulation} from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
 export const homeIcon = props => (
   <FontAwesomeIcon
@@ -159,7 +159,7 @@ export const HomeScreen = ({navigation}) => {
         accessoryRight={<HomeScreenContainer navigation={navigation} />}
       />
       <Divider />
-
+      {/* <Congratulation /> */}
       <ScrollView style={{flex: 1}}>
         <Carousel
           // mode="horizontal-stack"
