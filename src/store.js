@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
-import offersReducers from '../src/Reducers/cartSlice';
-// import stockReducer from '../src/Reducers/stockReducer';
+import offersReducers from '../src/Reducers/offersSlice';
+import authReducers from '../src/Reducers/authSlice';
+import notificationsReducers from '../src/Reducers/notificationSlice';
 
 export default configureStore({
   reducer: {
     offers: offersReducers,
-    // stock: stockReducer,
+    auth: authReducers,
+    notifications: notificationsReducers,
   },
 });

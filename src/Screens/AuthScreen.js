@@ -29,6 +29,8 @@ import {
   faWarning,
 } from '@fortawesome/free-solid-svg-icons';
 import {auth} from '../Constants/images';
+import {useSelector, useDispatch} from 'react-redux';
+import {login, register} from '../Reducers/authSlice';
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
     <FontAwesomeIcon
@@ -41,6 +43,7 @@ const AlertIcon = props => (
 
 const AuthScreen = props => {
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const [register_password, setRegisterPassword] = React.useState('');
   const [login_password, setLoginPassword] = React.useState('');
@@ -53,6 +56,8 @@ const AuthScreen = props => {
   const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
   const [registered, setRegistered] = React.useState(false);
 
+  const submitLogin = formData => {};
+  const submitRegister = formData => {};
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
   };

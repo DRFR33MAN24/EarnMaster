@@ -13,6 +13,8 @@ import {ProfileScreen, profileIcon, ProfileScreenTopBar} from './ProfileScreen';
 import {SurveysScreen} from './SurveysScreen';
 import {WithdrawScreen} from './WithdrawScreen';
 import AuthScreen from './AuthScreen';
+import {useSelector} from 'react-redux';
+
 const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -95,6 +97,7 @@ const TabNavigator = () => (
 );
 
 export const AppNavigator = () => {
+  const auth = useSelector(state => state.auth);
   const [authenticated, setAuthenticated] = useState(true);
 
   if (authenticated) {
