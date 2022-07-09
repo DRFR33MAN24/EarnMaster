@@ -1690,6 +1690,10 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/eslint-plugin/-/eslint-plugin-1.2.0.tgz"
   "version" "1.2.0"
 
+"@react-native-google-signin/google-signin@github:react-native-google-signin/google-signin":
+  "resolved" "git+ssh://git@github.com/react-native-google-signin/google-signin.git#e9857d1ec8ea5071d6f418566c7d48361e744c89"
+  "version" "8.0.0"
+
 "@react-native/assets@1.0.0":
   "integrity" "sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ=="
   "resolved" "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
