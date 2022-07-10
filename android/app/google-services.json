@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "925475123534-kfe2h06eqehv51vb8j59lutfhra4b2k1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.earnmaster",
+            "certificate_hash": "91adfc1fc21b0bff540e55fbd3abb38624006cfb"
+          }
+        },
+        {
           "client_id": "925475123534-2058vfrc7pft57hn27e7gkq6bohi09er.apps.googleusercontent.com",
           "client_type": 3
         }
