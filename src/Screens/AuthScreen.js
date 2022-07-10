@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
   Image,
@@ -31,6 +31,12 @@ import {
 import {auth} from '../Constants/images';
 import {useSelector, useDispatch} from 'react-redux';
 import {login, register} from '../Reducers/authSlice';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import config from '../config';
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
     <FontAwesomeIcon
@@ -55,11 +61,50 @@ const AuthScreen = props => {
   const [rememberPassword, setRememberPassword] = React.useState(false);
   const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
   const [registered, setRegistered] = React.useState(false);
+  const [userInfo, setUserInfo] = React.useState({});
+
+  useEffect(() => {
+    _configureGoogleSignIn();
+  }, []);
+  // useEffect(() => {
+  //   (async function () {
+  //     console.log('getting tokens');
+  //     //const tokens = await GoogleSignin.getTokens();
+  //     console.log(userInfo);
+  //   })();
+  // }, [userInfo]);
 
   const submitLogin = formData => {};
   const submitRegister = formData => {};
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
+  };
+
+  const _configureGoogleSignIn = () => {
+    GoogleSignin.configure({
+      webClientId: config.webClientId,
+      offlineAccess: false,
+    });
+  };
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+
+      const userInfo = await GoogleSignin.signIn();
+
+      setUserInfo(userInfo);
+    } catch (error) {
+      console.log(error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+      }
+    }
   };
 
   const renderIcon = props => (
@@ -129,6 +174,18 @@ const AuthScreen = props => {
           </View>
           <View style={{marginVertical: 8}}>
             <Button>Login</Button>
+          </View>
+          <View style={{alignItems: 'center', marginVertical: 10}}>
+            <GoogleSigninButton
+              style={{width: '100%', height: 48}}
+              size={GoogleSigninButton.Size.Wide}
+              color={GoogleSigninButton.Color.Dark}
+              onPress={signIn}
+              // onPress={this._signIn}
+              disabled={false}
+              // disabled={this.state.isSigninInProgress}
+            />
+            {userInfo && <Text>{userInfo.user}</Text>}
           </View>
           <View>
             <TouchableOpacity onPress={() => props.setRegistered(false)}>

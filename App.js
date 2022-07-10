@@ -42,12 +42,12 @@ export default () => {
 
     Notifications.events().registerRemoteNotificationsRegistered(event => {
       // TODO: Send the token to my server so it could send back push notifications...
-      sendTokenToServer(event.deviceToken);
-      console.log('Device Token Received', event.deviceToken);
+      // sendTokenToServer(event.deviceToken);
+      // console.log('Device Token Received', event.deviceToken);
     });
     Notifications.events().registerRemoteNotificationsRegistrationFailed(
       event => {
-        console.error(event);
+        // console.error(event);
       },
     );
 
