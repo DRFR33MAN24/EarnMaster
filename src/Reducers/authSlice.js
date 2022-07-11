@@ -25,8 +25,12 @@ const getToken = async () => {
 export const login = createAsyncThunk(
   'auth/login',
   async (loginInfo, thunkAPI) => {
-    const response = await _login(loginInfo);
-    thunkAPI.dispatch(setUser(response));
+    try {
+      const response = await _login(loginInfo);
+      thunkAPI.dispatch(setUser(response));
+    } catch (error) {
+      console.log(error);
+    }
     //console.log(response);
     return response;
   },
@@ -58,13 +62,16 @@ const authSlice = createSlice({
       country: '',
       profileImg: '',
     },
-
+    errors: {},
     status: 'idle',
   },
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
       storeToken(action.payload.token);
+    },
+    setErrors: (state, action) => {
+      state.errors = action.payload;
     },
 
     extraReducers: builder => {
@@ -76,7 +83,11 @@ const authSlice = createSlice({
         .addCase(register.pending, (state, action) => {
           state.status = 'loading';
         })
-        .addCase(register.fulfilled, (state, action) => {});
+        .addCase(register.fulfilled, (state, action) => {})
+        .addCase(loginGoogle.pending, (state, action) => {
+          state.status = 'loading';
+        })
+        .addCase(loginGoogle.fulfilled, (state, action) => {});
     },
   },
 });

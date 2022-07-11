@@ -10,7 +10,7 @@ export const _login = async loginInfo => {
       body: JSON.stringify(loginInfo),
     });
     const json = await response.json();
-    return json.movies;
+    return json;
   } catch (error) {
     console.error(error);
   }
