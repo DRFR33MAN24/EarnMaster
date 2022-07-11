@@ -30,7 +30,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {auth} from '../Constants/images';
 import {useSelector, useDispatch} from 'react-redux';
-import {login, register, sendIdToken} from '../Reducers/authSlice';
+import {login, register, loginGoogle} from '../Reducers/authSlice';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -61,28 +61,41 @@ const AuthScreen = props => {
   const [rememberPassword, setRememberPassword] = React.useState(false);
   const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
   const [registered, setRegistered] = React.useState(false);
-  const [userInfo, setUserInfo] = React.useState(null);
+  const [formErrors, setFormErrors] = React.useState({});
 
   useEffect(() => {
     _configureGoogleSignIn();
   }, []);
 
-  useEffect(() => {
-    if (userInfo) {
-      // (async function () {
-      //   console.log('getting tokens');
-      //   const response = await fetch(
-      //     `https://oauth2.googleapis.com/tokeninfo?id_token=${userInfo.idToken}`,
-      //   );
-      //   const json = await response.json();
-      //   console.log(json);
-      // })();
-      // sendIdToken(userInfo.idToken);
-    }
-  }, [userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //   (async function () {
+  //     console.log('getting tokens');
+  //     const response = await fetch(
+  //       `https://oauth2.googleapis.com/tokeninfo?id_token=${userInfo.idToken}`,
+  //     );
+  //     const json = await response.json();
+  //     console.log(json);
+  //   })();
+  //   sendIdToken(userInfo.idToken);
+  //   }
+  // }, [userInfo]);
 
-  const submitLogin = formData => {};
-  const submitRegister = formData => {};
+  const submitLogin = () => {
+    if (!login_mail ) {
+      setFormErrors(prev => {...prev,login_mail:"please enter a valid email address"});
+    }
+    login({email: login_mail, password: login_password});
+  };
+  const submitRegister = () => {
+    register({
+      email: register_email,
+      password: register_password,
+      repeatPassword: repeatPassword,
+      dob: dateOfBirth,
+      name: name,
+    });
+  };
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
   };
@@ -99,8 +112,7 @@ const AuthScreen = props => {
       await GoogleSignin.hasPlayServices();
 
       const userInfo = await GoogleSignin.signIn();
-
-      setUserInfo(userInfo);
+      loginGoogle(userInfo.idToken);
     } catch (error) {
       console.log(error, error.code);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
