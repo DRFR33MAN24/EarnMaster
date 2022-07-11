@@ -30,7 +30,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {auth} from '../Constants/images';
 import {useSelector, useDispatch} from 'react-redux';
-import {login, register} from '../Reducers/authSlice';
+import {login, register, sendIdToken} from '../Reducers/authSlice';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -61,18 +61,25 @@ const AuthScreen = props => {
   const [rememberPassword, setRememberPassword] = React.useState(false);
   const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
   const [registered, setRegistered] = React.useState(false);
-  const [userInfo, setUserInfo] = React.useState({});
+  const [userInfo, setUserInfo] = React.useState(null);
 
   useEffect(() => {
     _configureGoogleSignIn();
   }, []);
-  // useEffect(() => {
-  //   (async function () {
-  //     console.log('getting tokens');
-  //     //const tokens = await GoogleSignin.getTokens();
-  //     console.log(userInfo);
-  //   })();
-  // }, [userInfo]);
+
+  useEffect(() => {
+    if (userInfo) {
+      // (async function () {
+      //   console.log('getting tokens');
+      //   const response = await fetch(
+      //     `https://oauth2.googleapis.com/tokeninfo?id_token=${userInfo.idToken}`,
+      //   );
+      //   const json = await response.json();
+      //   console.log(json);
+      // })();
+      // sendIdToken(userInfo.idToken);
+    }
+  }, [userInfo]);
 
   const submitLogin = formData => {};
   const submitRegister = formData => {};
@@ -175,6 +182,13 @@ const AuthScreen = props => {
           <View style={{marginVertical: 8}}>
             <Button>Login</Button>
           </View>
+          <View>
+            <Button
+              appearance="outline"
+              onPress={() => props.setRegistered(false)}>
+              create new account
+            </Button>
+          </View>
           <View style={{alignItems: 'center', marginVertical: 10}}>
             <GoogleSigninButton
               style={{width: '100%', height: 48}}
@@ -185,12 +199,6 @@ const AuthScreen = props => {
               disabled={false}
               // disabled={this.state.isSigninInProgress}
             />
-            {userInfo && <Text>{userInfo.user}</Text>}
-          </View>
-          <View>
-            <TouchableOpacity onPress={() => props.setRegistered(false)}>
-              <Text style={{color: 'grey'}}>create new account</Text>
-            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -249,9 +257,11 @@ const AuthScreen = props => {
             <Button>Register</Button>
           </View>
           <View>
-            <TouchableOpacity onPress={() => props.setRegistered(true)}>
-              <Text style={{color: 'grey'}}>Login</Text>
-            </TouchableOpacity>
+            <Button
+              appearance="outline"
+              onPress={() => props.setRegistered(true)}>
+              Login
+            </Button>
           </View>
         </ScrollView>
       </View>
@@ -273,7 +283,7 @@ const AuthScreen = props => {
             alignItems: 'center',
             paddingBottom: 40,
           }}>
-          <View style={{padding: 40}}>
+          <View style={{padding: 80}}>
             <ImageBackground
               source={auth}
               style={styles.imageStyle}
@@ -305,8 +315,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imageStyle: {
-    width: 300,
-    height: 250,
+    width: 100,
+    height: 100,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
