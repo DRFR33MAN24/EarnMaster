@@ -32,7 +32,7 @@ export const _loginGoogle = async loginInfo => {
     const json = await response.json();
     return json.movies;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
@@ -53,7 +53,7 @@ export const _getOffers = async (data, token) => {
     const offers = await response.json();
     return offers;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
@@ -70,6 +70,6 @@ export const _register = async registerInfo => {
     const json = await response.json();
     return json.movies;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };

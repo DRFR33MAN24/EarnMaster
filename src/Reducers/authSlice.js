@@ -29,34 +29,42 @@ export const login = createAsyncThunk(
       const response = await _login(loginInfo);
       thunkAPI.dispatch(setUser(response));
     } catch (error) {
-      if (error.code === 'User not found') {
-        // user cancelled the login flow
-      } else if (error.code === 'Incorrect password') {
-        // operation (e.g. sign in) is in progress already
+      if (!error.code) {
+        thunkAPI.dispatch(setErrors({code: 0, msg: 'Unknown error occurred'}));
       } else {
-        console.log(error);
+        thunkAPI.dispatch(setErrors(error));
       }
     }
-    //console.log(response);
-    return response;
   },
 );
 export const loginGoogle = createAsyncThunk(
   'auth/loginGoogle',
   async (loginInfo, thunkAPI) => {
-    const response = await _loginGoogle(loginInfo);
-    thunkAPI.dispatch(setUser(response));
-    //console.log(response);
-    return response;
+    try {
+      const response = await _loginGoogle(loginInfo);
+      thunkAPI.dispatch(setUser(response));
+    } catch (error) {
+      if (!error.code) {
+        thunkAPI.dispatch(setErrors({code: 0, msg: 'Unknown error occurred'}));
+      } else {
+        thunkAPI.dispatch(setErrors(error));
+      }
+    }
   },
 );
 export const register = createAsyncThunk(
-  'auth/login',
+  'auth/register',
   async (registerInfo, thunkAPI) => {
-    const response = await _register(registerInfo);
-    thunkAPI.dispatch(setUser(response));
-    //console.log(response);
-    return response;
+    try {
+      const response = await _register(registerInfo);
+      thunkAPI.dispatch(setUser(response));
+    } catch (error) {
+      if (!error.code) {
+        thunkAPI.dispatch(setErrors({code: 0, msg: 'Unknown error occurred'}));
+      } else {
+        thunkAPI.dispatch(setErrors(error));
+      }
+    }
   },
 );
 const authSlice = createSlice({
