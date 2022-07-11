@@ -82,8 +82,19 @@ const AuthScreen = props => {
   // }, [userInfo]);
 
   const submitLogin = () => {
-    if (!login_mail ) {
-      setFormErrors(prev => {...prev,login_mail:"please enter a valid email address"});
+    if (!login_mail) {
+      setFormErrors({
+        ...formErrors,
+        login_mail: 'please enter a valid email address',
+      });
+      return;
+    }
+    if (!login_password) {
+      setFormErrors({
+        ...formErrors,
+        login_password: 'please enter a valid password',
+      });
+      return;
     }
     login({email: login_mail, password: login_password});
   };
