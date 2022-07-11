@@ -12,7 +12,7 @@ export const _login = async loginInfo => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 

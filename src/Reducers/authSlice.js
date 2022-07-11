@@ -29,7 +29,13 @@ export const login = createAsyncThunk(
       const response = await _login(loginInfo);
       thunkAPI.dispatch(setUser(response));
     } catch (error) {
-      console.log(error);
+      if (error.code === 'User not found') {
+        // user cancelled the login flow
+      } else if (error.code === 'Incorrect password') {
+        // operation (e.g. sign in) is in progress already
+      } else {
+        console.log(error);
+      }
     }
     //console.log(response);
     return response;
