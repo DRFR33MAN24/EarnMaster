@@ -24,44 +24,44 @@ const getToken = async () => {
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (loginInfo, thunkAPI) => {
+  async (loginInfo, {rejectWithValue}) => {
     try {
       const response = await _login(loginInfo);
-      thunkAPI.dispatch(setUser(response));
+      return response;
     } catch (error) {
-      if (!error.code) {
-        thunkAPI.dispatch(setErrors({code: 0, msg: 'Unknown error occurred'}));
-      } else {
-        thunkAPI.dispatch(setErrors(error));
+      if (!error.response) {
+        throw error;
       }
+      return rejectWithValue(error.response.data);
     }
   },
 );
 export const loginGoogle = createAsyncThunk(
   'auth/loginGoogle',
-  async (loginInfo, thunkAPI) => {
+  async (loginInfo, {rejectWithValue}) => {
     try {
       const response = await _loginGoogle(loginInfo);
-      thunkAPI.dispatch(setUser(response));
+      return response;
     } catch (error) {
-      if (!error.code) {
-        thunkAPI.dispatch(setErrors({code: 0, msg: 'Unknown error occurred'}));
-      } else {
-        thunkAPI.dispatch(setErrors(error));
+      if (!error.response) {
+        throw error;
       }
+      return rejectWithValue(error.response.data);
     }
   },
 );
 export const register = createAsyncThunk(
   'auth/register',
-  async (registerInfo, thunkAPI) => {
+  async (registerInfo, {rejectWithValue}) => {
     try {
       const response = await _register(registerInfo);
 
       return response;
     } catch (error) {
-      console.log(error);
-      return error;
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
     }
   },
 );
@@ -90,7 +90,12 @@ const authSlice = createSlice({
       .addCase(login.pending, (state, action) => {
         state.status = 'loading';
       })
-      .addCase(login.fulfilled, (state, action) => {})
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.status = 'idle';
+        storeToken(action.payload.token);
+      })
+      .addCase(login.rejected, (state, action) => {})
       .addCase(register.pending, (state, action) => {
         state.status = 'loading';
       })
@@ -99,10 +104,16 @@ const authSlice = createSlice({
         state.status = 'idle';
         storeToken(action.payload.token);
       })
+      .addCase(register.rejected, (state, action) => {})
       .addCase(loginGoogle.pending, (state, action) => {
         state.status = 'loading';
       })
-      .addCase(loginGoogle.fulfilled, (state, action) => {});
+      .addCase(loginGoogle.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.status = 'idle';
+        storeToken(action.payload.token);
+      })
+      .addCase(loginGoogle.rejected, (state, action) => {});
   },
 });
 

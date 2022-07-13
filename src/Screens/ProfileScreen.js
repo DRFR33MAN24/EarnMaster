@@ -28,7 +28,7 @@ import {
 import {ThemeContext} from '../../theme-context';
 import {facebook, twitter, instagram} from '../Constants/images';
 import {profile} from '../fakeJsonData';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../Reducers/authSlice';
 export const profileIcon = props => (
   <FontAwesomeIcon
@@ -63,6 +63,7 @@ export const ProfileScreenTopBar = () => {
 
 export const ProfileScreen = ({navigation}) => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
   const themeContext = React.useContext(ThemeContext);
   const theme = useTheme();
   const [checked, setChecked] = useState(false);
@@ -93,12 +94,12 @@ export const ProfileScreen = ({navigation}) => {
               source={require('./images/profile.png')}
               style={{resizeMode: 'center', width: 96, height: 96}}
             />
-            <Text>Martin Mystery</Text>
+            <Text>{user.name}</Text>
           </View>
         </Card>
 
         <Card disabled={true}>
-          <Text>Email: {profile.email}</Text>
+          <Text>Email: {user.email}</Text>
         </Card>
 
         <Card disabled={true}>

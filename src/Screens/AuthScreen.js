@@ -101,7 +101,7 @@ const AuthScreen = props => {
   };
 
   const RenderIcon = ({setSecure, secure}) => (
-    <TouchableOpacity onPress={setSecure}>
+    <TouchableOpacity onPress={() => setSecure(!secure)}>
       {/* <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'} /> */}
       {!secure ? (
         <FontAwesomeIcon
@@ -226,6 +226,7 @@ const AuthScreen = props => {
     const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
     const [name, setName] = React.useState('');
     const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+    const [secureTextEntryR, setSecureTextEntryR] = React.useState(true);
     const dispatch = useDispatch();
     const submitRegister = () => {
       dispatch(
@@ -288,8 +289,8 @@ const AuthScreen = props => {
             caption={renderCaption}
             accessoryRight={
               <RenderIcon
-                secure={secureTextEntry}
-                setSecure={setSecureTextEntry}
+                secure={secureTextEntryR}
+                setSecure={setSecureTextEntryR}
               />
             }
             secureTextEntry={secureTextEntry}
