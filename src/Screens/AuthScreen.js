@@ -241,7 +241,7 @@ const AuthScreen = props => {
     };
     return (
       <View style={{width: '95%'}}>
-        <ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled">
           <Input
             value={name}
             label="Name"
@@ -318,7 +318,7 @@ const AuthScreen = props => {
         styles.container,
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
-      <ScrollView style={{width: '100%'}}>
+      <ScrollView style={{width: '100%'}} keyboardShouldPersistTaps="handled">
         <View
           style={{
             width: '100%',

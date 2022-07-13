@@ -2,23 +2,27 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {_login, _register} from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storeToken = async value => {
+const storeUser = async value => {
   try {
-    await AsyncStorage.setItem('@jwt_token', value);
+    await AsyncStorage.setItem('@user', JSON.stringify(value));
   } catch (e) {
     // saving error
   }
 };
 
-const getToken = async () => {
+const getUser = async () => {
   try {
-    const value = await AsyncStorage.getItem('@jwt_token');
-    if (value !== null) {
+    const value = await AsyncStorage.getItem('@user');
+    const user = JSON.parse(value);
+    if (!user.user.id) {
       // value previously stored
+
+      throw 'user not found';
     }
-    return value;
+
+    return user;
   } catch (e) {
-    // error reading value
+    throw e;
   }
 };
 
@@ -27,6 +31,34 @@ export const login = createAsyncThunk(
   async (loginInfo, {rejectWithValue}) => {
     try {
       const response = await _login(loginInfo);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+export const loadUser = createAsyncThunk(
+  'auth/loadUser',
+  async (data, {rejectWithValue}) => {
+    try {
+      const response = await getUser();
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (data, {rejectWithValue}) => {
+    try {
+      const response = await storeUser({});
       return response;
     } catch (error) {
       if (!error.response) {
@@ -68,8 +100,9 @@ export const register = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: {},
+    user: undefined,
     errors: {},
+    token: undefined,
     status: 'idle',
   },
   reducers: {
@@ -81,9 +114,6 @@ const authSlice = createSlice({
     setErrors: (state, action) => {
       state.errors = action.payload;
     },
-    logout: (state, action) => {
-      state.user = {};
-    },
   },
   extraReducers: builder => {
     builder
@@ -93,7 +123,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.status = 'idle';
-        storeToken(action.payload.token);
+        storeUser(action.payload);
       })
       .addCase(login.rejected, (state, action) => {})
       .addCase(register.pending, (state, action) => {
@@ -102,7 +132,7 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.status = 'idle';
-        storeToken(action.payload.token);
+        storeUser(action.payload);
       })
       .addCase(register.rejected, (state, action) => {})
       .addCase(loginGoogle.pending, (state, action) => {
@@ -113,11 +143,32 @@ const authSlice = createSlice({
         state.status = 'idle';
         storeToken(action.payload.token);
       })
-      .addCase(loginGoogle.rejected, (state, action) => {});
+      .addCase(loginGoogle.rejected, (state, action) => {})
+      .addCase(loadUser.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(loadUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.status = 'idle';
+      })
+      .addCase(loadUser.rejected, (state, action) => {
+        state.user = {};
+        state.token = '';
+      })
+      .addCase(logout.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.user = {};
+        state.token = '';
+        state.status = 'idle';
+      })
+      .addCase(logout.rejected, (state, action) => {});
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {setErrors, setUser, logout} = authSlice.actions;
+export const {setErrors, setUser} = authSlice.actions;
 
 export default authSlice.reducer;
