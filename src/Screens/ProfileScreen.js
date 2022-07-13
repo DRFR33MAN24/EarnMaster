@@ -28,6 +28,8 @@ import {
 import {ThemeContext} from '../../theme-context';
 import {facebook, twitter, instagram} from '../Constants/images';
 import {profile} from '../fakeJsonData';
+import {useDispatch} from 'react-redux';
+import {logout} from '../Reducers/authSlice';
 export const profileIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -60,6 +62,7 @@ export const ProfileScreenTopBar = () => {
 };
 
 export const ProfileScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const themeContext = React.useContext(ThemeContext);
   const theme = useTheme();
   const [checked, setChecked] = useState(false);
@@ -111,7 +114,7 @@ export const ProfileScreen = ({navigation}) => {
           <Button onPress={themeContext.toggleTheme}>Toggle theme</Button>
         </Card> */}
         <Card disabled={true}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => dispatch(logout())}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text>Logout</Text>

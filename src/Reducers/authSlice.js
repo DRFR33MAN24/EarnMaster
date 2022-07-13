@@ -57,56 +57,56 @@ export const register = createAsyncThunk(
   async (registerInfo, thunkAPI) => {
     try {
       const response = await _register(registerInfo);
-      thunkAPI.dispatch(setUser(response));
+
+      return response;
     } catch (error) {
-      if (!error.code) {
-        thunkAPI.dispatch(setErrors({code: 0, msg: 'Unknown error occurred'}));
-      } else {
-        thunkAPI.dispatch(setErrors(error));
-      }
+      console.log(error);
+      return error;
     }
   },
 );
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: {
-      id: '',
-      email: '',
-      country: '',
-      profileImg: '',
-    },
+    user: {},
     errors: {},
     status: 'idle',
   },
   reducers: {
     setUser: (state, action) => {
+      console.log('action payload', action.payload);
       state.user = action.payload;
-      storeToken(action.payload.token);
+      // storeToken(action.payload.token);
     },
     setErrors: (state, action) => {
       state.errors = action.payload;
     },
-
-    extraReducers: builder => {
-      builder
-        .addCase(login.pending, (state, action) => {
-          state.status = 'loading';
-        })
-        .addCase(login.fulfilled, (state, action) => {})
-        .addCase(register.pending, (state, action) => {
-          state.status = 'loading';
-        })
-        .addCase(register.fulfilled, (state, action) => {})
-        .addCase(loginGoogle.pending, (state, action) => {
-          state.status = 'loading';
-        })
-        .addCase(loginGoogle.fulfilled, (state, action) => {});
+    logout: (state, action) => {
+      state.user = {};
     },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(login.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(login.fulfilled, (state, action) => {})
+      .addCase(register.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.status = 'idle';
+        storeToken(action.payload.token);
+      })
+      .addCase(loginGoogle.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(loginGoogle.fulfilled, (state, action) => {});
   },
 });
 
 // Action creators are generated for each case reducer function
-//export const {addCartItem, removeCartItem, decreaseItemQty} = cartSlice.actions;
+export const {setErrors, setUser, logout} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -49,20 +49,9 @@ const AlertIcon = props => (
 
 const AuthScreen = props => {
   const theme = useTheme();
-  const dispatch = useDispatch();
 
-  const [register_password, setRegisterPassword] = React.useState('');
-  const [login_password, setLoginPassword] = React.useState('');
-  const [repeatPassword, setRepeatPassword] = React.useState('');
-  const [register_email, setRegisterEmail] = React.useState('');
-  const [login_mail, setLoginEmail] = React.useState('');
-  const [name, setName] = React.useState('');
-  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
-  const [rememberPassword, setRememberPassword] = React.useState(false);
-  const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
-  const [registered, setRegistered] = React.useState(false);
   const [formErrors, setFormErrors] = React.useState({});
-
+  const [registered, setRegistered] = React.useState(false);
   useEffect(() => {
     _configureGoogleSignIn();
   }, []);
@@ -81,35 +70,9 @@ const AuthScreen = props => {
   //   }
   // }, [userInfo]);
 
-  const submitLogin = () => {
-    if (!login_mail) {
-      setFormErrors({
-        ...formErrors,
-        login_mail: 'please enter a valid email address',
-      });
-      return;
-    }
-    if (!login_password) {
-      setFormErrors({
-        ...formErrors,
-        login_password: 'please enter a valid password',
-      });
-      return;
-    }
-    login({email: login_mail, password: login_password});
-  };
-  const submitRegister = () => {
-    register({
-      email: register_email,
-      password: register_password,
-      repeatPassword: repeatPassword,
-      dob: dateOfBirth,
-      name: name,
-    });
-  };
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
+  // const toggleSecureEntry = () => {
+  //   setSecureTextEntry(!secureTextEntry);
+  // };
 
   const _configureGoogleSignIn = () => {
     GoogleSignin.configure({
@@ -137,10 +100,10 @@ const AuthScreen = props => {
     }
   };
 
-  const renderIcon = props => (
-    <TouchableOpacity onPress={toggleSecureEntry}>
+  const RenderIcon = ({setSecure, secure}) => (
+    <TouchableOpacity onPress={setSecure}>
       {/* <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'} /> */}
-      {!secureTextEntry ? (
+      {!secure ? (
         <FontAwesomeIcon
           icon={faEye}
           size={15}
@@ -174,6 +137,29 @@ const AuthScreen = props => {
     );
   };
   const Login = props => {
+    const [login_password, setLoginPassword] = React.useState('');
+
+    const [login_mail, setLoginEmail] = React.useState('');
+    const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+    const [rememberPassword, setRememberPassword] = React.useState(false);
+    const dispatch = useDispatch();
+    const submitLogin = () => {
+      if (!login_mail) {
+        setFormErrors({
+          ...formErrors,
+          login_mail: 'please enter a valid email address',
+        });
+        return;
+      }
+      if (!login_password) {
+        setFormErrors({
+          ...formErrors,
+          login_password: 'please enter a valid password',
+        });
+        return;
+      }
+      login({email: login_mail, password: login_password});
+    };
     return (
       <View style={{width: '95%'}}>
         <ScrollView>
@@ -191,7 +177,12 @@ const AuthScreen = props => {
             label="Password"
             placeholder="Enter password"
             caption={renderCaption}
-            accessoryRight={renderIcon}
+            accessoryRight={
+              <RenderIcon
+                secure={secureTextEntry}
+                setSecure={setSecureTextEntry}
+              />
+            }
             secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setLoginPassword(nextValue)}
           />
@@ -203,7 +194,7 @@ const AuthScreen = props => {
             </CheckBox>
           </View>
           <View style={{marginVertical: 8}}>
-            <Button>Login</Button>
+            <Button onPress={submitLogin}>Login</Button>
           </View>
           <View>
             <Button
@@ -229,6 +220,24 @@ const AuthScreen = props => {
   };
 
   const Register = props => {
+    const [repeatPassword, setRepeatPassword] = React.useState('');
+    const [register_password, setRegisterPassword] = React.useState('');
+    const [register_email, setRegisterEmail] = React.useState('');
+    const [dateOfBirth, setDateOfBirth] = React.useState(new Date());
+    const [name, setName] = React.useState('');
+    const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+    const dispatch = useDispatch();
+    const submitRegister = () => {
+      dispatch(
+        register({
+          email: register_email,
+          password: register_password,
+          repeat_password: repeatPassword,
+          dob: dateOfBirth,
+          username: name,
+        }),
+      );
+    };
     return (
       <View style={{width: '95%'}}>
         <ScrollView>
@@ -250,6 +259,7 @@ const AuthScreen = props => {
             // secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setRegisterEmail(nextValue)}
           />
+
           <View>
             <Datepicker
               label="Enter your birth date"
@@ -262,7 +272,12 @@ const AuthScreen = props => {
             label="Password"
             placeholder="Enter password"
             caption={renderCaption}
-            accessoryRight={renderIcon}
+            accessoryRight={
+              <RenderIcon
+                secure={secureTextEntry}
+                setSecure={setSecureTextEntry}
+              />
+            }
             secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setRegisterPassword(nextValue)}
           />
@@ -271,13 +286,18 @@ const AuthScreen = props => {
             label="RePassword"
             placeholder="Enter password"
             caption={renderCaption}
-            accessoryRight={renderIcon}
+            accessoryRight={
+              <RenderIcon
+                secure={secureTextEntry}
+                setSecure={setSecureTextEntry}
+              />
+            }
             secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setRepeatPassword(nextValue)}
           />
 
           <View style={{marginVertical: 8}}>
-            <Button>Register</Button>
+            <Button onPress={submitRegister}>Register</Button>
           </View>
           <View>
             <Button

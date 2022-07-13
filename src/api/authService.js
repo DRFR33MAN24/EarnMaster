@@ -71,7 +71,7 @@ export const _register = async registerInfo => {
       },
     );
     const json = await response.json();
-    return json.movies;
+    return json;
   } catch (error) {
     throw error;
   }
