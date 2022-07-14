@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {_login, _register} from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storeUser = async value => {
+export const storeUser = async value => {
   try {
     await AsyncStorage.setItem('@user', JSON.stringify(value));
   } catch (e) {
@@ -10,7 +10,7 @@ const storeUser = async value => {
   }
 };
 
-const getUser = async () => {
+export const getUser = async () => {
   try {
     const value = await AsyncStorage.getItem('@user');
     const user = JSON.parse(value);

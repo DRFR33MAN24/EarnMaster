@@ -46,6 +46,10 @@ import {surveysData} from '../fakeJsonData';
 import {Survey, WideSurvey} from '../Components/Survey';
 import {Congratulation} from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchOffers} from '../Reducers/offersSlice';
+
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -143,13 +147,15 @@ export const HomeScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
+
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [referral, setReferral] = useState('');
   const [surveys, setSurveys] = useState([]);
   useEffect(() => {
     // api call
     setSurveys(surveysData);
-    //console.log(surveyData);
+    dispatch(fetchOffers(0));
   }, []);
   return (
     <SafeAreaView

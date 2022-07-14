@@ -1,10 +1,12 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {_getOffers} from '../api/offersService';
-
+import {getUser} from './authSlice';
 export const fetchOffers = createAsyncThunk(
   'offers/fetchOffers',
-  async (code, thunkAPI) => {
-    const response = await getOffers(offset);
+  async (offset, thunkAPI) => {
+    const user = await getUser();
+
+    const response = await _getOffers({offset: offset, token: user.token});
     thunkAPI.dispatch(setOffers(response));
     //console.log(response);
     return response;
