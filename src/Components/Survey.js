@@ -23,7 +23,7 @@ export const Survey = ({data}) => {
   const [surveyDetails, toggleSurveyDetails] = useState(false);
   const uiTheme = useTheme();
   let theme = useContext(ThemeContext).currentTheme;
-  let rate = Math.round(data.coins / 100);
+  let rate = Math.round(data.amount / 100);
   if (rate > 5) {
     rate = 5;
   }
@@ -92,7 +92,7 @@ export const Survey = ({data}) => {
               overflow: 'hidden',
             }}>
             <Animated.Image
-              source={data.imageUri}
+              source={{uri: data.image}}
               style={{
                 resizeMode: 'cover',
                 // width: width,
@@ -182,7 +182,7 @@ export const Survey = ({data}) => {
           style={{
             paddingHorizontal: 10,
           }}>
-          <Text>{data.name}</Text>
+          <Text>{data.title}</Text>
         </View>
         <View
           style={{
@@ -206,7 +206,7 @@ export const Survey = ({data}) => {
               // marginHorizontal: 5,
             }}
           />
-          <Text>{data.coins}</Text>
+          <Text>{data.amount}</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -223,7 +223,7 @@ export const WideSurvey = ({data}) => {
   const [surveyDetails, toggleSurveyDetails] = useState(false);
 
   let theme = useContext(ThemeContext).currentTheme;
-  let rate = Math.round(data.coins / 100);
+  let rate = Math.round(data.amount / 100);
   if (rate > 5) {
     rate = 5;
   }
@@ -292,7 +292,7 @@ export const WideSurvey = ({data}) => {
               overflow: 'hidden',
             }}>
             <Animated.Image
-              source={data.imageUri}
+              source={{uri: data.image}}
               style={{
                 resizeMode: 'cover',
                 // width: width,
@@ -366,7 +366,7 @@ export const WideSurvey = ({data}) => {
                 marginHorizontal: 5,
               }}
             />
-            <Text>{data.coins}</Text>
+            <Text>{data.amount}</Text>
           </View>
           <View
             style={{
@@ -387,7 +387,7 @@ export const WideSurvey = ({data}) => {
                 flexWrap: 'wrap',
                 flexShrink: 1,
               }}>
-              {data.name}
+              {data.title}
             </Text>
           </View>
         </View>

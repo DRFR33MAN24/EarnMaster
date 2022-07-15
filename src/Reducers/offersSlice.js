@@ -7,7 +7,7 @@ export const fetchOffers = createAsyncThunk(
     const user = await getUser();
 
     const response = await _getOffers({offset: offset, token: user.token});
-    thunkAPI.dispatch(setOffers(response));
+
     //console.log(response);
     return response;
   },
@@ -18,6 +18,7 @@ const offersSlice = createSlice({
   initialState: {
     offers: [],
     total_offers: 0,
+    offset: 0,
     status: 'idle',
   },
   reducers: {
@@ -30,7 +31,10 @@ const offersSlice = createSlice({
       .addCase(fetchOffers.pending, (state, action) => {
         state.status = 'loading';
       })
-      .addCase(fetchOffers.fulfilled, (state, action) => {});
+      .addCase(fetchOffers.fulfilled, (state, action) => {
+        state.offers = action.payload.rows;
+        state.total_offers = action.payload.count;
+      });
   },
 });
 

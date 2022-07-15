@@ -20,7 +20,7 @@ export const GoToSurveyModal = ({data, closeModal}) => {
             alignItems: 'center',
           }}>
           <Image
-            source={data.imageUri}
+            source={{uri: data.image}}
             style={{
               resizeMode: 'stretch',
 
@@ -32,7 +32,7 @@ export const GoToSurveyModal = ({data, closeModal}) => {
             }}
           />
           <View style={{paddingHorizontal: 10, marginVertical: 10}}>
-            <Text>{data.details}</Text>
+            <Text>{data.description}</Text>
           </View>
         </View>
       </ScrollView>

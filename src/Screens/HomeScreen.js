@@ -49,6 +49,7 @@ import Carousel from 'react-native-reanimated-carousel';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchOffers} from '../Reducers/offersSlice';
+import {fetchNotifications} from '../Reducers/notificationSlice';
 
 export const homeIcon = props => (
   <FontAwesomeIcon
@@ -149,6 +150,10 @@ export const HomeScreen = ({navigation}) => {
   // };
 
   const dispatch = useDispatch();
+  const {offers, offset, total_offers} = useSelector(state => state.offers);
+  const {notifications, offset_notifications, total_notifications} =
+    useSelector(state => state.notifications);
+
   const theme = useTheme();
   const [referral, setReferral] = useState('');
   const [surveys, setSurveys] = useState([]);
@@ -156,6 +161,7 @@ export const HomeScreen = ({navigation}) => {
     // api call
     setSurveys(surveysData);
     dispatch(fetchOffers(0));
+    dispatch(fetchNotifications(0));
   }, []);
   return (
     <SafeAreaView
@@ -177,7 +183,7 @@ export const HomeScreen = ({navigation}) => {
           width={Dimensions.get('screen').width}
           autoPlayInterval={3000}
           height={115}
-          data={surveysData}
+          data={offers}
           style={{
             width: '100%',
             marginVertical: 5,
@@ -213,10 +219,8 @@ export const HomeScreen = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          {surveys != null &&
-            surveys.map((survey, index) => (
-              <Survey data={survey} key={index} />
-            ))}
+          {offers != null &&
+            offers.map((offer, index) => <Survey data={offer} key={index} />)}
           {/* <Survey />
           <Survey /> */}
         </View>
