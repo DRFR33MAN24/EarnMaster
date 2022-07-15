@@ -60,36 +60,51 @@ export const homeIcon = props => (
   />
 );
 
-export const CoinsComponent = props => (
-  <View
-    style={{
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    }}>
-    {/* <Text style={styles.badge}> 2 </Text> */}
+export const CoinsComponent = props => {
+  const balance = useSelector(state => state.auth.user.balance);
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+      }}>
+      {/* <Text style={styles.badge}> 2 </Text> */}
 
-    <Image
-      source={dollar}
-      style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
-    />
-    {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
-    <Text style={{fontSize: 12}}> 100</Text>
-  </View>
-);
-export const NotificationIcon = props => (
-  <Animatable.View animation="swing" easing="ease-out" iterationCount={3}>
-    <Button
-      appearance="ghost"
-      onPress={() => props.navigation.navigate('Notification')}
-      style={{padding: 0}}>
-      <View style={styles.badgeIconView}>
-        <Text style={styles.badge}> 2 </Text>
+      <Image
+        source={dollar}
+        style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
+      />
+      {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
+      <Text style={{fontSize: 12}}> {balance}</Text>
+    </View>
+  );
+};
 
-        <FontAwesomeIcon icon={faBell} size={20} style={{color: 'gold'}} />
-      </View>
-    </Button>
-  </Animatable.View>
-);
+export const NotificationIcon = props => {
+  const dispatch = useDispatch();
+  const notificationsCount = useSelector(
+    state => state.notifications.total_notifications,
+  );
+
+  useEffect(() => {
+    dispatch(fetchNotifications(0));
+  }, []);
+  return (
+    <Animatable.View animation="swing" easing="ease-out" iterationCount={3}>
+      <Button
+        appearance="ghost"
+        onPress={() => props.navigation.navigate('Notification')}
+        style={{padding: 0}}>
+        <View style={styles.badgeIconView}>
+          <Text style={styles.badge}> {notificationsCount} </Text>
+
+          <FontAwesomeIcon icon={faBell} size={20} style={{color: 'gold'}} />
+        </View>
+      </Button>
+    </Animatable.View>
+  );
+};
+
 export const HomeScreenContainer = props => (
   <View
     style={{
@@ -151,17 +166,14 @@ export const HomeScreen = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {offers, offset, total_offers} = useSelector(state => state.offers);
-  const {notifications, offset_notifications, total_notifications} =
-    useSelector(state => state.notifications);
 
   const theme = useTheme();
   const [referral, setReferral] = useState('');
-  const [surveys, setSurveys] = useState([]);
+
   useEffect(() => {
     // api call
-    setSurveys(surveysData);
+
     dispatch(fetchOffers(0));
-    dispatch(fetchNotifications(0));
   }, []);
   return (
     <SafeAreaView

@@ -3,7 +3,7 @@ import {View, Image, TouchableOpacity} from 'react-native';
 import {Text, useTheme} from '@ui-kitten/components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle, faCircleCheck} from '@fortawesome/free-solid-svg-icons';
-export const Notification = ({title, message, img, read}) => {
+export const Notification = ({title, message, image, read}) => {
   const uiTheme = useTheme();
   return (
     <TouchableOpacity>
@@ -37,14 +37,15 @@ export const Notification = ({title, message, img, read}) => {
             {message}
           </Text>
         </View>
-        <View style={{flex: 1}}>
+        <View>
           <Image
-            source={img}
+            source={{uri: image}}
             style={{
               width: 64,
               height: 64,
               resizeMode: 'stretch',
               borderRadius: 10,
+              marginHorizontal: 5,
             }}
           />
         </View>

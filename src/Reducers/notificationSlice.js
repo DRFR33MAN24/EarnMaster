@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {_getNotifications} from '../api/notificationService';
-
+import {getUser} from './authSlice';
 export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
   async (offset, thunkAPI) => {
@@ -33,8 +33,8 @@ const notificationsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchNotifications.fulfilled, (state, action) => {
-        state.notifications = action.payload.rows;
-        state.total_notifications = action.payload.count;
+        state.notifications = action.payload;
+        state.total_notifications = action.payload.length;
       });
   },
 });

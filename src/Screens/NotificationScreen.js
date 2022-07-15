@@ -9,14 +9,18 @@ import {
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {BackIcon} from '../Components/NavigationComponents';
-import {notifications} from '../fakeJsonData';
-import {Notification} from '../Components/Notification';
 
+import {Notification} from '../Components/Notification';
+import {useDispatch, useSelector} from 'react-redux';
 export const NotificationScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const {notifications, total_notifications, offset} = useSelector(
+    state => state.notifications,
+  );
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>

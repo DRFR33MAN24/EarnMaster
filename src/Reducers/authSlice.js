@@ -121,6 +121,7 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(login.fulfilled, (state, action) => {
+        console.log('login full', action.payload);
         state.user = action.payload.user;
         state.status = 'idle';
         storeUser(action.payload);

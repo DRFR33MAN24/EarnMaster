@@ -158,7 +158,7 @@ const AuthScreen = props => {
         });
         return;
       }
-      login({email: login_mail, password: login_password});
+      dispatch(login({email: login_mail, password: login_password}));
     };
     return (
       <View style={{width: '95%'}}>

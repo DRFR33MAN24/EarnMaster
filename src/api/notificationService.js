@@ -1,7 +1,6 @@
 import config from '../config';
 export const _getNotifications = async fetchData => {
   try {
-    console.log('getNoti');
     const response = await fetch(
       `${config.backendServer}/api/users/notifications?offset=${fetchData.offset}`,
       {
