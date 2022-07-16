@@ -2,10 +2,10 @@ import {Text, Card, Button, useTheme} from '@ui-kitten/components';
 import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 
-export const WalletTransaction = ({id, type, amount, state, submitDate}) => {
+export const WalletTransaction = ({id, name, amount, status, updatedAt}) => {
   const uiTheme = useTheme();
   const RenderState = ({state}) => {
-    switch (state) {
+    switch (status) {
       case 'rejected':
         return (
           <Text style={{color: uiTheme['color-danger-default']}}>REJECTED</Text>
@@ -33,11 +33,13 @@ export const WalletTransaction = ({id, type, amount, state, submitDate}) => {
           <Text style={{color: amount > 0 ? 'green' : 'red'}}>
             {amount.toFixed(2)}
           </Text>
-          <Text> {type}</Text>
         </View>
-        <RenderState state={state} />
+        <View>
+          <Text> {name}</Text>
+        </View>
+        <RenderState state={status} />
       </View>
-      <Text style={styles.dateText}>{submitDate}</Text>
+      <Text style={styles.dateText}>{updatedAt}</Text>
     </Card>
   );
 };

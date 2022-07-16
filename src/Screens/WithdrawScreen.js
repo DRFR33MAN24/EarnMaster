@@ -22,33 +22,36 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faC, faCoins} from '@fortawesome/free-solid-svg-icons';
 import {BackIcon} from '../Components/NavigationComponents';
 import {glass, dollar} from '../Constants/images';
+import {useDispatch} from 'react-redux';
+import {submitPayment} from '../Reducers/walletSlice';
 const playCard = {
   backgroundColor: 'white',
   image: require('./images/play.png'),
   title: 'Google Play',
-  value: '5$',
+  value: 700,
 };
 
 const amazonCard = {
   backgroundColor: 'orange',
   image: require('./images/amazon.png'),
   title: ' Amazon Gift Card',
-  value: '5$',
+  value: 400,
 };
 const appleCard = {
   backgroundColor: 'orange',
   image: require('./images/apple.png'),
   title: ' Amazon Gift Card',
-  value: '5$',
+  value: 300,
 };
 const razerCard = {
   backgroundColor: 'orange',
   image: require('./images/razer.png'),
   title: ' Amazon Gift Card',
-  value: '5$',
+  value: 500,
 };
 const RedeemOption = ({style}) => {
   const uiTheme = useTheme();
+  const dispatch = useDispatch();
   return (
     <View
       style={{
@@ -61,7 +64,10 @@ const RedeemOption = ({style}) => {
         margin: 0,
         padding: 0,
       }}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          dispatch(submitPayment({name: style.title, amount: style.value}))
+        }>
         <View
           style={{
             // backgroundColor: 'yellow',
@@ -173,7 +179,7 @@ const RedeemOption = ({style}) => {
       </TouchableOpacity>
       <View style={{paddingHorizontal: 10}}>
         <Text>{style.title}</Text>
-        <Text>{style.value}</Text>
+        <Text>{style.value}$</Text>
       </View>
     </View>
   );
@@ -182,6 +188,7 @@ export const WithdrawScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
+
   const theme = useTheme();
   return (
     <SafeAreaView

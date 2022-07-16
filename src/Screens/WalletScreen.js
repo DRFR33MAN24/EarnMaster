@@ -7,7 +7,7 @@ import {
   useTheme,
   ButtonGroup,
 } from '@ui-kitten/components';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -34,7 +34,9 @@ import {
   StackedBarChart,
 } from 'react-native-chart-kit';
 import {ThemeContext} from '../../theme-context';
-import {transactions} from '../fakeJsonData';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchTransactions} from '../Reducers/walletSlice';
 export const walletIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -72,6 +74,12 @@ export const WalletScreen = ({navigation}) => {
   const uiTheme = useTheme();
   const theme = useContext(ThemeContext);
   const [chartParentWidth, setChartParentWidth] = useState(0);
+  const {transactions, offset} = useSelector(state => state.wallet);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTransactions(0));
+  }, []);
 
   return (
     <SafeAreaView
