@@ -50,6 +50,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchOffers} from '../Reducers/offersSlice';
 import {fetchNotifications} from '../Reducers/notificationSlice';
+import {reloadUser} from '../Reducers/authSlice';
 
 export const homeIcon = props => (
   <FontAwesomeIcon
@@ -62,21 +63,27 @@ export const homeIcon = props => (
 
 export const CoinsComponent = props => {
   const balance = useSelector(state => state.auth.user.balance);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reloadUser());
+  }, []);
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-      }}>
-      {/* <Text style={styles.badge}> 2 </Text> */}
+    <TouchableOpacity onPress={() => dispatch(reloadUser())}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+        }}>
+        {/* <Text style={styles.badge}> 2 </Text> */}
 
-      <Image
-        source={dollar}
-        style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
-      />
-      {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
-      <Text style={{fontSize: 12}}> {balance}</Text>
-    </View>
+        <Image
+          source={dollar}
+          style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
+        />
+        {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
+        <Text style={{fontSize: 12}}> {balance}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

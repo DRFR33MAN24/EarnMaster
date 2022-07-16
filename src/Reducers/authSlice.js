@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {_login, _register} from '../api/authService';
+import {_login, _register, _reloadUser} from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storeUser = async value => {
@@ -31,6 +31,21 @@ export const login = createAsyncThunk(
   async (loginInfo, {rejectWithValue}) => {
     try {
       const response = await _login(loginInfo);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+export const reloadUser = createAsyncThunk(
+  'auth/reloadUser',
+  async (data, {rejectWithValue}) => {
+    try {
+      const user = await getUser();
+      const response = await _reloadUser(user);
       return response;
     } catch (error) {
       if (!error.response) {
@@ -121,9 +136,10 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log('login full', action.payload);
+        // console.log('login full', action.payload);
         state.user = action.payload.user;
         state.status = 'idle';
+        state.token = action.payload.token;
         storeUser(action.payload);
       })
       .addCase(login.rejected, (state, action) => {})
@@ -154,6 +170,19 @@ const authSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(loadUser.rejected, (state, action) => {
+        state.user = {};
+        state.token = '';
+      })
+      .addCase(reloadUser.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(reloadUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.status = 'idle';
+        storeUser(action.payload);
+      })
+      .addCase(reloadUser.rejected, (state, action) => {
         state.user = {};
         state.token = '';
       })

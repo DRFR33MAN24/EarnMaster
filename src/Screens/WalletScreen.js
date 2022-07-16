@@ -263,9 +263,10 @@ export const WalletScreen = ({navigation}) => {
             <Text category="s1">Transaction history:</Text>
           </Card>
         </View>
-        {transactions.map((transaction, index) => (
-          <WalletTransaction {...transaction} key={index} />
-        ))}
+        {transactions &&
+          transactions.map((transaction, index) => (
+            <WalletTransaction data={transaction} key={index} />
+          ))}
       </ScrollView>
     </SafeAreaView>
   );

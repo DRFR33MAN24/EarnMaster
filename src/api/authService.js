@@ -15,6 +15,26 @@ export const _login = async loginInfo => {
     throw error;
   }
 };
+export const _reloadUser = async credentails => {
+  try {
+    const response = await fetch(
+      `${config.backendServer}/api/authUser/loadUser`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-auth-token': credentails.token,
+        },
+      },
+    );
+    const json = await response.json();
+
+    return json;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const _loginGoogle = async loginInfo => {
   try {

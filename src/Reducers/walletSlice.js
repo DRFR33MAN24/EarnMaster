@@ -16,15 +16,22 @@ export const fetchTransactions = createAsyncThunk(
 );
 export const submitPayment = createAsyncThunk(
   'wallet/submitPayment',
-  async (paymentDetails, thunkAPI) => {
-    const user = await getUser();
-    const response = await _submitPayment({
-      paymentDetails: paymentDetails,
-      token: user.token,
-    });
+  async (paymentDetails, {rejectWithValue}) => {
+    try {
+      const user = await getUser();
+      const response = await _submitPayment({
+        paymentDetails: paymentDetails,
+        token: user.token,
+      });
 
-    //console.log(response);
-    return response;
+      //console.log(response);
+      if (response.msg) {
+        throw response;
+      }
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   },
 );
 const walletSlice = createSlice({
@@ -52,9 +59,9 @@ const walletSlice = createSlice({
       .addCase(submitPayment.pending, (state, action) => {
         state.status = 'loading';
       })
-      .addCase(submitPayment.fulfilled, (state, action) => {
-        state.transactions = action.payload;
-        state.total_transactions = action.payload.length;
+      .addCase(submitPayment.fulfilled, (state, action) => {})
+      .addCase(submitPayment.rejected, (state, action) => {
+        console.log(action.payload);
       });
   },
 });

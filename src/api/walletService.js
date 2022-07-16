@@ -28,7 +28,7 @@ export const _submitPayment = async ({paymentDetails, token}) => {
         'Content-Type': 'application/json',
         'x-auth-token': token,
       },
-      body: JSON.stringify({paymentDetails: paymentDetails}),
+      body: JSON.stringify({...paymentDetails}),
     });
     const json = await response.json();
     return json;

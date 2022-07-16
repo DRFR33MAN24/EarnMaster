@@ -14,7 +14,7 @@ import {SurveysScreen} from './SurveysScreen';
 import {WithdrawScreen} from './WithdrawScreen';
 import AuthScreen from './AuthScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadUser} from '../Reducers/authSlice';
+import {loadUser, reloadUser} from '../Reducers/authSlice';
 
 const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -102,6 +102,7 @@ export const AppNavigator = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
+    //dispatch(reloadUser());
   }, []);
 
   if (auth.user === undefined) {
