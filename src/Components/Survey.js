@@ -21,7 +21,7 @@ import {ThemeContext} from '../../theme-context';
 import {glass, dollar} from '../Constants/images';
 import {GoToSurveyModal} from './GoToSurveyModal';
 import LinearGradient from 'react-native-linear-gradient';
-
+import ImageColors from 'react-native-image-colors'
 export const Survey = ({data}) => {
   const width = new Animated.Value(1);
   const height = new Animated.Value(1);
@@ -410,6 +410,7 @@ export const WideSurvey2 = ({data}) => {
   const height = new Animated.Value(1);
 
   const [surveyDetails, toggleSurveyDetails] = useState(false);
+  const [dominantColors, setDominantColors] = useState('#228B22');
 
   let theme = useContext(ThemeContext).currentTheme;
   let rate = Math.round(data.amount / 100);
@@ -427,6 +428,13 @@ export const WideSurvey2 = ({data}) => {
         }),
       ).start();
     }
+    const result = await ImageColors.getColors(data.image, {
+  fallback: '#228B22',
+  cache: true,
+  key: 'unique_key',
+})
+
+setDominantColors(result);
   }, []);
 
   return (
@@ -478,7 +486,7 @@ export const WideSurvey2 = ({data}) => {
               //borderRadius: 10,
               borderTopRightRadius: 10,
               borderBottomRightRadius: 10,
-              backgroundColor: 'grey',
+              backgroundColor: dominantColors.vibrant,
               zIndex: -200,
               overflow: 'hidden',
             }}>
