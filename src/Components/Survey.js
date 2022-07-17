@@ -21,7 +21,7 @@ import {ThemeContext} from '../../theme-context';
 import {glass, dollar} from '../Constants/images';
 import {GoToSurveyModal} from './GoToSurveyModal';
 import LinearGradient from 'react-native-linear-gradient';
-import ImageColors from 'react-native-image-colors'
+import ImageColors from 'react-native-image-colors';
 export const Survey = ({data}) => {
   const width = new Animated.Value(1);
   const height = new Animated.Value(1);
@@ -410,7 +410,11 @@ export const WideSurvey2 = ({data}) => {
   const height = new Animated.Value(1);
 
   const [surveyDetails, toggleSurveyDetails] = useState(false);
-  const [dominantColors, setDominantColors] = useState('#228B22');
+  const [dominantColors, setDominantColors] = useState({
+    vibrant: '#11111111',
+    darkMuted: '#00000000',
+    lightMuted: '#11111111',
+  });
 
   let theme = useContext(ThemeContext).currentTheme;
   let rate = Math.round(data.amount / 100);
@@ -428,13 +432,15 @@ export const WideSurvey2 = ({data}) => {
         }),
       ).start();
     }
-    const result = await ImageColors.getColors(data.image, {
-  fallback: '#228B22',
-  cache: true,
-  key: 'unique_key',
-})
+    (async function () {
+      const result = await ImageColors.getColors(data.image, {
+        fallback: '#11111111',
+        cache: true,
+        key: 'unique_key',
+      });
 
-setDominantColors(result);
+      setDominantColors(result);
+    })();
   }, []);
 
   return (
@@ -479,14 +485,13 @@ setDominantColors(result);
             style={{
               position: 'absolute',
 
-              alignItems: 'flex-end',
               width: '100%',
               height: 110,
 
               //borderRadius: 10,
               borderTopRightRadius: 10,
               borderBottomRightRadius: 10,
-              backgroundColor: dominantColors.vibrant,
+              // backgroundColor: 'transparent',
               zIndex: -200,
               overflow: 'hidden',
             }}>
@@ -494,24 +499,36 @@ setDominantColors(result);
               start={{x: 0, y: 0}}
               end={{x: 1, y: 0}}
               useAngle={true}
-              angle={70}
-              angleCenter={{x: 0.5, y: 0.5}}
-              locations={[0.3, 0.0]}
-              colors={['grey', 'transparent']}>
-              <Animated.Image
-                source={{uri: data.image}}
+              angle={60}
+              angleCenter={{x: 0.9, y: 0.5}}
+              locations={[0.3, 0.38]}
+              colors={[dominantColors.darkMuted, 'transparent']}
+              style={{
+                width: '100%',
+              }}>
+              <View
                 style={{
-                  resizeMode: 'cover',
-                  // width: width,
-                  // height: height,
-                  width: 110,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
                   height: '100%',
-                  borderTopRightRadius: 10,
-                  borderBottomRightRadius: 10,
-                  zIndex: -1300,
-                  transform: [{scale: width}],
-                }}
-              />
+                  width: '100%',
+                  zIndex: -300,
+                  backgroundColor: 'transparent',
+                }}>
+                <Animated.Image
+                  source={{uri: data.image}}
+                  style={{
+                    resizeMode: 'cover',
+                    // width: width,
+                    // height: height,
+                    width: 110,
+                    height: '100%',
+                    borderTopRightRadius: 10,
+                    borderBottomRightRadius: 10,
+                    transform: [{scale: width}],
+                  }}
+                />
+              </View>
             </LinearGradient>
           </View>
 
@@ -544,11 +561,11 @@ setDominantColors(result);
             <FontAwesomeIcon
               icon={faClock}
               size={20}
-              style={{color: 'white'}}
+              style={{color: dominantColors.lightMuted}}
             />
             <Text
               style={{
-                color: 'white',
+                color: dominantColors.lightMuted,
                 paddingHorizontal: 4,
               }}>
               {data.timeToComplete}
@@ -592,7 +609,7 @@ setDominantColors(result);
             <Text
               category="h5"
               style={{
-                color: 'white',
+                color: dominantColors.lightMuted,
                 flexWrap: 'wrap',
                 flexShrink: 1,
               }}>

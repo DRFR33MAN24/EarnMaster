@@ -180,7 +180,7 @@ export const HomeScreen = ({navigation}) => {
   useEffect(() => {
     // api call
 
-    dispatch(fetchOffers(0));
+    dispatch(fetchOffers(20));
   }, []);
   return (
     <SafeAreaView
