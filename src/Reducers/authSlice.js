@@ -46,12 +46,12 @@ export const reloadUser = createAsyncThunk(
     try {
       const user = await getUser();
       const response = await _reloadUser(user);
+      if (response.msg) {
+        throw response;
+      }
       return response;
     } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -60,12 +60,12 @@ export const loadUser = createAsyncThunk(
   async (data, {rejectWithValue}) => {
     try {
       const response = await getUser();
+      if (response.msg) {
+        throw response;
+      }
       return response;
     } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -116,7 +116,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: undefined,
-    errors: {},
+    authErrors: {},
     token: undefined,
     status: 'idle',
   },
@@ -183,6 +183,7 @@ const authSlice = createSlice({
         storeUser(action.payload);
       })
       .addCase(reloadUser.rejected, (state, action) => {
+        state.authErrors = action.payload;
         state.user = {};
         state.token = '';
       })

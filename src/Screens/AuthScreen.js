@@ -17,6 +17,7 @@ import {
   Card,
   CheckBox,
   Datepicker,
+  Modal,
 } from '@ui-kitten/components';
 
 import * as Progress from 'react-native-progress';
@@ -49,7 +50,7 @@ const AlertIcon = props => (
 
 const AuthScreen = props => {
   const theme = useTheme();
-
+  const auth = useSelector(state => state.auth);
   const [formErrors, setFormErrors] = React.useState({});
   const [registered, setRegistered] = React.useState(false);
   useEffect(() => {
@@ -318,6 +319,14 @@ const AuthScreen = props => {
         styles.container,
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
+      {auth.authErrors && (
+        <Modal visible={true}>
+          <Card>
+            <Text>{auth.authErrors.msg}</Text>
+            <Button>Retry</Button>
+          </Card>
+        </Modal>
+      )}
       <ScrollView style={{width: '100%'}} keyboardShouldPersistTaps="handled">
         <View
           style={{

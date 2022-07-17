@@ -43,7 +43,7 @@ import {
   instagram,
 } from '../Constants/images';
 import {surveysData} from '../fakeJsonData';
-import {Survey, WideSurvey} from '../Components/Survey';
+import {Survey, WideSurvey, WideSurvey2} from '../Components/Survey';
 import {Congratulation} from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
 
@@ -219,7 +219,7 @@ export const HomeScreen = ({navigation}) => {
                 alignItems: 'center',
                 width: '100%',
               }}>
-              <WideSurvey key={index} data={item} />
+              <WideSurvey2 key={index} data={item} />
             </View>
           )}
         />

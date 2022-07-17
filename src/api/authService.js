@@ -32,7 +32,11 @@ export const _reloadUser = async credentails => {
 
     return json;
   } catch (error) {
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };
 

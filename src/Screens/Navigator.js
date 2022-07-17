@@ -101,8 +101,8 @@ export const AppNavigator = () => {
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadUser());
-    //dispatch(reloadUser());
+    //dispatch(loadUser());
+    dispatch(reloadUser());
   }, []);
 
   if (auth.user === undefined) {
