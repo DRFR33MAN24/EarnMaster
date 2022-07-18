@@ -14,7 +14,8 @@ import {SurveysScreen} from './SurveysScreen';
 import {WithdrawScreen} from './WithdrawScreen';
 import AuthScreen from './AuthScreen';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadUser, reloadUser} from '../Reducers/authSlice';
+import {loadUser, reloadUser, setDeviceToken} from '../Reducers/authSlice';
+import {Notifications} from 'react-native-notifications';
 
 const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -102,7 +103,39 @@ export const AppNavigator = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     //dispatch(loadUser());
-    dispatch(reloadUser());
+
+    // Request permissions on iOS, refresh token on Android
+    Notifications.registerRemoteNotifications();
+
+    Notifications.events().registerRemoteNotificationsRegistered(event => {
+      // TODO: Send the token to my server so it could send back push notifications...
+      // sendTokenToServer(event.deviceToken);
+      // console.log('Device Token Received', event.deviceToken);
+
+      dispatch(setDeviceToken(event.deviceToken));
+      dispatch(reloadUser(event.deviceToken));
+    });
+    Notifications.events().registerRemoteNotificationsRegistrationFailed(
+      event => {
+        dispatch(setDeviceToken(''));
+      },
+    );
+
+    Notifications.events().registerNotificationReceivedForeground(
+      (notification, completion) => {
+        console.log(
+          `Notification received in foreground: ${notification.title} : ${notification.body}`,
+        );
+        completion({alert: false, sound: false, badge: false});
+      },
+    );
+
+    Notifications.events().registerNotificationOpened(
+      (notification, completion) => {
+        console.log(`Notification opened: ${notification.payload}`);
+        completion();
+      },
+    );
   }, []);
 
   if (auth.user === undefined) {

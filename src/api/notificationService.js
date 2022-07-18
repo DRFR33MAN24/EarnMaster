@@ -15,7 +15,10 @@ export const _getNotifications = async fetchData => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };

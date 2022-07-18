@@ -31,12 +31,13 @@ export const login = createAsyncThunk(
   async (loginInfo, {rejectWithValue}) => {
     try {
       const response = await _login(loginInfo);
+
+      if (response.msg) {
+        throw response;
+      }
       return response;
     } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -45,7 +46,7 @@ export const reloadUser = createAsyncThunk(
   async (data, {rejectWithValue}) => {
     try {
       const user = await getUser();
-      const response = await _reloadUser(user);
+      const response = await _reloadUser(user, data);
       if (response.msg) {
         throw response;
       }
@@ -74,12 +75,12 @@ export const logout = createAsyncThunk(
   async (data, {rejectWithValue}) => {
     try {
       const response = await storeUser({});
+      if (response.msg) {
+        throw response;
+      }
       return response;
     } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -88,12 +89,12 @@ export const loginGoogle = createAsyncThunk(
   async (loginInfo, {rejectWithValue}) => {
     try {
       const response = await _loginGoogle(loginInfo);
+      if (response.msg) {
+        throw response;
+      }
       return response;
     } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -103,12 +104,12 @@ export const register = createAsyncThunk(
     try {
       const response = await _register(registerInfo);
 
+      if (response.msg) {
+        throw response;
+      }
       return response;
     } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -118,16 +119,19 @@ const authSlice = createSlice({
     user: undefined,
     authErrors: {},
     token: undefined,
+    deviceToken: '',
     status: 'idle',
   },
   reducers: {
     setUser: (state, action) => {
-      console.log('action payload', action.payload);
       state.user = action.payload;
       // storeToken(action.payload.token);
     },
     setErrors: (state, action) => {
       state.errors = action.payload;
+    },
+    setDeviceToken: (state, action) => {
+      state.deviceToken = action.payload;
     },
   },
   extraReducers: builder => {
@@ -142,7 +146,11 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         storeUser(action.payload);
       })
-      .addCase(login.rejected, (state, action) => {})
+      .addCase(login.rejected, (state, action) => {
+        state.authErrors = action.payload;
+        state.user = {};
+        state.token = '';
+      })
       .addCase(register.pending, (state, action) => {
         state.status = 'loading';
       })
@@ -151,7 +159,11 @@ const authSlice = createSlice({
         state.status = 'idle';
         storeUser(action.payload);
       })
-      .addCase(register.rejected, (state, action) => {})
+      .addCase(register.rejected, (state, action) => {
+        state.authErrors = action.payload;
+        state.user = {};
+        state.token = '';
+      })
       .addCase(loginGoogle.pending, (state, action) => {
         state.status = 'loading';
       })
@@ -160,7 +172,11 @@ const authSlice = createSlice({
         state.status = 'idle';
         storeToken(action.payload.token);
       })
-      .addCase(loginGoogle.rejected, (state, action) => {})
+      .addCase(loginGoogle.rejected, (state, action) => {
+        state.authErrors = action.payload;
+        state.user = {};
+        state.token = '';
+      })
       .addCase(loadUser.pending, (state, action) => {
         state.status = 'loading';
       })
@@ -170,6 +186,7 @@ const authSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(loadUser.rejected, (state, action) => {
+        state.authErrors = action.payload;
         state.user = {};
         state.token = '';
       })
@@ -200,6 +217,6 @@ const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {setErrors, setUser} = authSlice.actions;
+export const {setErrors, setUser, setDeviceToken} = authSlice.actions;
 
 export default authSlice.reducer;

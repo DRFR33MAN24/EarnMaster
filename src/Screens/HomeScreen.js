@@ -26,6 +26,7 @@ import {
   StyleSheet,
   Image,
   Dimensions,
+  RefreshControl,
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
@@ -176,11 +177,19 @@ export const HomeScreen = ({navigation}) => {
 
   const theme = useTheme();
   const [referral, setReferral] = useState('');
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const onRefresh = React.useCallback(() => {
+    //setRefreshing(true);
+    getOffers(0);
+  }, []);
+
+  const getOffers = offset => {
+    dispatch(fetchOffers(offset));
+  };
   useEffect(() => {
     // api call
-
-    dispatch(fetchOffers(20));
+    getOffers(0);
   }, []);
   return (
     <SafeAreaView
@@ -191,7 +200,11 @@ export const HomeScreen = ({navigation}) => {
       />
       <Divider />
       {/* <Congratulation /> */}
-      <ScrollView style={{flex: 1}}>
+      <ScrollView
+        style={{flex: 1}}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <Carousel
           // mode="horizontal-stack"
           // modeConfig={{

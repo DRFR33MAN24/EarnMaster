@@ -16,7 +16,10 @@ export const _getOffers = async fetchData => {
 
     return json;
   } catch (error) {
-    console.log(error);
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };

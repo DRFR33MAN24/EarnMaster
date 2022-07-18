@@ -10,41 +10,50 @@ import {
 import {Survey, WideSurvey} from '../Components/Survey';
 import {BackIcon} from '../Components/NavigationComponents';
 
-import {surveysData} from '../fakeJsonData';
-export const SurveysScreen = ({navigation}) => {
+//import {surveysData} from '../fakeJsonData';
+export const SurveysScreen = ({navigation, route}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
   const theme = useTheme();
   const [surveys, setSurveys] = useState([]);
-  useEffect(() => {
-    // api call
-    setSurveys(surveysData);
-    //console.log(surveyData);
-  }, []);
+  const {
+    image,
+    description,
+    link,
+    timeToComplete,
+    title,
+    os,
+    country,
+    category,
+    amount,
+  } = route.params;
+
+  // useEffect(() => {
+  //   // api call
+  //   setSurveys(surveysData);
+  //   //console.log(surveyData);
+  // }, []);
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
-        title="Surveys"
+        title={title}
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
 
       <ScrollView style={{flex: 1}}>
-        {surveys != null && surveys.map(survey => <WideSurvey data={survey} />)}
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            // flex: 1,
-
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-          }}>
-          {surveys != null && surveys.map(survey => <Survey data={survey} />)}
-          {/* <Survey />
-          <Survey /> */}
+        <Image
+          source={{uri: image}}
+          resizeMode="stretch"
+          style={{width: '100%', height: 200}}
+        />
+        <View style={{paddingHorizontal: 10}}>
+          <Text category="h2">{title}</Text>
+          <Text category="p1">{description}</Text>
+          <Text>{category}</Text>
+          <Text>{amount}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

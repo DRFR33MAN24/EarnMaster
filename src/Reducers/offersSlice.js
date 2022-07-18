@@ -3,13 +3,19 @@ import {_getOffers} from '../api/offersService';
 import {getUser} from './authSlice';
 export const fetchOffers = createAsyncThunk(
   'offers/fetchOffers',
-  async (offset, thunkAPI) => {
-    const user = await getUser();
+  async (offset, {rejectWithValue}) => {
+    try {
+      const user = await getUser();
 
-    const response = await _getOffers({offset: offset, token: user.token});
+      const response = await _getOffers({offset: offset, token: user.token});
 
-    //console.log(response);
-    return response;
+      if (response.msg) {
+        throw response;
+      }
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   },
 );
 
@@ -20,6 +26,7 @@ const offersSlice = createSlice({
     total_offers: 0,
     offset: 0,
     status: 'idle',
+    errors: {},
   },
   reducers: {
     setOffers: (state, action) => {
@@ -34,6 +41,9 @@ const offersSlice = createSlice({
       .addCase(fetchOffers.fulfilled, (state, action) => {
         state.offers = action.payload.rows;
         state.total_offers = action.payload.count;
+      })
+      .addCase(fetchOffers.rejected, (state, action) => {
+        state.errors = action.payload;
       });
   },
 });

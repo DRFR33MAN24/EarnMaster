@@ -12,10 +12,14 @@ export const _login = async loginInfo => {
     const json = await response.json();
     return json;
   } catch (error) {
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };
-export const _reloadUser = async credentails => {
+export const _reloadUser = async (credentails, deviceToken) => {
   try {
     const response = await fetch(
       `${config.backendServer}/api/authUser/loadUser`,
@@ -26,6 +30,7 @@ export const _reloadUser = async credentails => {
           'Content-Type': 'application/json',
           'x-auth-token': credentails.token,
         },
+        body: JSON.stringify({deviceToken: deviceToken}),
       },
     );
     const json = await response.json();
@@ -54,9 +59,13 @@ export const _loginGoogle = async loginInfo => {
       },
     );
     const json = await response.json();
-    return json.movies;
+    return json;
   } catch (error) {
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -77,7 +86,11 @@ export const _getOffers = async (data, token) => {
     const offers = await response.json();
     return offers;
   } catch (error) {
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -97,6 +110,10 @@ export const _register = async registerInfo => {
     const json = await response.json();
     return json;
   } catch (error) {
-    throw error;
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
   }
 };

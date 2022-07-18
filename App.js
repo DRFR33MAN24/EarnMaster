@@ -7,65 +7,37 @@ import {default as mapping} from './mapping.json';
 import {ThemeContext} from './theme-context';
 import {AppNavigator} from './src/Screens/Navigator';
 import SplashScreen from './src/Screens/SplashScreen';
-import {Notifications} from 'react-native-notifications';
+
 import {Provider} from 'react-redux';
 import store from './src/store';
+import {SafeAreaView} from 'react-native';
 
 export default () => {
   const [currentTheme, setTheme] = useState('light');
   const [appReady, setAppReady] = useState(true);
 
-  const sendTokenToServer = async token => {
-    try {
-      const response = fetch('http://192.168.1.18:5000/register', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          token: token,
-        }),
-      });
-      const json = await response.json();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const sendTokenToServer = async token => {
+  //   try {
+  //     const response = fetch('http://192.168.1.18:5000/register', {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         token: token,
+  //       }),
+  //     });
+  //     const json = await response.json();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   useEffect(() => {
     setTimeout(() => {
       setAppReady(true);
     }, 2000);
-
-    // Request permissions on iOS, refresh token on Android
-    Notifications.registerRemoteNotifications();
-
-    Notifications.events().registerRemoteNotificationsRegistered(event => {
-      // TODO: Send the token to my server so it could send back push notifications...
-      // sendTokenToServer(event.deviceToken);
-      // console.log('Device Token Received', event.deviceToken);
-    });
-    Notifications.events().registerRemoteNotificationsRegistrationFailed(
-      event => {
-        // console.error(event);
-      },
-    );
-
-    Notifications.events().registerNotificationReceivedForeground(
-      (notification, completion) => {
-        console.log(
-          `Notification received in foreground: ${notification.title} : ${notification.body}`,
-        );
-        completion({alert: false, sound: false, badge: false});
-      },
-    );
-
-    Notifications.events().registerNotificationOpened(
-      (notification, completion) => {
-        console.log(`Notification opened: ${notification.payload}`);
-        completion();
-      },
-    );
   }, []);
 
   const toggleTheme = () => {

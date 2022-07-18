@@ -22,6 +22,7 @@ import {glass, dollar} from '../Constants/images';
 import {GoToSurveyModal} from './GoToSurveyModal';
 import LinearGradient from 'react-native-linear-gradient';
 import ImageColors from 'react-native-image-colors';
+import {useNavigation} from '@react-navigation/native';
 export const Survey = ({data}) => {
   const width = new Animated.Value(1);
   const height = new Animated.Value(1);
@@ -403,6 +404,7 @@ export const WideSurvey = ({data}) => {
 };
 export const WideSurvey2 = ({data}) => {
   const uiTheme = useTheme();
+  const navigaion = useNavigation();
   if (!data) {
     return <View></View>;
   }
@@ -460,7 +462,7 @@ export const WideSurvey2 = ({data}) => {
       ) : null}
 
       <TouchableOpacity
-        onPress={() => toggleSurveyDetails(true)}
+        onPress={() => navigaion.navigate('Surveys', {...data})}
         style={[
           styles.cardShadow,
           {

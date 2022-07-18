@@ -18,6 +18,7 @@ import {
   CheckBox,
   Datepicker,
   Modal,
+  Popover,
 } from '@ui-kitten/components';
 
 import * as Progress from 'react-native-progress';
@@ -28,6 +29,7 @@ import {
   faEyeSlash,
   faEnvelope,
   faWarning,
+  faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 import {auth} from '../Constants/images';
 import {useSelector, useDispatch} from 'react-redux';
@@ -87,7 +89,7 @@ const AuthScreen = props => {
       await GoogleSignin.hasPlayServices();
 
       const userInfo = await GoogleSignin.signIn();
-      loginGoogle(userInfo.idToken);
+      loginGoogle({tokenId: userInfo.idToken, deviceToken: auth.deviceToken});
     } catch (error) {
       console.log(error, error.code);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -159,7 +161,13 @@ const AuthScreen = props => {
         });
         return;
       }
-      dispatch(login({email: login_mail, password: login_password}));
+      dispatch(
+        login({
+          email: login_mail,
+          password: login_password,
+          deviceToken: auth.deviceToken,
+        }),
+      );
     };
     return (
       <View style={{width: '95%'}}>
@@ -237,6 +245,7 @@ const AuthScreen = props => {
           repeat_password: repeatPassword,
           dob: dateOfBirth,
           username: name,
+          deviceToken: auth.deviceToken,
         }),
       );
     };
@@ -313,6 +322,9 @@ const AuthScreen = props => {
     );
   };
 
+  const anchorView = () => (
+    <View style={{position: 'absolute', bottom: '10%'}}></View>
+  );
   return (
     <View
       style={[
@@ -320,12 +332,33 @@ const AuthScreen = props => {
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
       {auth.authErrors && (
-        <Modal visible={true}>
-          <Card>
-            <Text>{auth.authErrors.msg}</Text>
-            <Button>Retry</Button>
-          </Card>
-        </Modal>
+        <Popover
+          visible={true}
+          placement="bottom"
+          anchor={anchorView}
+          style={{
+            backgroundColor: theme['background-basic-color-4'],
+            borderWidth: 0,
+          }}>
+          <View
+            style={{
+              padding: 10,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View style={{marginHorizontal: 5}}>
+              <FontAwesomeIcon
+                icon={faExclamationTriangle}
+                size={25}
+                style={{color: theme['color-danger-900']}}
+              />
+            </View>
+            <Text style={{color: theme['color-danger-900']}}>
+              {auth.authErrors.msg}
+            </Text>
+          </View>
+        </Popover>
       )}
       <ScrollView style={{width: '100%'}} keyboardShouldPersistTaps="handled">
         <View
