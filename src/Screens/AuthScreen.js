@@ -40,6 +40,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import config from '../config';
+import CountryPicker from 'react-native-country-picker-modal';
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
     <FontAwesomeIcon
@@ -278,6 +279,16 @@ const AuthScreen = props => {
               onSelect={nextDate => setDateOfBirth(nextDate)}
             />
           </View>
+          <View>
+            <Text category="label" >Select country</Text>
+            <CountryPicker
+              countryCode="US"
+              visible={false}
+              withFlag={true}
+              withEmoji={true}
+              withCountryNameButton={true}
+            />
+          </View>
           <Input
             value={register_password}
             label="Password"
@@ -331,7 +342,7 @@ const AuthScreen = props => {
         styles.container,
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
-      {auth.authErrors && (
+      {auth.authErrors.msg && (
         <Popover
           visible={true}
           placement="bottom"

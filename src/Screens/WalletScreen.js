@@ -24,6 +24,7 @@ import {
   faCreditCard,
   faMoneyBillTransfer,
 } from '@fortawesome/free-solid-svg-icons';
+
 import {WalletTransaction} from '../Components/WalletTransaction';
 import {
   LineChart,
@@ -37,13 +38,8 @@ import {ThemeContext} from '../../theme-context';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchTransactions} from '../Reducers/walletSlice';
-export const walletIcon = props => (
-  <FontAwesomeIcon
-    {...props}
-    icon={faWallet}
-    size={25}
-    style={{color: props.style.tintColor}}
-  />
+export const walletIcon = ({style}) => (
+  <FontAwesomeIcon icon={faWallet} size={25} style={{color: style.tintColor}} />
 );
 export const WalletScreenTopBar = () => {
   let navigation = useNavigation();

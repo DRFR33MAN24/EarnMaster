@@ -416,6 +416,11 @@ export const WideSurvey2 = ({data}) => {
     vibrant: '#11111111',
     darkMuted: '#00000000',
     lightMuted: '#11111111',
+    lightVibrant: '#11111111',
+    darkVibrant: '#11111111',
+    muted: '#11111111',
+    average: '#11111111',
+    dominant: '#11111111',
   });
 
   let theme = useContext(ThemeContext).currentTheme;
@@ -504,7 +509,7 @@ export const WideSurvey2 = ({data}) => {
               angle={60}
               angleCenter={{x: 0.9, y: 0.5}}
               locations={[0.3, 0.38]}
-              colors={[dominantColors.darkMuted, 'transparent']}
+              colors={[dominantColors.darkVibrant, 'transparent']}
               style={{
                 width: '100%',
               }}>
@@ -567,7 +572,7 @@ export const WideSurvey2 = ({data}) => {
             />
             <Text
               style={{
-                color: dominantColors.lightMuted,
+                color: dominantColors.lightVibrant,
                 paddingHorizontal: 4,
               }}>
               {data.timeToComplete}
@@ -611,7 +616,7 @@ export const WideSurvey2 = ({data}) => {
             <Text
               category="h5"
               style={{
-                color: dominantColors.lightMuted,
+                color: dominantColors.lightVibrant,
                 flexWrap: 'wrap',
                 flexShrink: 1,
               }}>

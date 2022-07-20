@@ -25,19 +25,16 @@ import {
   faSignOut,
   faPhone,
 } from '@fortawesome/free-solid-svg-icons';
+
 import {ThemeContext} from '../../theme-context';
 import {facebook, twitter, instagram} from '../Constants/images';
 import {profile} from '../fakeJsonData';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../Reducers/authSlice';
-export const profileIcon = props => (
-  <FontAwesomeIcon
-    {...props}
-    icon={faUser}
-    size={25}
-    style={{color: props.style.tintColor}}
-  />
+export const profileIcon = ({style}) => (
+  <FontAwesomeIcon icon={faUser} size={25} style={{color: style.tintColor}} />
 );
+
 export const ProfileScreenTopBar = () => {
   let navigation = useNavigation();
 

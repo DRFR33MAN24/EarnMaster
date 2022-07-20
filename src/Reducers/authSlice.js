@@ -14,13 +14,14 @@ export const getUser = async () => {
   try {
     const value = await AsyncStorage.getItem('@user');
     const user = JSON.parse(value);
-    if (!user.user.id) {
+
+    if (!user.user) {
       // value previously stored
 
-      throw 'user not found';
+      throw {msg: 'Login to continue'};
+    } else {
+      return user;
     }
-
-    return user;
   } catch (e) {
     throw e;
   }
@@ -47,6 +48,7 @@ export const reloadUser = createAsyncThunk(
     try {
       const user = await getUser();
       const response = await _reloadUser(user, data);
+
       if (response.msg) {
         throw response;
       }
@@ -75,6 +77,7 @@ export const logout = createAsyncThunk(
   async (data, {rejectWithValue}) => {
     try {
       const response = await storeUser({});
+
       if (response.msg) {
         throw response;
       }
@@ -200,7 +203,7 @@ const authSlice = createSlice({
         storeUser(action.payload);
       })
       .addCase(reloadUser.rejected, (state, action) => {
-        state.authErrors = action.payload;
+        //state.authErrors = action.payload;
         state.user = {};
         state.token = '';
       })
