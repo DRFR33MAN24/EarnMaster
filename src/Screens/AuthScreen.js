@@ -31,7 +31,7 @@ import {
   faWarning,
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
-import {auth} from '../Constants/images';
+import {authImg} from '../Constants/images';
 import {useSelector, useDispatch} from 'react-redux';
 import {login, register, loginGoogle} from '../Reducers/authSlice';
 import {
@@ -40,7 +40,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import config from '../config';
-import CountryPicker from 'react-native-country-picker-modal';
+import CountryPicker, {CountryCode} from 'react-native-country-picker-modal';
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
     <FontAwesomeIcon
@@ -172,7 +172,7 @@ const AuthScreen = props => {
     };
     return (
       <View style={{width: '95%'}}>
-        <ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled">
           <Input
             value={login_mail}
             label="Email"
@@ -237,6 +237,7 @@ const AuthScreen = props => {
     const [name, setName] = React.useState('');
     const [secureTextEntry, setSecureTextEntry] = React.useState(true);
     const [secureTextEntryR, setSecureTextEntryR] = React.useState(true);
+    const [countryCode, setCountryCode] = React.useState('US');
     const dispatch = useDispatch();
     const submitRegister = () => {
       dispatch(
@@ -247,8 +248,14 @@ const AuthScreen = props => {
           dob: dateOfBirth,
           username: name,
           deviceToken: auth.deviceToken,
+          country: countryCode,
         }),
       );
+    };
+
+    const onSelect = country => {
+      setCountryCode(country.cca2);
+      // setCountry(country)
     };
     return (
       <View style={{width: '95%'}}>
@@ -280,14 +287,19 @@ const AuthScreen = props => {
             />
           </View>
           <View>
-            <Text category="label" >Select country</Text>
-            <CountryPicker
-              countryCode="US"
-              visible={false}
-              withFlag={true}
-              withEmoji={true}
-              withCountryNameButton={true}
-            />
+            <Text category="label" style={{color: theme['text-hint-color']}}>
+              Select country
+            </Text>
+            <View style={{paddingVertical: 10}}>
+              <CountryPicker
+                countryCode={countryCode}
+                visible={false}
+                withFlag={true}
+                withEmoji={true}
+                withCountryNameButton={true}
+                onSelect={onSelect}
+              />
+            </View>
           </View>
           <Input
             value={register_password}
@@ -382,7 +394,7 @@ const AuthScreen = props => {
           }}>
           <View style={{padding: 80}}>
             <ImageBackground
-              source={auth}
+              source={authImg}
               style={styles.imageStyle}
               resizeMode="contain"
             />

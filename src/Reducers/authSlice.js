@@ -6,7 +6,7 @@ export const storeUser = async value => {
   try {
     await AsyncStorage.setItem('@user', JSON.stringify(value));
   } catch (e) {
-    // saving error
+    throw {msg: 'Failed to clear user cred'};
   }
 };
 
@@ -76,12 +76,7 @@ export const logout = createAsyncThunk(
   'auth/logout',
   async (data, {rejectWithValue}) => {
     try {
-      const response = await storeUser({});
-
-      if (response.msg) {
-        throw response;
-      }
-      return response;
+      await storeUser({});
     } catch (error) {
       return rejectWithValue(error);
     }
