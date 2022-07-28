@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {_login, _register, _reloadUser} from '../api/authService';
+import {_login, _register, _reloadUser, _loginGoogle} from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storeUser = async value => {
@@ -139,6 +139,7 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         // console.log('login full', action.payload);
+
         state.user = action.payload.user;
         state.status = 'idle';
         state.token = action.payload.token;
@@ -168,7 +169,8 @@ const authSlice = createSlice({
       .addCase(loginGoogle.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.status = 'idle';
-        storeToken(action.payload.token);
+        state.token = action.payload.token;
+        storeUser(action.payload);
       })
       .addCase(loginGoogle.rejected, (state, action) => {
         state.authErrors = action.payload;

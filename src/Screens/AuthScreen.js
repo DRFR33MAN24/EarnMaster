@@ -56,9 +56,6 @@ const AuthScreen = props => {
   const auth = useSelector(state => state.auth);
   const [formErrors, setFormErrors] = React.useState({});
   const [registered, setRegistered] = React.useState(false);
-  useEffect(() => {
-    _configureGoogleSignIn();
-  }, []);
 
   // useEffect(() => {
   //   if (userInfo) {
@@ -77,32 +74,6 @@ const AuthScreen = props => {
   // const toggleSecureEntry = () => {
   //   setSecureTextEntry(!secureTextEntry);
   // };
-
-  const _configureGoogleSignIn = () => {
-    GoogleSignin.configure({
-      webClientId: config.webClientId,
-      offlineAccess: false,
-    });
-  };
-
-  const signIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-
-      const userInfo = await GoogleSignin.signIn();
-      loginGoogle({tokenId: userInfo.idToken, deviceToken: auth.deviceToken});
-    } catch (error) {
-      console.log(error, error.code);
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-      } else {
-      }
-    }
-  };
 
   const RenderIcon = ({setSecure, secure}) => (
     <TouchableOpacity onPress={() => setSecure(!secure)}>
@@ -147,6 +118,49 @@ const AuthScreen = props => {
     const [secureTextEntry, setSecureTextEntry] = React.useState(true);
     const [rememberPassword, setRememberPassword] = React.useState(false);
     const dispatch = useDispatch();
+    useEffect(() => {
+      _configureGoogleSignIn();
+    }, []);
+
+    const _configureGoogleSignIn = () => {
+      GoogleSignin.configure({
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/userinfo.profile',
+          'https://www.googleapis.com/auth/user.birthday.read',
+        ],
+        webClientId: config.webClientId,
+        offlineAccess: false,
+      });
+    };
+
+    const signIn = async () => {
+      try {
+        await GoogleSignin.hasPlayServices();
+
+        await GoogleSignin.signIn();
+        const tokens = await GoogleSignin.getTokens();
+
+        dispatch(
+          loginGoogle({
+            tokenId: tokens.idToken,
+            accessToken: tokens.accessToken,
+            deviceToken: auth.deviceToken,
+          }),
+        );
+      } catch (error) {
+        console.log(error, error.code);
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+          // user cancelled the login flow
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+          // operation (e.g. sign in) is in progress already
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+          // play services not available or outdated
+        } else {
+        }
+      }
+    };
+
     const submitLogin = () => {
       if (!login_mail) {
         setFormErrors({
