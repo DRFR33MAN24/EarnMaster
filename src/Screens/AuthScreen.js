@@ -128,6 +128,7 @@ const AuthScreen = props => {
           'email',
           'https://www.googleapis.com/auth/userinfo.profile',
           'https://www.googleapis.com/auth/user.birthday.read',
+          'https://www.googleapis.com/auth/user.addresses.read',
         ],
         webClientId: config.webClientId,
         offlineAccess: false,
@@ -138,12 +139,13 @@ const AuthScreen = props => {
       try {
         await GoogleSignin.hasPlayServices();
 
-        await GoogleSignin.signIn();
+        const userInfo = await GoogleSignin.signIn();
         const tokens = await GoogleSignin.getTokens();
 
         dispatch(
           loginGoogle({
             tokenId: tokens.idToken,
+            userId: userInfo.user.id,
             accessToken: tokens.accessToken,
             deviceToken: auth.deviceToken,
           }),
