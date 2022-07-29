@@ -18,7 +18,6 @@ import {
   CheckBox,
   Datepicker,
   Modal,
-  Popover,
 } from '@ui-kitten/components';
 
 import * as Progress from 'react-native-progress';
@@ -146,6 +145,7 @@ const AuthScreen = props => {
           loginGoogle({
             tokenId: tokens.idToken,
             userId: userInfo.user.id,
+
             accessToken: tokens.accessToken,
             deviceToken: auth.deviceToken,
           }),
@@ -361,9 +361,9 @@ const AuthScreen = props => {
     );
   };
 
-  const anchorView = () => (
-    <View style={{position: 'absolute', bottom: '10%'}}></View>
-  );
+  // const anchorView = () => (
+  //   <View style={{position: 'absolute', bottom: '10%'}}></View>
+  // );
   return (
     <View
       style={[
@@ -371,13 +371,13 @@ const AuthScreen = props => {
         {backgroundColor: theme['background-basic-color-4']},
       ]}>
       {auth.authErrors.msg && (
-        <Popover
-          visible={true}
-          placement="bottom"
-          anchor={anchorView}
+        <View
           style={{
-            backgroundColor: theme['background-basic-color-4'],
-            borderWidth: 0,
+            backgroundColor: theme['background-basic-color-1'],
+            // borderWidth: 1,
+            position: 'absolute',
+            bottom: 20,
+            zIndex: 200,
           }}>
           <View
             style={{
@@ -397,7 +397,7 @@ const AuthScreen = props => {
               {auth.authErrors.msg}
             </Text>
           </View>
-        </Popover>
+        </View>
       )}
       <ScrollView style={{width: '100%'}} keyboardShouldPersistTaps="handled">
         <View

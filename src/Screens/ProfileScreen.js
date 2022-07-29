@@ -87,10 +87,17 @@ export const ProfileScreen = ({navigation}) => {
               justifyContent: 'center',
               paddingVertical: 20,
             }}>
-            <Image
-              source={require('./images/profile.png')}
-              style={{resizeMode: 'center', width: 96, height: 96}}
-            />
+            {!user.profileImg ? (
+              <Image
+                source={require('./images/profile.png')}
+                style={{resizeMode: 'center', width: 96, height: 96}}
+              />
+            ) : (
+              <Image
+                source={{uri: user.profileImg}}
+                style={{resizeMode: 'center', width: 96, height: 96}}
+              />
+            )}
             <Text>{user.name}</Text>
           </View>
         </Card>
