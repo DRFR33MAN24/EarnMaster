@@ -128,6 +128,9 @@ const authSlice = createSlice({
     setErrors: (state, action) => {
       state.errors = action.payload;
     },
+    clearAuthErrors: (state, action) => {
+      state.authErrors = {};
+    },
     setDeviceToken: (state, action) => {
       state.deviceToken = action.payload;
     },
@@ -217,6 +220,7 @@ const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {setErrors, setUser, setDeviceToken} = authSlice.actions;
+export const {setErrors, setUser, setDeviceToken, clearAuthErrors} =
+  authSlice.actions;
 
 export default authSlice.reducer;

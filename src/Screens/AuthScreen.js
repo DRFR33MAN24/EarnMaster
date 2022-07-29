@@ -32,7 +32,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {authImg} from '../Constants/images';
 import {useSelector, useDispatch} from 'react-redux';
-import {login, register, loginGoogle} from '../Reducers/authSlice';
+import {
+  login,
+  register,
+  loginGoogle,
+  clearAuthErrors,
+} from '../Reducers/authSlice';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -55,7 +60,7 @@ const AuthScreen = props => {
   const auth = useSelector(state => state.auth);
   const [formErrors, setFormErrors] = React.useState({});
   const [registered, setRegistered] = React.useState(false);
-
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   if (userInfo) {
   //   (async function () {
@@ -379,24 +384,26 @@ const AuthScreen = props => {
             bottom: 20,
             zIndex: 200,
           }}>
-          <View
-            style={{
-              padding: 10,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View style={{marginHorizontal: 5}}>
-              <FontAwesomeIcon
-                icon={faExclamationTriangle}
-                size={25}
-                style={{color: theme['color-danger-900']}}
-              />
+          <TouchableOpacity onPress={() => dispatch(clearAuthErrors())}>
+            <View
+              style={{
+                padding: 10,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View style={{marginHorizontal: 5}}>
+                <FontAwesomeIcon
+                  icon={faExclamationTriangle}
+                  size={25}
+                  style={{color: theme['color-danger-900']}}
+                />
+              </View>
+              <Text style={{color: theme['color-danger-900']}}>
+                {auth.authErrors.msg}
+              </Text>
             </View>
-            <Text style={{color: theme['color-danger-900']}}>
-              {auth.authErrors.msg}
-            </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       )}
       <ScrollView style={{width: '100%'}} keyboardShouldPersistTaps="handled">
