@@ -57,7 +57,7 @@ import CountryPicker, {CountryCode} from 'react-native-country-picker-modal';
 //     password: {type: 'string', minLength: 6},
 //     confirmPassword: {type: 'string', const: {$data: 1 / password}},
 //   },
-//   required: ['email'],
+//   required: ['email','password','confirmPassword','name'],
 //   additionalProperties: false,
 // };
 
