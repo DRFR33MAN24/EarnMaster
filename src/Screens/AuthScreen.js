@@ -45,6 +45,25 @@ import {
 } from '@react-native-google-signin/google-signin';
 import config from '../config';
 import CountryPicker, {CountryCode} from 'react-native-country-picker-modal';
+import Ajv from 'ajv';
+const ajv = new Ajv();
+const schema = {
+  type: 'object',
+  properties: {
+    foo: {type: 'integer'},
+    bar: {type: 'string'},
+  },
+  required: ['foo'],
+  additionalProperties: false,
+};
+
+const validate = ajv.compile(schema);
+
+const data = {
+  foo: 1,
+  bar: 'abc',
+};
+
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
     <FontAwesomeIcon
@@ -61,6 +80,10 @@ const AuthScreen = props => {
   const [formErrors, setFormErrors] = React.useState({});
   const [registered, setRegistered] = React.useState(false);
   const dispatch = useDispatch();
+
+  const valid = validate(data);
+  if (!valid) console.log(validate.errors);
+
   // useEffect(() => {
   //   if (userInfo) {
   //   (async function () {
