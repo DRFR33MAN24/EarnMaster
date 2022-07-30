@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "@ui-kitten/components": "^5.1.2",
     "ajv": "^8.11.0",
+    "ajv-errors": "^3.0.0",
     "ajv-formats": "^2.1.1",
     "react": "17.0.2",
     "react-native": "0.68.2",
