@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Image,
@@ -22,7 +22,7 @@ import {
 
 import * as Progress from 'react-native-progress';
 
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faEye,
   faEyeSlash,
@@ -30,8 +30,8 @@ import {
   faWarning,
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
-import {authImg} from '../Constants/images';
-import {useSelector, useDispatch} from 'react-redux';
+import { authImg } from '../Constants/images';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   login,
   register,
@@ -44,32 +44,30 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import config from '../config';
-import CountryPicker, {CountryCode} from 'react-native-country-picker-modal';
+import CountryPicker, { CountryCode } from 'react-native-country-picker-modal';
 import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 const ajv = new Ajv();
-const schema = {
+addFormats(ajv, ['email']);
+const registerSchema = {
   type: 'object',
   properties: {
-    foo: {type: 'integer'},
-    bar: {type: 'string'},
+    email: { type: 'string', format: 'email' },
+    name: { type: 'string' },
   },
-  required: ['foo'],
+  required: ['email'],
   additionalProperties: false,
 };
 
-const validate = ajv.compile(schema);
+const validate = ajv.compile(registerSchema);
 
-const data = {
-  foo: 1,
-  bar: 'abc',
-};
 
 const AlertIcon = props => (
-  <View style={{paddingHorizontal: 2}}>
+  <View style={{ paddingHorizontal: 2 }}>
     <FontAwesomeIcon
       icon={faWarning}
       size={15}
-      // style={{color: props.style.tintColor}}
+    // style={{color: props.style.tintColor}}
     />
   </View>
 );
@@ -81,8 +79,8 @@ const AuthScreen = props => {
   const [registered, setRegistered] = React.useState(false);
   const dispatch = useDispatch();
 
-  const valid = validate(data);
-  if (!valid) console.log(validate.errors);
+
+
 
   // useEffect(() => {
   //   if (userInfo) {
@@ -102,20 +100,20 @@ const AuthScreen = props => {
   //   setSecureTextEntry(!secureTextEntry);
   // };
 
-  const RenderIcon = ({setSecure, secure}) => (
+  const RenderIcon = ({ setSecure, secure }) => (
     <TouchableOpacity onPress={() => setSecure(!secure)}>
       {/* <Icon {...props} name={secureTextEntry ? 'eye-off' : 'eye'} /> */}
       {!secure ? (
         <FontAwesomeIcon
           icon={faEye}
           size={15}
-          // style={{color: props.style.tintColor}}
+        // style={{color: props.style.tintColor}}
         />
       ) : (
         <FontAwesomeIcon
           icon={faEyeSlash}
           size={15}
-          // style={{color: props.style.tintColor}}
+        // style={{color: props.style.tintColor}}
         />
       )}
     </TouchableOpacity>
@@ -124,7 +122,7 @@ const AuthScreen = props => {
     <FontAwesomeIcon
       icon={faEnvelope}
       size={15}
-      // style={{color: props.style.tintColor}}
+    // style={{color: props.style.tintColor}}
     />
   );
 
@@ -215,7 +213,7 @@ const AuthScreen = props => {
       );
     };
     return (
-      <View style={{width: '95%'}}>
+      <View style={{ width: '95%' }}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <Input
             value={login_mail}
@@ -240,14 +238,14 @@ const AuthScreen = props => {
             secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setLoginPassword(nextValue)}
           />
-          <View style={{paddingVertical: 8, paddingHorizontal: 4}}>
+          <View style={{ paddingVertical: 8, paddingHorizontal: 4 }}>
             <CheckBox
               checked={rememberPassword}
               onChange={nextChecked => setRememberPassword(nextChecked)}>
               {`Remember me`}
             </CheckBox>
           </View>
-          <View style={{marginVertical: 8}}>
+          <View style={{ marginVertical: 8 }}>
             <Button onPress={submitLogin}>Login</Button>
           </View>
           <View>
@@ -257,15 +255,15 @@ const AuthScreen = props => {
               create new account
             </Button>
           </View>
-          <View style={{alignItems: 'center', marginVertical: 10}}>
+          <View style={{ alignItems: 'center', marginVertical: 10 }}>
             <GoogleSigninButton
-              style={{width: '100%', height: 48}}
+              style={{ width: '100%', height: 48 }}
               size={GoogleSigninButton.Size.Wide}
               color={GoogleSigninButton.Color.Dark}
               onPress={signIn}
               // onPress={this._signIn}
               disabled={false}
-              // disabled={this.state.isSigninInProgress}
+            // disabled={this.state.isSigninInProgress}
             />
           </View>
         </ScrollView>
@@ -284,6 +282,16 @@ const AuthScreen = props => {
     const [countryCode, setCountryCode] = React.useState('US');
     const dispatch = useDispatch();
     const submitRegister = () => {
+      const data = {
+        email: register_email,
+        name: username,
+      };
+      const valid = validate(data);
+      if (!valid) {
+        console.log(validate.errors);
+        //setErrors()
+        return
+      }
       dispatch(
         register({
           email: register_email,
@@ -302,7 +310,7 @@ const AuthScreen = props => {
       // setCountry(country)
     };
     return (
-      <View style={{width: '95%'}}>
+      <View style={{ width: '95%' }}>
         <ScrollView keyboardShouldPersistTaps="handled">
           <Input
             value={name}
@@ -331,10 +339,10 @@ const AuthScreen = props => {
             />
           </View>
           <View>
-            <Text category="label" style={{color: theme['text-hint-color']}}>
+            <Text category="label" style={{ color: theme['text-hint-color'] }}>
               Select country
             </Text>
-            <View style={{paddingVertical: 10}}>
+            <View style={{ paddingVertical: 10 }}>
               <CountryPicker
                 countryCode={countryCode}
                 visible={false}
@@ -374,7 +382,7 @@ const AuthScreen = props => {
             onChangeText={nextValue => setRepeatPassword(nextValue)}
           />
 
-          <View style={{marginVertical: 8}}>
+          <View style={{ marginVertical: 8 }}>
             <Button onPress={submitRegister}>Register</Button>
           </View>
           <View>
@@ -396,7 +404,7 @@ const AuthScreen = props => {
     <View
       style={[
         styles.container,
-        {backgroundColor: theme['background-basic-color-4']},
+        { backgroundColor: theme['background-basic-color-4'] },
       ]}>
       {auth.authErrors.msg && (
         <View
@@ -415,21 +423,21 @@ const AuthScreen = props => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <View style={{marginHorizontal: 5}}>
+              <View style={{ marginHorizontal: 5 }}>
                 <FontAwesomeIcon
                   icon={faExclamationTriangle}
                   size={25}
-                  style={{color: theme['color-danger-900']}}
+                  style={{ color: theme['color-danger-900'] }}
                 />
               </View>
-              <Text style={{color: theme['color-danger-900']}}>
+              <Text style={{ color: theme['color-danger-900'] }}>
                 {auth.authErrors.msg}
               </Text>
             </View>
           </TouchableOpacity>
         </View>
       )}
-      <ScrollView style={{width: '100%'}} keyboardShouldPersistTaps="handled">
+      <ScrollView style={{ width: '100%' }} keyboardShouldPersistTaps="handled">
         <View
           style={{
             width: '100%',
@@ -438,7 +446,7 @@ const AuthScreen = props => {
             alignItems: 'center',
             paddingBottom: 40,
           }}>
-          <View style={{padding: 80}}>
+          <View style={{ padding: 80 }}>
             <ImageBackground
               source={authImg}
               style={styles.imageStyle}
