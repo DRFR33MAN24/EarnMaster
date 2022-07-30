@@ -16,8 +16,9 @@ import {
   faHome,
   faChevronLeft,
   faGift,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useRef} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -27,6 +28,7 @@ import {
   Image,
   Dimensions,
   RefreshControl,
+  FlatList,
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
@@ -185,26 +187,36 @@ export const HomeScreen = ({navigation}) => {
   }, []);
 
   const getOffers = offset => {
-    dispatch(fetchOffers(offset));
+    if (offset <= total_offers) {
+      console.log(offset);
+      dispatch(fetchOffers(offset));
+    }
   };
   useEffect(() => {
     // api call
     getOffers(0);
   }, []);
-  return (
-    <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
-      <TopNavigation
-        title="Dashboard"
-        accessoryRight={<HomeScreenContainer navigation={navigation} />}
-      />
-      <Divider />
-      {/* <Congratulation /> */}
+
+  const HomeScreenHeaderComponent = () => {
+    return (
       <ScrollView
         style={{flex: 1}}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
+        <TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
+              marginVertical: 10,
+            }}>
+            <Text category="h5">Featured Offers</Text>
+            <FontAwesomeIcon icon={faChevronRight} size={20} />
+          </View>
+        </TouchableOpacity>
         <Carousel
           // mode="horizontal-stack"
           // modeConfig={{
@@ -242,77 +254,6 @@ export const HomeScreen = ({navigation}) => {
           {surveys != null &&
             surveys.map(survey => <WideSurvey data={survey} />)}
         </View> */}
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            // flex: 1,
-            marginHorizontal: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          {offers != null &&
-            offers.map((offer, index) => <Survey data={offer} key={index} />)}
-          {/* <Survey />
-          <Survey /> */}
-        </View>
-        {/* <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}>
-          <Card style={styles.homeScreenButton}>
-            <TouchableOpacity>
-              <View>
-                <Image source={ribbon} style={styles.homeScreenButtonImage} />
-
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Complete offers
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Card>
-
-          <Card style={styles.homeScreenButton}>
-            <TouchableOpacity>
-              <View>
-                <Image
-                  source={television}
-                  style={styles.homeScreenButtonImage}
-                />
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Watch Ads
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Card>
-
-          <Card style={styles.homeScreenButton}>
-            <TouchableOpacity>
-              <View>
-                <Image source={gambler} style={styles.homeScreenButtonImage} />
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Gamble!
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Card>
-
-          <Card style={styles.homeScreenButton}>
-            <TouchableOpacity onPress={() => navigation.navigate('Surveys')}>
-              <View>
-                <Image
-                  source={checklist}
-                  style={styles.homeScreenButtonImage}
-                />
-                <Text numberOfLines={1} style={{flex: 1}}>
-                  Paid Surveys
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Card>
-        </View> */}
         <View>
           <Card style={{marginVertical: 10, marginHorizontal: 10}}>
             <Text>Refer friend and earn</Text>
@@ -337,7 +278,64 @@ export const HomeScreen = ({navigation}) => {
             </TouchableOpacity>
           </Card>
         </View>
+        <TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
+              marginVertical: 10,
+            }}>
+            <Text category="h5">For You</Text>
+            <FontAwesomeIcon icon={faChevronRight} size={20} />
+          </View>
+        </TouchableOpacity>
       </ScrollView>
+    );
+  };
+  return (
+    <SafeAreaView
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
+      <TopNavigation
+        title="Dashboard"
+        accessoryRight={<HomeScreenContainer navigation={navigation} />}
+      />
+      <Divider />
+      {/* <Congratulation /> */}
+
+      <FlatList
+        data={offers}
+        keyExtractor={(item, index) => index}
+        renderItem={({item, index}) => <Survey data={item} key={index} />}
+        numColumns={2}
+        ListHeaderComponent={HomeScreenHeaderComponent}
+        onEndReached={() => getOffers(offset)}
+        onEndReachedThreshold={0.1}
+      />
+      {/* <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            // flex: 1,
+            marginHorizontal: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}></View> */}
+
+      {/* <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            // flex: 1,
+            marginHorizontal: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          {offers != null &&
+            offers.map((offer, index) => <Survey data={offer} key={index} />)}
+
+        </View> */}
     </SafeAreaView>
   );
 };

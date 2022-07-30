@@ -7,7 +7,10 @@ export const fetchOffers = createAsyncThunk(
     try {
       const user = await getUser();
 
-      const response = await _getOffers({offset: offset, token: user.token});
+      const response = await _getOffers({
+        offset: offset * 10,
+        token: user.token,
+      });
 
       if (response.msg) {
         throw response;
@@ -39,8 +42,9 @@ const offersSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchOffers.fulfilled, (state, action) => {
-        state.offers = action.payload.rows;
+        state.offers = state.offers.concat(action.payload.rows);
         state.total_offers = action.payload.count;
+        state.offset += 10;
       })
       .addCase(fetchOffers.rejected, (state, action) => {
         state.errors = action.payload;
