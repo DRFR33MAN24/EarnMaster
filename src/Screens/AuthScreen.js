@@ -45,23 +45,36 @@ import {
 } from '@react-native-google-signin/google-signin';
 import config from '../config';
 import CountryPicker, {CountryCode} from 'react-native-country-picker-modal';
-// import Ajv from 'ajv';
-// import addFormats from 'ajv-formats';
-// const ajv = new Ajv({allErrors: true, $data: true});
-// addFormats(ajv, ['email']);
-// const registerSchema = {
-//   type: 'object',
-//   properties: {
-//     email: {type: 'string', format: 'email'},
-//     name: {type: 'string', minLength: 3},
-//     password: {type: 'string', minLength: 6},
-//     confirmPassword: {type: 'string', const: {$data: 1 / password}},
-//   },
-//   required: ['email','password','confirmPassword','name'],
-//   additionalProperties: false,
-// };
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+const ajv = new Ajv({allErrors: true, $data: true});
+require('ajv-errors')(ajv);
+addFormats(ajv, ['email']);
+const registerSchema = {
+  type: 'object',
+  allOf: [
+    {
+      properties: {
+        email: {type: 'string', format: 'email'},
+        name: {type: 'string', minLength: 3},
+        password: {type: 'string', minLength: 6},
+        confirmPassword: {type: 'string', const: {$data: '1/password'}},
+      },
+      additionalProperties: false,
+    },
+  ],
+  errorMessage: {
+    properties: {
+      email: 'Please enter a valid email ',
+      name: 'Please enter a valid name',
+      password: 'password should be longer than 6',
+      confirmPassword: 'passwords should match',
+    },
+  },
+  required: ['email', 'password', 'confirmPassword', 'name'],
+};
 
-// const validate = ajv.compile(registerSchema);
+const validate = ajv.compile(registerSchema);
 
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
@@ -79,24 +92,6 @@ const AuthScreen = props => {
   const [formErrors, setFormErrors] = React.useState({});
   const [registered, setRegistered] = React.useState(false);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (userInfo) {
-  //   (async function () {
-  //     console.log('getting tokens');
-  //     const response = await fetch(
-  //       `https://oauth2.googleapis.com/tokeninfo?id_token=${userInfo.idToken}`,
-  //     );
-  //     const json = await response.json();
-  //     console.log(json);
-  //   })();
-  //   sendIdToken(userInfo.idToken);
-  //   }
-  // }, [userInfo]);
-
-  // const toggleSecureEntry = () => {
-  //   setSecureTextEntry(!secureTextEntry);
-  // };
 
   const RenderIcon = ({setSecure, secure}) => (
     <TouchableOpacity onPress={() => setSecure(!secure)}>
@@ -124,13 +119,14 @@ const AuthScreen = props => {
     />
   );
 
-  const renderCaption = () => {
+  const RenderCaption = ({message}) => {
+    if (!message) {
+      return null;
+    }
     return (
       <View style={styles.captionContainer}>
         {AlertIcon(styles.captionIcon)}
-        <Text style={styles.captionText}>
-          Should contain at least 8 symbols
-        </Text>
+        <Text style={styles.captionText}>{message}</Text>
       </View>
     );
   };
@@ -278,18 +274,32 @@ const AuthScreen = props => {
     const [secureTextEntry, setSecureTextEntry] = React.useState(true);
     const [secureTextEntryR, setSecureTextEntryR] = React.useState(true);
     const [countryCode, setCountryCode] = React.useState('US');
+    const [errors, setErrors] = React.useState({});
     const dispatch = useDispatch();
+
+    const extractErrors = data => {
+      const valid = validate(data);
+      if (!valid) {
+        let errObj = {};
+        for (const err of validate.errors) {
+          errObj[err.instancePath] = err.message;
+        }
+        setErrors(errObj);
+        return true;
+      }
+      return false;
+    };
     const submitRegister = () => {
       const data = {
         email: register_email,
-        name: username,
+        name: name,
+        password: register_password,
+        confirmPassword: repeatPassword,
       };
-      const valid = validate(data);
-      if (!valid) {
-        console.log(validate.errors);
-        //setErrors()
+      if (extractErrors(data)) {
         return;
       }
+
       dispatch(
         register({
           email: register_email,
@@ -314,7 +324,7 @@ const AuthScreen = props => {
             value={name}
             label="Name"
             placeholder="John Doe"
-            // caption={renderCaption}
+            caption={<RenderCaption message={errors['/name']} />}
             //accessoryRight={renderEmailIcon}
             // secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setName(nextValue)}
@@ -323,7 +333,7 @@ const AuthScreen = props => {
             value={register_email}
             label="Email"
             placeholder="example@domain.com"
-            // caption={renderCaption}
+            caption={<RenderCaption message={errors['/email']} />}
             accessoryRight={renderEmailIcon}
             // secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setRegisterEmail(nextValue)}
@@ -355,7 +365,7 @@ const AuthScreen = props => {
             value={register_password}
             label="Password"
             placeholder="Enter password"
-            caption={renderCaption}
+            caption={<RenderCaption message={errors['/password']} />}
             accessoryRight={
               <RenderIcon
                 secure={secureTextEntry}
@@ -369,7 +379,7 @@ const AuthScreen = props => {
             value={repeatPassword}
             label="RePassword"
             placeholder="Enter password"
-            caption={renderCaption}
+            caption={<RenderCaption message={errors['/confirmPassword']} />}
             accessoryRight={
               <RenderIcon
                 secure={secureTextEntryR}
