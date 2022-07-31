@@ -241,7 +241,7 @@ const AuthScreen = props => {
             value={login_mail}
             label="Email"
             placeholder="example@domain.com"
-            // caption={renderCaption}
+            caption={<RenderCaption message={errors['/email']} />}
             accessoryRight={renderEmailIcon}
             // secureTextEntry={secureTextEntry}
             onChangeText={nextValue => setLoginEmail(nextValue)}
@@ -250,7 +250,7 @@ const AuthScreen = props => {
             value={login_password}
             label="Password"
             placeholder="Enter password"
-            caption={renderCaption}
+            caption={<RenderCaption message={errors['/password']} />}
             accessoryRight={
               <RenderIcon
                 secure={secureTextEntry}
