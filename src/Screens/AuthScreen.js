@@ -209,7 +209,7 @@ const AuthScreen = props => {
       const valid = validateLogin(data);
       if (!valid) {
         let errObj = {};
-        for (const err of validate.errors) {
+        for (const err of validateLogin.errors) {
           errObj[err.instancePath] = err.message;
         }
         setErrors(errObj);
@@ -309,7 +309,7 @@ const AuthScreen = props => {
       const valid = validateRegister(data);
       if (!valid) {
         let errObj = {};
-        for (const err of validate.errors) {
+        for (const err of validateRegister.errors) {
           errObj[err.instancePath] = err.message;
         }
         setErrors(errObj);
