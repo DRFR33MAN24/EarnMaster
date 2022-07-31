@@ -73,8 +73,30 @@ const registerSchema = {
   },
   required: ['email', 'password', 'confirmPassword', 'name'],
 };
+const loginSchema = {
+  type: 'object',
+  allOf: [
+    {
+      properties: {
+        email: {type: 'string', format: 'email'},
 
-const validate = ajv.compile(registerSchema);
+        password: {type: 'string', minLength: 6},
+      },
+      additionalProperties: false,
+    },
+  ],
+  errorMessage: {
+    properties: {
+      email: 'Please enter a valid email ',
+
+      password: 'password should be longer than 6',
+    },
+  },
+  required: ['email', 'password'],
+};
+
+const validateRegister = ajv.compile(registerSchema);
+const validateLogin = ajv.compile(loginSchema);
 
 const AlertIcon = props => (
   <View style={{paddingHorizontal: 2}}>
@@ -136,6 +158,7 @@ const AuthScreen = props => {
     const [login_mail, setLoginEmail] = React.useState('');
     const [secureTextEntry, setSecureTextEntry] = React.useState(true);
     const [rememberPassword, setRememberPassword] = React.useState(false);
+    const [errors, setErrors] = React.useState({});
     const dispatch = useDispatch();
     useEffect(() => {
       _configureGoogleSignIn();
@@ -182,20 +205,25 @@ const AuthScreen = props => {
         }
       }
     };
-
-    const submitLogin = () => {
-      if (!login_mail) {
-        setFormErrors({
-          ...formErrors,
-          login_mail: 'please enter a valid email address',
-        });
-        return;
+    const extractErrors = data => {
+      const valid = validateLogin(data);
+      if (!valid) {
+        let errObj = {};
+        for (const err of validate.errors) {
+          errObj[err.instancePath] = err.message;
+        }
+        setErrors(errObj);
+        return true;
       }
-      if (!login_password) {
-        setFormErrors({
-          ...formErrors,
-          login_password: 'please enter a valid password',
-        });
+      return false;
+    };
+    const submitLogin = () => {
+      const data = {
+        email: login_mail,
+
+        password: login_password,
+      };
+      if (extractErrors(data)) {
         return;
       }
       dispatch(
@@ -278,7 +306,7 @@ const AuthScreen = props => {
     const dispatch = useDispatch();
 
     const extractErrors = data => {
-      const valid = validate(data);
+      const valid = validateRegister(data);
       if (!valid) {
         let errObj = {};
         for (const err of validate.errors) {
