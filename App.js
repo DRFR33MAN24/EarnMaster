@@ -11,13 +11,6 @@ import SplashScreen from './src/Screens/SplashScreen';
 import {Provider} from 'react-redux';
 import store from './src/store';
 import {SafeAreaView} from 'react-native';
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
-
-// Initialize Apollo Client
-const client = new ApolloClient({
-  uri: 'localhost:5000/graphql',
-  cache: new InMemoryCache(),
-});
 
 export default () => {
   const [currentTheme, setTheme] = useState('light');
@@ -35,20 +28,18 @@ export default () => {
   };
   return (
     <Provider store={store}>
-      <ApolloProvider client={client}>
-        <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
-          <ApplicationProvider
-            {...eva}
-            theme={
-              currentTheme === 'light'
-                ? {...eva[currentTheme], ...light}
-                : {...eva[currentTheme], ...dark}
-            }
-            customMapping={mapping}>
-            {appReady ? <AppNavigator /> : <SplashScreen />}
-          </ApplicationProvider>
-        </ThemeContext.Provider>
-      </ApolloProvider>
+      <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
+        <ApplicationProvider
+          {...eva}
+          theme={
+            currentTheme === 'light'
+              ? {...eva[currentTheme], ...light}
+              : {...eva[currentTheme], ...dark}
+          }
+          customMapping={mapping}>
+          {appReady ? <AppNavigator /> : <SplashScreen />}
+        </ApplicationProvider>
+      </ThemeContext.Provider>
     </Provider>
   );
 };

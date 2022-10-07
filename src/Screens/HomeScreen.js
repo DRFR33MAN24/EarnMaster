@@ -54,16 +54,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchOffers} from '../Reducers/offersSlice';
 import {fetchNotifications} from '../Reducers/notificationSlice';
 import {reloadUser} from '../Reducers/authSlice';
-import {gql, useQuery} from '@apollo/client';
-const OFFERS_QUERY = gql`
-  query Offers {
-    offers {
-      id
-      number
-      title
-    }
-  }
-`;
+
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
@@ -182,7 +173,7 @@ export const HomeScreen = ({navigation}) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
-  const {data, loading} = useQuery(OFFERS_QUERY);
+
   const dispatch = useDispatch();
   const {offers, offset, total_offers} = useSelector(state => state.offers);
 
