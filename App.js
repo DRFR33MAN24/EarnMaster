@@ -11,28 +11,17 @@ import SplashScreen from './src/Screens/SplashScreen';
 import {Provider} from 'react-redux';
 import store from './src/store';
 import {SafeAreaView} from 'react-native';
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+
+// Initialize Apollo Client
+const client = new ApolloClient({
+  uri: 'localhost:5000/graphql',
+  cache: new InMemoryCache(),
+});
 
 export default () => {
   const [currentTheme, setTheme] = useState('light');
   const [appReady, setAppReady] = useState(true);
-
-  // const sendTokenToServer = async token => {
-  //   try {
-  //     const response = fetch('http://192.168.1.18:5000/register', {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: 'application/json',
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         token: token,
-  //       }),
-  //     });
-  //     const json = await response.json();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     setTimeout(() => {
@@ -46,18 +35,20 @@ export default () => {
   };
   return (
     <Provider store={store}>
-      <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
-        <ApplicationProvider
-          {...eva}
-          theme={
-            currentTheme === 'light'
-              ? {...eva[currentTheme], ...light}
-              : {...eva[currentTheme], ...dark}
-          }
-          customMapping={mapping}>
-          {appReady ? <AppNavigator /> : <SplashScreen />}
-        </ApplicationProvider>
-      </ThemeContext.Provider>
+      <ApolloProvider client={client}>
+        <ThemeContext.Provider value={{currentTheme, toggleTheme}}>
+          <ApplicationProvider
+            {...eva}
+            theme={
+              currentTheme === 'light'
+                ? {...eva[currentTheme], ...light}
+                : {...eva[currentTheme], ...dark}
+            }
+            customMapping={mapping}>
+            {appReady ? <AppNavigator /> : <SplashScreen />}
+          </ApplicationProvider>
+        </ThemeContext.Provider>
+      </ApolloProvider>
     </Provider>
   );
 };
